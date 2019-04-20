@@ -1,5 +1,5 @@
-[
- {
+{
+  "0" : {
    "pergunta": "Normalmente, quantos litros de sangue uma pessoa tem? Em media, quantos sao retirados numa doacao de sangue?",
    "b": "Tem entre 4 a 6 litros. São retirados 450 mililitros",
    "a": "Tem entre 2 a 4 litros. Sao retirados 450 mililitros",
@@ -9,7 +9,7 @@
    "tipo": "natureza",
    "resposta": "b"
  },
- {
+  "1" : {
    "pergunta": "De quem eh a famosa frase “Penso, logo existo”?",
    "b": "Galileu Galilei",
    "a": "Platao",
@@ -19,7 +19,7 @@
    "tipo": "humanas",
    "resposta": "c"
  },
- {
+  "2" : {
    "pergunta": "De onde eh a invenção do chuveiro eletrico?",
    "b": "Inglaterra",
    "a": "Franca",
@@ -29,8 +29,8 @@
    "tipo": "humanas",
    "resposta": "c"
  },
- {
-   "pergunta": "Quais o menor e o maior pais do mundo?",
+  "3" : {
+   "pergunta": "Quais são o menor e o maior pais do mundo?",
    "b": "Nauru e China",
    "a": "Vaticano e Rússia",
    "c": "Monaco e Canada",
@@ -39,7 +39,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "4" : {
    "pergunta": "Qual o nome do presidente do Brasil que ficou conhecido como Jango?",
    "b": "Jacinto Anjos",
    "a": "Janio Quadros",
@@ -49,7 +49,7 @@
    "tipo": "humanas",
    "resposta": "e"
  },
- {
+  "5" : {
    "pergunta": "Qual o grupo em que todas as palavras foram escritas corretamente?",
    "b": "Asterisco, beneficente, meteorologia, entretido",
    "a": "Asteristico, beneficiente, meteorologia, entertido",
@@ -59,7 +59,7 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
+  "6" : {
    "pergunta": "Qual o livro mais vendido no mundo a seguir a Biblia?",
    "b": "Dom Quixote",
    "a": "O Senhor dos Aneis",
@@ -69,7 +69,7 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
+  "7" : {
    "pergunta": "Quantas casas decimais tem o numero pi?",
    "b": "Centenas",
    "a": "Duas",
@@ -79,7 +79,7 @@
    "tipo": "matematica",
    "resposta": "c"
  },
- {
+  "8" : {
    "pergunta": "Atualmente, quantos elementos quimicos a tabela periodica possui?",
    "b": "109",
    "a": "113",
@@ -89,7 +89,7 @@
    "tipo": "natureza",
    "resposta": "d"
  },
- {
+  "9" : {
    "pergunta": "Quais os paises que tem a maior e a menor expectativa de vida do mundo?",
    "b": "Australia e Afeganistao",
    "a": "Japao e Serra Leoa",
@@ -99,7 +99,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "10": {
    "pergunta": "O que a palavra legend significa em portugues?",
    "b": "Conto",
    "a": "Legenda",
@@ -109,7 +109,7 @@
    "tipo": "linguagens",
    "resposta": "d"
  },
- {
+  "11": {
    "pergunta": "Qual o numero minimo de jogadores numa partida de futebol?(por time)",
    "b": "11",
    "a": "13",
@@ -119,7 +119,7 @@
    "tipo": "linguagens",
    "resposta": "e"
  },
- {
+  "12": {
    "pergunta": "Quais os principais autores do Barroco no Brasil?",
    "b": "Miguel de Cervantes, Gregorio de Matos e Danthe Alighieri",
    "a": "Gregorio de Matos, Bento Teixeira e Manuel Botelho de Oliveira",
@@ -129,7 +129,7 @@
    "tipo": "linguagens",
    "resposta": "a"
  },
- {
+  "13": {
    "pergunta": "Quais as duas datas que sao comemoradas em novembro?",
    "b": "Proclamação da República e Dia Nacional da Consciência Negra",
    "a": "Independência do Brasil e Dia da Bandeira",
@@ -139,8 +139,8 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
-   "pergunta": "Quem pintou \"Guernica\"?",
+  "14": {
+   "pergunta": "Quem pintou o quadro “Guernica”?",
    "b": "Pablo Picasso",
    "a": "Paul Cezanne",
    "c": "Diego Rivera",
@@ -149,7 +149,7 @@
    "tipo": "linguagens",
    "resposta": "b"
  },
- {
+  "15": {
    "pergunta": "Quanto tempo a luz do Sol demora para chegar a Terra?",
    "b": "1 dia",
    "a": "12 minutos",
@@ -159,7 +159,7 @@
    "tipo": "natureza",
    "resposta": "d"
  },
- {
+  "16": {
    "pergunta": "Qual a traducao da frase “Fabiano cogio su saco antes de salir”?",
    "b": "Fabiano fechou o saco antes de sair",
    "a": "Fabiano coseu seu paleto antes de sair",
@@ -169,7 +169,7 @@
    "tipo": "linguagens",
    "resposta": "c"
  },
- {
+  "17": {
    "pergunta": "Qual a nacionalidade de Che Guevara?",
    "b": "Peruana",
    "a": "Cubana",
@@ -179,7 +179,7 @@
    "tipo": "humanas",
    "resposta": "e"
  },
- {
+  "18": {
    "pergunta": "Qual a altura da rede de volei nos jogos masculino e feminino?",
    "b": "2,5 m e 2,0 m",
    "a": "2,4 para ambos",
@@ -189,7 +189,7 @@
    "tipo": "linguagens",
    "resposta": "e"
  },
- {
+  "19": {
    "pergunta": "Em que ordem surgiram os modelos atomicos?",
    "b": "Rutherford-Bohr, Rutherford, Thomson, Dalton",
    "a": "Thomson, Dalton, Rutherford, Rutherford-Bohr",
@@ -199,7 +199,7 @@
    "tipo": "natureza",
    "resposta": "e"
  },
- {
+  "20": {
    "pergunta": "Qual personagem folclorico costuma ser agradado pelos cacadores com a oferta de fumo?",
    "b": "Saci",
    "a": "Caipora",
@@ -209,7 +209,7 @@
    "tipo": "linguagens",
    "resposta": "a"
  },
- {
+  "21": {
    "pergunta": "Em que periodo da pré-historia o fogo foi descoberto?",
    "b": "Paleolítico",
    "a": "Neolítico",
@@ -219,7 +219,7 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
+  "22": {
    "pergunta": "Qual das alternativas abaixo apenas contem classes de palavras?",
    "b": "Artigo, verbo transitivo e verbo intransitivo",
    "a": "Vogais, semivogais e consoantes",
@@ -229,7 +229,7 @@
    "tipo": "linguagens",
    "resposta": "e"
  },
- {
+  "23": {
    "pergunta": "Qual a montanha mais alta do Brasil?",
    "b": "Pico Parana",
    "a": "Pico da Neblina",
@@ -239,7 +239,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "24": {
    "pergunta": "Qual a velocidade da luz?",
    "b": "150 000 000 metros por segundo (m/s)",
    "a": "300 000 000 metros por segundo (m/s)",
@@ -249,7 +249,7 @@
    "tipo": "natureza",
    "resposta": "d"
  },
- {
+  "25": {
    "pergunta": "Em qual local da Asia o portugues eh lingua oficial?",
    "b": "Filipinas",
    "a": "India",
@@ -259,7 +259,7 @@
    "tipo": "humanas",
    "resposta": "d"
  },
- {
+  "26": {
    "pergunta": "It is six twenty or twenty past six. Que horas sao em ingles?",
    "b": "06:20",
    "a": "12:06",
@@ -269,7 +269,7 @@
    "tipo": "linguagens",
    "resposta": "b"
  },
- {
+  "27": {
    "pergunta": "Quem eh o autor de “O Principe”?",
    "b": "Antoine de Saint-Exupery",
    "a": "Maquiavel",
@@ -279,7 +279,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "28": {
    "pergunta": "Como eh a conjugacao do verbo caber na 1a pessoa do singular do presente do indicativo?",
    "b": "Ele cabe",
    "a": "Eu caibo",
@@ -289,7 +289,7 @@
    "tipo": "linguagens",
    "resposta": "a"
  },
- {
+  "29": {
    "pergunta": "Quais destas construcoes famosas ficam nos Estados Unidos?",
    "b": "Estatua da Liberdade, Big Ben e The High Line",
    "a": "Estatua da Liberdade, Golden Gate Bridge e Empire State Building",
@@ -299,7 +299,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "30": {
    "pergunta": "Quais destas doencas sao sexualmente transmissiveis?",
    "b": "Chikungunya, aids e herpes genital",
    "a": "Aids, tricomoniase e ebola",
@@ -309,8 +309,8 @@
    "tipo": "natureza",
    "resposta": "c"
  },
- {
-   "pergunta": "Qual destes paises e transcontinental?",
+  "31": {
+   "pergunta": "Qual destes paises eh transcontinental?",
    "b": "Filipinas",
    "a": "Russia",
    "c": "Istambul",
@@ -319,17 +319,17 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
-   "pergunta": "Em qual das oracaes abaixo a palavra foi empregada incorretamente?",
+  "32": {
+   "pergunta": "Em qual das oracoes abaixo a palavra foi empregada incorretamente?",
    "b": "Eh um homem mal.",
    "a": "Mais uma vez, portou-se mal.",
-   "c": "Esse e o mal de todos.",
+   "c": "Esse eh o mal de todos.",
    "d": "Mal falou nele, o fulano apareceu.",
    "e": "Eh um mau vendedor.",
    "tipo": "linguagens",
    "resposta": "b"
  },
- {
+  "33": {
    "pergunta": "Qual foi o recurso utilizado inicialmente pelo homem para explicar a origem das coisas?",
    "b": "Biologia",
    "a": "Filosofia",
@@ -339,7 +339,7 @@
    "tipo": "humanas",
    "resposta": "e"
  },
- {
+  "34": {
    "pergunta": "Qual das alternativas menciona apenas simbolos nacionais?",
    "b": "Bandeira nacional, armas nacionais, hino nacional e selo nacional",
    "a": "Bandeira insignia da presidencia, bandeira nacional, brasao, hinos e selo",
@@ -349,7 +349,7 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
+  "35": {
    "pergunta": "Quais os planetas do sistema solar?",
    "b": "Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Terra, Urano, Venus",
    "a": "Mercurio, Venus, Terra, Marte, Jupiter",
@@ -359,7 +359,7 @@
    "tipo": "natureza",
    "resposta": "a"
  },
- {
+  "36": {
    "pergunta": "Qual era o nome de Aleijadinho?",
    "b": "Manuel Francisco Lisboa",
    "a": "Alexandrino Francisco Lisboa",
@@ -369,7 +369,7 @@
    "tipo": "humanas",
    "resposta": "e"
  },
- {
+  "37": {
    "pergunta": "Jupiter e Plutao sao os correlatos romanos de quais deuses gregos?",
    "b": "Cronos e Apolo",
    "a": "Ares e Hermes",
@@ -379,7 +379,7 @@
    "tipo": "humanas",
    "resposta": "c"
  },
- {
+  "38": {
    "pergunta": "Qual o maior animal terrestre?",
    "b": "Dinossauro",
    "a": "Baleia Azul",
@@ -389,7 +389,7 @@
    "tipo": "natureza",
    "resposta": "c"
  },
- {
+  "39": {
    "pergunta": "Qual o tema do famoso discurso Eu Tenho um Sonho, de Martin Luther King?",
    "b": "Justica para os menos favorecidos",
    "a": "Igualdade das raças",
@@ -399,7 +399,7 @@
    "tipo": "humanas",
    "resposta": "a"
  },
- {
+  "40": {
    "pergunta": "Que lider mundial ficou conhecida como “Dama de Ferro”?",
    "b": "Angela Merkel",
    "a": "Dilma Rousseff",
@@ -409,7 +409,7 @@
    "tipo": "humanas",
    "resposta": "c"
  },
- {
+  "41": {
    "pergunta": "Quais os nomes dos tres Reis Magos?",
    "b": "Belchior, Gaspar e Baltazar",
    "a": "Gaspar, Nicolau e Natanael",
@@ -419,17 +419,17 @@
    "tipo": "humanas",
    "resposta": "b"
  },
- {
+  "42": {
    "pergunta": "Quais os principais heteronimos de Fernando Pessoa?",
    "b": "Ariano Suassuna, Raul Bopp e Quincas Borba",
    "a": "Alberto Caeiro, Ricardo Reis e Alvaro de Campos",
    "c": "Bento Teixeira, Ricardo Reis e Haroldo de Campos",
    "d": "Alberto Caeiro, Ricardo Leite e Augusto de Campos",
-   "e": " Bento Teixeira, Ricardo Reis e Augusto de Campos",
+   "e": "Bento Teixeira, Ricardo Reis e Augusto de Campos",
    "tipo": "linguagens",
    "resposta": "a"
  },
- {
+  "43": {
    "pergunta": "Qual a religiao monoteista que conta com o maior numero de adeptos no mundo?",
    "b": "Zoroastrismo",
    "a": "Judaismo",
@@ -439,7 +439,7 @@
    "tipo": "humanas",
    "resposta": "d"
  },
- {
+  "44": {
    "pergunta": "Qual desses filmes foi baseado na obra de Shakespeare?",
    "b": "Capitães de Areia ",
    "a": "Muito Barulho por Nada",
@@ -449,7 +449,7 @@
    "tipo": "linguagens",
    "resposta": "a"
  },
- {
+  "45": {
    "pergunta": "Quem foi o primeiro homem a pisar na Lua? Em que ano aconteceu?",
    "b": "Buzz Aldrin, em 1969",
    "a": "Yuri Gagarin, em 1961",
@@ -459,7 +459,7 @@
    "tipo": "humanas",
    "resposta": "e"
  },
- {
+  "46": {
    "pergunta": "Qual o nome do cientista que descobriu o processo de pasteurizacao e a vacina contra a raiva?",
    "b": "Marie Curie",
    "a": "Blaise Pascal",
@@ -469,7 +469,7 @@
    "tipo": "natureza",
    "resposta": "c"
  },
- {
+  "47": {
    "pergunta": "As pessoas de qual tipo sanguineo sao consideradas doadores universais?",
    "b": "A",
    "a": "AB",
@@ -479,4 +479,4 @@
    "tipo": "natureza",
    "resposta": "c"
  }
-]
+}
