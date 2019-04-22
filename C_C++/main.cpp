@@ -29,12 +29,12 @@ int pontuacao = 0;
 int erros = 0;
 
 /* Printa os valores dentro de um vetor */
-void print(std::vector<int> const &a)
+void print(vector<int> const &a)
 {
-	std::cout << "The vector elements are : ";
+	cout << "The vector elements are : ";
 
 	for (int i = 0; i < a.size(); i++)
-		std::cout << a.at(i) << ' ';
+		cout << a.at(i) << ' ';
 }
 
 // Main
@@ -193,7 +193,7 @@ void finalizarPartida()
 void criarPergunta()
 {
 	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
-	std::ifstream json_file("perguntas.json");
+	ifstream json_file("perguntas.json");
 	json perguntas;
 	json_file >> perguntas;
 
@@ -222,12 +222,14 @@ void criarPergunta()
 
 		if (!perguntas_usadas.empty())
 		{
-			bool exists = std::find(perguntas_usadas.begin(), perguntas_usadas.end(), pergunta_id) != perguntas_usadas.end();
+			bool exists = find(perguntas_usadas.begin(), perguntas_usadas.end(), pergunta_id) != perguntas_usadas.end();
 			if (exists != true)
 			{
 				break;
 			}
-			cout << exists << endl;
+
+			pergunta_id = 100;
+			
 		}
 		else
 		{
@@ -236,7 +238,7 @@ void criarPergunta()
 	} while (true);
 
 	perguntas_usadas.push_back(pergunta_id);
-	std::string key = to_string(pergunta_id);
+	string key = to_string(pergunta_id);
 
 	// Enunciado pergunta
 	cout << "Pergunta: " << perguntas[key]["pergunta"] << endl;
@@ -252,7 +254,6 @@ void criarPergunta()
 	cout << "Resposta: ";
 	string resposta;
 	cin >> resposta;
-
 	if (resposta == perguntas[key]["resposta"])
 	{
 		cout << "Acertou!!" << endl
