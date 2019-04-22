@@ -22,6 +22,7 @@ void verRanking();		 // A fazer (sei nao, viss...)
 void ativarRecompensa(); // A fazer
 void finalizarPartida(); // Expliquem a ideia desse metodo
 void criarPergunta();	// Feito
+void playAgain();	// A fazer
 
 vector<int> perguntas_usadas;
 int pontuacao = 0;
@@ -192,22 +193,25 @@ void finalizarPartida()
 void criarPergunta()
 {
 	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
+	std::ifstream json_file("perguntas.json");
+	json perguntas;
+	json_file >> perguntas;
 
 	int pergunta_id = 100;
 	int r;
 	do
 	{
 		/* Random number --> Bad alloc */
-		while (pergunta_id > 47)
+		while (pergunta_id > perguntas.size())
 		{
-			std::random_device rd;						  // obtain a random number from hardware
-			std::mt19937 eng(rd());						  // seed the generator
-			std::uniform_int_distribution<> distr(0, 48); // define the range
+			random_device rd;						  // obtain a random number from hardware
+			mt19937 eng(rd());						  // seed the generator
+			uniform_int_distribution<> distr(0, 48); // define the range
 
 			for (int n = 0; n < 40; ++n)
 			{
 				r = distr(eng);
-				if (r < 48)
+				if (r < perguntas.size())
 				{
 					pergunta_id = r;
 					break;
@@ -232,12 +236,7 @@ void criarPergunta()
 	} while (true);
 
 	perguntas_usadas.push_back(pergunta_id);
-
-	std::ifstream json_file("perguntas.json");
-	json perguntas;
-	json_file >> perguntas;
-
-	std::string key = std::to_string(pergunta_id);
+	std::string key = to_string(pergunta_id);
 
 	// Enunciado pergunta
 	cout << "Pergunta: " << perguntas[key]["pergunta"] << endl;
