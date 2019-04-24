@@ -28,18 +28,17 @@ void verRanking();		 // A fazer (sei nao, viss...)
 void ativarRecompensa(); // A fazer
 void finalizarPartida(); // Expliquem a ideia desse metodo
 void playAgain();	// A fazer
-int exibirDicas(int perguntaID); // A fazer
+int exibirDicas(int perguntaID); // A fazer -> Só falta pular
 
 // Feitos
-void criaPartidaMenu();  // Feito
+void criaPartidaMenu();  // Feito -> Ajustar para Multiplayer
 void criarPergunta();	// Feito
 void singlePlayer();	 // Feito
 int randomValue(int max); // Feito
-string tolower(string word);
+string tolower(string word); // Feito
 
 vector<int> perguntasUsadas;
-// vector<string> validas = {"a","b","c","d","e","p"};
-string validas[] = {"a","b","c","d","e","p"};
+vector<string> validas = {"a","b","c","d","e","p"};
 int acertos = 0;
 int erros = 0;
 bool dicaEliminacao = false;
@@ -139,7 +138,7 @@ void singlePlayer(){
 		criarPergunta();
 
 		cout << "===== PLACAR =====" << endl;
-		cout << "Pontuação: " << acertos << endl;
+		cout << "Acertos: " << acertos << endl;
 		cout << "Erros: " << erros << endl << endl;
 	} while (acertos <= 10 && erros < 3); 
 
@@ -228,9 +227,8 @@ void criarPergunta(){
 
 		resposta = tolower(resposta);
 
-		for (int i = 0; i <= validas.size())
-  		valida = std::find(std::begin(validas), std::end(validas), resposta) != std::end(validas);
-		
+		valida = find(validas.begin(), validas.end(), resposta) != validas.end();
+
 	} while (valida != true);
 
 	if (resposta == "p" || resposta == "P") {
@@ -238,14 +236,19 @@ void criarPergunta(){
 		int tipoDica = exibirDicas(perguntaID);
 		
 		if (tipoDica != 3) {
+			
+			
+			
 			do {
 				cout << "Resposta final: ";
 				cin >> resposta;
 
 				resposta = tolower(resposta);
-				bool valida = find(validas.begin(), validas.end(), resposta) != validas.end();
-				
+
+				valida = find(validas.begin(), validas.end(), resposta) != validas.end();
+
 			} while (valida != true);
+
 		}
 	}
 
@@ -280,8 +283,10 @@ int exibirDicas(int perguntaID) {
 		cout << "3) Pular pergunta" << endl;
 	}
 
+	cout << "Sua escolha: " << endl;
 	int tipoDica;
 	cin >> tipoDica;
+	cout << endl;
 
 	switch (tipoDica) {
 		// Eliminar respostas
