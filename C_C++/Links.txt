@@ -9,3 +9,29 @@ https://docs.google.com/spreadsheets/d/1KOp3Y1zcwSTH1nK_h6pcaACUmvN-lbAY9iDKjmvb
 // GitHUB //
 
 https://github.com/gustavolbs/PLP-2019.1
+
+
+
+0:
+,
+   "eliminacao": "A\nB\nD",
+   "porcentagens": "A: 30%\nB: 35%\nC: 10%\nD: 15%\nE: 10%"
+
+1:
+,
+   "eliminacao": "A\nC\nD",
+   "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%"
+
+2:
+,
+    "eliminacao": "A\nB\nC",
+    "porcentagens": "A: 30%\nB: 30%\nC: 35%\nD: 1%\nE: 4%"
+3:
+,
+   "eliminacao": "A\nC\nE",
+   "porcentagens": "A: 50%\nB: 10%\nC: 25%\nD: 10%\nE: 5%"
+
+4:
+,
+    "eliminacao": "A\nC\nD",
+    "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%"

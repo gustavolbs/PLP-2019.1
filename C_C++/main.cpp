@@ -10,24 +10,47 @@
 #include <cstdlib>
 #include <ctime>
 #include "json.hpp"
+
+
 using namespace std;
 using json = nlohmann::json;
+
+#define UP_A 65
+#define UP_Z 91
+#define LOW_A 97
+#define LOW_Z 122
+
+
+
 // Funções
-void criaPartidaMenu();  // Feito
-void singlePlayer();	 // Feito
 void multiPlayer();		 // Sem cabimento
 void verRanking();		 // A fazer (sei nao, viss...)
 void ativarRecompensa(); // A fazer
 void finalizarPartida(); // Expliquem a ideia desse metodo
-void criarPergunta(int tipoPergunta);	// Feito
 void playAgain();	// A fazer
-int randomValue(int max);
+int exibirDicas(string Key); // A fazer
+
+// Feitos
+void criaPartidaMenu();  // Feito
+void criarPergunta();	// Feito
+void singlePlayer();	 // Feito
+int randomValue(int max); // Feito
+string tolower(string word);
 
 vector<int> perguntasUsadas;
 int acertos = 0;
 int erros = 0;
+bool dicaEliminacao = false;
+bool dicaPorcentagens = false;
+bool dicaPular = false;
 
-/* Printa os valores dentro de um vetor */
+
+
+
+
+/* 
+	Printa os valores dentro de um vetor
+*/
 void print(vector<int> const &a){
 	cout << "The vector elements are : ";
 
@@ -112,22 +135,23 @@ void criaPartidaMenu(){
 	Função que inicia o modo SinglePlayer competindo contra o BOT (vamo verificar isso).
 */
 void singlePlayer(){
-	// Inicia o modo SinglePlayer
-
-	// Random de perguntas
-
-	for(int i = 0;i < 12;i++){
+	do {
 		cout << endl;
-		criarPergunta(i % 4);
+		criarPergunta();
 
 		cout << "===== PLACAR =====" << endl;
 		cout << "Pontuação: " << acertos << endl;
 		cout << "Erros: " << erros << endl << endl;
+	} while (acertos <= 10 && erros < 3); 
 
-	}
+	
 	int pontuacaoFinal = (acertos * 0.6) - (erros * 0.4); //falta ajustar
-	//cout << "Obrigado por jogar, porntuacao final: " << pontuacaoFinal << "\nAcertos: " << pontuacao << "\nErros: " << erros << endl;
-	cout << "Obrigado por jogar, porntuacao final: " << pontuacaoFinal << endl;
+	if (pontuacaoFinal < 0) {
+		pontuacaoFinal = 0;
+	}
+	
+	cout << "Obrigado por jogar, pontuacao final: " << pontuacaoFinal << endl;
+	cout << endl << endl << endl << endl;
 	
 }
 
@@ -162,34 +186,32 @@ void finalizarPartida(){
 /*
 	Função que exibe uma pergunta do BD excolhida aleatoriamente utilizando o ID de uma pergunta e chama a função que pede a resposta da questão
 */
-void criarPergunta(int tipoPergunta){
+void criarPergunta(){
 	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
 	ifstream json_file("perguntas.json");
 	json perguntas;
 	json_file >> perguntas;
+
 	int perguntaID = -1;
 	bool jaUsada;
+
 	string key;
-	cout << tipoPergunta << endl;
+	
+	
 	do{
 		perguntaID = randomValue(perguntas.size());
 		key = to_string(perguntaID);
 		jaUsada = find(perguntasUsadas.begin(), perguntasUsadas.end(), perguntaID) != perguntasUsadas.end();
 
-	}while(jaUsada == true);
-	/* || !(
-	(tipoPergunta == 0 && perguntas[key]["tipo"] == "humanas") ||
-	(tipoPergunta == 1 && perguntas[key]["tipo"] == "linguagens") ||
-	(tipoPergunta == 2 && perguntas[key]["tipo"] == "matematica") ||
-	(tipoPergunta == 3 && perguntas[key]["tipo"] == "natureza")
-	));
-	*/
-
+	} while(jaUsada == true);
+	
+	
 	//Precisamos adicionar mais perguuntas de matematica
 
 	perguntasUsadas.push_back(perguntaID);
 
 	// Enunciado pergunta
+	cout << "Tipo: " << perguntas[key]["tipo"] << endl;
 	cout << "Pergunta: " << perguntas[key]["pergunta"] << endl;
 
 	// Opções
@@ -198,13 +220,27 @@ void criarPergunta(int tipoPergunta){
 	cout << "C: " << perguntas[key]["c"] << '\n';
 	cout << "D: " << perguntas[key]["d"] << '\n';
 	cout << "E: " << perguntas[key]["e"] << '\n';
-
+	cout << "P: PEDIR DICA" << '\n';
+	
 	// Resposta pergunta
 	cout << "Resposta: ";
-	string resposta;
-	cin >> resposta;
+	string resposta,resposta1;
+	cin >> resposta1;
+	resposta = tolower(resposta1);
+
+	if (resposta == "p" || resposta == "P") {
+		cout << endl;
+		int tipoDica = exibirDicas(key);
+		
+		if (tipoDica != 3) {
+			cout << "Resposta final: ";
+			cin >> resposta;
+		}
+	}
+
+
 	if (resposta == perguntas[key]["resposta"]){
-		cout << "\033[0;32m" << "Acertou!!" << endl << endl;
+		cout << "\033[0;32m" << "Acertou!!!" << endl << endl;
 		acertos++;
 	}
 	else{
@@ -214,6 +250,76 @@ void criarPergunta(int tipoPergunta){
 	cout << "\x1b[0m";
 }
 
+/* 
+	Função que exibe as dicas para o usuário, conforme ele pedir.
+*/
+int exibirDicas(string Key) {
+	ifstream json_file("perguntas.json");
+	json perguntas;
+	json_file >> perguntas;
+	
+	if (dicaEliminacao == false) {
+		cout << "1) Eliminar alternativas" << endl;
+	}
+
+	if (dicaPorcentagens == false) {
+		cout << "2) Opiniao dos internautas" << endl;
+	}
+
+	if (dicaPular == false) {
+		cout << "3) Pular pergunta" << endl;
+	}
+
+	int tipoDica;
+	cin >> tipoDica;
+
+	switch (tipoDica) {
+		// Eliminar respostas
+		case 1:{
+			cout << "Uma das alternativas a seguir esta correta: " << perguntas[Key]["eliminacao"] << endl;
+			dicaEliminacao = true;
+			break;
+		}
+		// Porcentagem das questões
+		case 2:{
+			cout << "Essa eh a opiniao dos internautas: " << perguntas[Key]["porcentagens"];
+			dicaPorcentagens = true;
+				break;
+		}
+		// Pular pergunta
+		case 3:{
+			cout << "Vamos para a próxima questão" << endl;
+			dicaPular = true;
+			break;
+		}
+		default:{
+			cout << "FAZER VERIFICAÇÂO DICA INVALIDA" << endl;
+			break;
+		}
+	}
+	return tipoDica;
+}
+
+/*
+	Metodo que e responsavel por receber uma string e deixa-la em minusculo.
+		Usado principalmente para a validacao das respostas.
+*/
+string tolower(string word){
+	string lower;
+	for (int i = 0; i < word.length(); i++) {
+		if (word.at(i) >= UP_A && word.at(i) <= UP_Z) {
+			lower += (word.at(i) + 32);
+		}
+		else {
+			lower += word.at(i);
+		}
+	}
+	return lower;
+}
+
+/*
+	Função que calcula um inteiro aleatoriamente para servir de ID para cada questão.
+*/
 int randomValue(int max){
 	int perguntaID = 100 + max;
 	int r;
