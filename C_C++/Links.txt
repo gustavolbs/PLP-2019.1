@@ -1,0 +1,11 @@
+// Especificacoes //
+
+https://docs.google.com/document/d/11qAqwNNDV5fTeaSRDKrRnIKxSp6_n5ggcQ9k13-fPDE/edit
+
+// Perguntas //
+
+https://docs.google.com/spreadsheets/d/1KOp3Y1zcwSTH1nK_h6pcaACUmvN-lbAY9iDKjmvbfms/edit?usp=sharing
+
+// GitHUB //
+
+https://github.com/gustavolbs/PLP-2019.1

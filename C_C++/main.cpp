@@ -10,10 +10,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "json.hpp"
-
 using namespace std;
 using json = nlohmann::json;
-
 // Funções
 void criaPartidaMenu();  // Feito
 void singlePlayer();	 // Feito
@@ -21,65 +19,56 @@ void multiPlayer();		 // Sem cabimento
 void verRanking();		 // A fazer (sei nao, viss...)
 void ativarRecompensa(); // A fazer
 void finalizarPartida(); // Expliquem a ideia desse metodo
-void criarPergunta();	// Feito
+void criarPergunta(int tipoPergunta);	// Feito
 void playAgain();	// A fazer
+int randomValue(int max);
 
-vector<int> perguntas_usadas;
-int pontuacao = 0;
+vector<int> perguntasUsadas;
+int acertos = 0;
 int erros = 0;
 
 /* Printa os valores dentro de um vetor */
-void print(vector<int> const &a)
-{
+void print(vector<int> const &a){
 	cout << "The vector elements are : ";
 
-	for (int i = 0; i < a.size(); i++)
+	for (int i = 0; i < a.size(); i++){
 		cout << a.at(i) << ' ';
+	}
 }
 
 // Main
-int main()
-{
-	cout << "===== PerguntUP =====" << endl
-		 << endl;
+int main(){
+	cout << "===== PerguntUP =====" << endl << endl;
 	criaPartidaMenu();
 }
 
 /* 
 	Função que cria o menu do jogo e verifica se o usuário quer realmente jogar.
 */
-void criaPartidaMenu()
-{
+void criaPartidaMenu(){
 	int modo;
 	int comecar;
-	do
-	{
+	do{
 		string iniciar;
 		cout << "Deseja iniciar uma nova partida?" << endl;
 		cout << "(s = sim; n = não) \n";
 		cin >> iniciar;
 
-		if (iniciar == "s" || iniciar == "S")
-		{
+		if (iniciar == "s" || iniciar == "S"){
 			comecar = 1;
 		}
-		else if (iniciar == "n" || iniciar == "N")
-		{
+		else if (iniciar == "n" || iniciar == "N"){
 			comecar = 0;
 		}
-		else
-		{
+		else{
 			comecar = 2;
 		}
 
-		switch (comecar)
-		{
-		case 1:
-		{
+		switch (comecar){
+		case 1:{
 
 			string modalidade;
-			do
-			{
+			do{
 				/* cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
 					cin >> modalidade;
 
@@ -91,34 +80,28 @@ void criaPartidaMenu()
 						modo = 2;
 					} */
 				modo = 0;
-				switch (modo)
-				{
-				case 0:
-				{
+				switch (modo){
+				case 0:{
 					singlePlayer();
 					break;
 				}
-				case 1:
-				{
+				case 1:{
 					multiPlayer();
 					break;
 				}
-				default:
-				{
+				default:{
 					cout << "OPCAO INVALIDA!" << endl;
 				}
 				}
 			} while (modo != 0 && modo != 1);
 			break;
 		}
-		case 0:
-		{
+		case 0:{
 			cout << "Obrigado por jogar!" << endl;
 			exit(0);
 			break;
 		}
-		default:
-		{
+		default:{
 			cout << "OPCAO INVALIDA!" << endl;
 		}
 		}
@@ -128,117 +111,83 @@ void criaPartidaMenu()
 /* 
 	Função que inicia o modo SinglePlayer competindo contra o BOT (vamo verificar isso).
 */
-void singlePlayer()
-{
+void singlePlayer(){
 	// Inicia o modo SinglePlayer
 
 	// Random de perguntas
 
-	do
-	{
+	for(int i = 0;i < 12;i++){
 		cout << endl;
-		criarPergunta();
+		criarPergunta(i % 4);
 
 		cout << "===== PLACAR =====" << endl;
-		cout << "Pontuação: " << pontuacao << endl;
-		cout << "Erros: " << erros << endl
-			 << endl;
+		cout << "Pontuação: " << acertos << endl;
+		cout << "Erros: " << erros << endl << endl;
 
-	} while (pontuacao <= 10 && erros < 3);
-
-	if (pontuacao >= 10) {
-		cout << "Parabéns, você venceu com " << pontuacao << " e " << erros << " erros" << endl;
-	} else if (erros >= 3 && pontuacao > 0) {
-		cout << "Ah, que pena. Você errou " << erros << " vezes e por isso perdeu, mas você conseguiu marcar " << pontuacao << " ponto(s)" << endl;
-	} else if (erros >= 3 && pontuacao == 0) {
-		cout << "Que chato, você errou " << erros << " vezes e não acertou nenhuma vez. Mais sorte na próxima vez." << endl;
 	}
+	int pontuacaoFinal = (acertos * 0.6) - (erros * 0.4); //falta ajustar
+	//cout << "Obrigado por jogar, porntuacao final: " << pontuacaoFinal << "\nAcertos: " << pontuacao << "\nErros: " << erros << endl;
+	cout << "Obrigado por jogar, porntuacao final: " << pontuacaoFinal << endl;
+	
 }
 
 /* 
 	Função que inicia o modo MultiPlayer competindo contra um outro jogador (vamo verificar isso).
 */
-void multiPlayer()
-{
+void multiPlayer(){
 	// Inicia o modo MultiPlayer
 }
 
 /*
 	Função que exibe o ranking de pontuacao quando fora da partida. (Isso vai ser loko)
 */
-void verRanking()
-{
+void verRanking(){
 	// Exibe o ranking enquanto fora de uma partida
 }
 
 /*
 	Função que ativa o bônus/recompensa do jogador durante a partida
 */
-void ativarRecompensa()
-{
+void ativarRecompensa(){
 	// usado dentro de uma partida
 }
 
 /*
 	Função que finaliza uma partida (tenho minhas duvidas sobre esse método)
 */
-void finalizarPartida()
-{
+void finalizarPartida(){
 	// Encerra a partida atual (caso o usuário não esteja em uma pegunta)
 }
 
 /*
 	Função que exibe uma pergunta do BD excolhida aleatoriamente utilizando o ID de uma pergunta e chama a função que pede a resposta da questão
 */
-void criarPergunta()
-{
+void criarPergunta(int tipoPergunta){
 	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
 	ifstream json_file("perguntas.json");
 	json perguntas;
 	json_file >> perguntas;
+	int perguntaID = -1;
+	bool jaUsada;
+	string key;
+	cout << tipoPergunta << endl;
+	do{
+		perguntaID = randomValue(perguntas.size());
+		key = to_string(perguntaID);
+		jaUsada = find(perguntasUsadas.begin(), perguntasUsadas.end(), perguntaID) != perguntasUsadas.end();
 
-	int pergunta_id = 100;
-	int r;
-	do
-	{
-		/* Random number --> Bad alloc */
-		while (pergunta_id > perguntas.size())
-		{
-			random_device rd;						  // obtain a random number from hardware
-			mt19937 eng(rd());						  // seed the generator
-			uniform_int_distribution<> distr(0, 48); // define the range
+	}while(jaUsada == true);
+	/* || !(
+	(tipoPergunta == 0 && perguntas[key]["tipo"] == "humanas") ||
+	(tipoPergunta == 1 && perguntas[key]["tipo"] == "linguagens") ||
+	(tipoPergunta == 2 && perguntas[key]["tipo"] == "matematica") ||
+	(tipoPergunta == 3 && perguntas[key]["tipo"] == "natureza")
+	));
+	*/
 
-			for (int n = 0; n < 40; ++n)
-			{
-				r = distr(eng);
-				if (r < perguntas.size())
-				{
-					pergunta_id = r;
-					break;
-				}
-			}
-			break;
-		}
+	//Precisamos adicionar mais perguuntas de matematica
 
-		if (!perguntas_usadas.empty())
-		{
-			bool exists = find(perguntas_usadas.begin(), perguntas_usadas.end(), pergunta_id) != perguntas_usadas.end();
-			if (exists != true)
-			{
-				break;
-			}
-
-			pergunta_id = 100;
-			
-		}
-		else
-		{
-			break;
-		}
-	} while (true);
-
-	perguntas_usadas.push_back(pergunta_id);
-	string key = to_string(pergunta_id);
+	perguntasUsadas.push_back(perguntaID);
 
 	// Enunciado pergunta
 	cout << "Pergunta: " << perguntas[key]["pergunta"] << endl;
@@ -254,18 +203,33 @@ void criarPergunta()
 	cout << "Resposta: ";
 	string resposta;
 	cin >> resposta;
-	if (resposta == perguntas[key]["resposta"])
-	{
-		cout << "Acertou!!" << endl
-			 << endl;
-		pontuacao++;
-		return;
+	if (resposta == perguntas[key]["resposta"]){
+		cout << "\033[0;32m" << "Acertou!!" << endl << endl;
+		acertos++;
 	}
-	else
-	{
-		cout << "Voce errou. A resposta certa era a letra " << perguntas[key]["resposta"] << endl
-			 << endl;
+	else{
+		cout << "\033[1;31m" << "Voce errou. A resposta certa era a letra " << perguntas[key]["resposta"] << endl << endl;
 		erros++;
-		return;
 	}
+	cout << "\x1b[0m";
+}
+
+int randomValue(int max){
+	int perguntaID = 100 + max;
+	int r;
+	/* Random number --> Bad alloc */
+	while (perguntaID > max){
+		random_device rd;						  // obtain a random number from hardware
+		mt19937 eng(rd());						  // seed the generator
+		uniform_int_distribution<> distr(0, max); // define the range
+
+		for (int n = 0; n < 40; ++n){
+			r = distr(eng);
+			if (r < max){
+				perguntaID = r;
+				break;
+			}
+		}
+	}
+	return perguntaID;
 }
