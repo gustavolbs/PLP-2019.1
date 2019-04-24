@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "json.hpp"
-
+#include <iterator> // for std::begin, std::end
 
 using namespace std;
 using json = nlohmann::json;
@@ -28,7 +28,7 @@ void verRanking();		 // A fazer (sei nao, viss...)
 void ativarRecompensa(); // A fazer
 void finalizarPartida(); // Expliquem a ideia desse metodo
 void playAgain();	// A fazer
-int exibirDicas(string Key); // A fazer
+int exibirDicas(int perguntaID); // A fazer
 
 // Feitos
 void criaPartidaMenu();  // Feito
@@ -38,14 +38,13 @@ int randomValue(int max); // Feito
 string tolower(string word);
 
 vector<int> perguntasUsadas;
+// vector<string> validas = {"a","b","c","d","e","p"};
+string validas[] = {"a","b","c","d","e","p"};
 int acertos = 0;
 int erros = 0;
 bool dicaEliminacao = false;
 bool dicaPorcentagens = false;
 bool dicaPular = false;
-
-
-
 
 
 /* 
@@ -195,12 +194,8 @@ void criarPergunta(){
 	int perguntaID = -1;
 	bool jaUsada;
 
-	string key;
-	
-	
-	do{
+	do {
 		perguntaID = randomValue(perguntas.size());
-		key = to_string(perguntaID);
 		jaUsada = find(perguntasUsadas.begin(), perguntasUsadas.end(), perguntaID) != perguntasUsadas.end();
 
 	} while(jaUsada == true);
@@ -211,40 +206,55 @@ void criarPergunta(){
 	perguntasUsadas.push_back(perguntaID);
 
 	// Enunciado pergunta
-	cout << "Tipo: " << perguntas[key]["tipo"] << endl;
-	cout << "Pergunta: " << perguntas[key]["pergunta"] << endl;
+	cout << "Tipo: " << perguntas[perguntaID]["tipo"] << endl;
+	cout << "Pergunta: " << perguntas[perguntaID]["pergunta"] << endl;
 
 	// Opções
-	cout << "A: " << perguntas[key]["a"] << '\n';
-	cout << "B: " << perguntas[key]["b"] << '\n';
-	cout << "C: " << perguntas[key]["c"] << '\n';
-	cout << "D: " << perguntas[key]["d"] << '\n';
-	cout << "E: " << perguntas[key]["e"] << '\n';
+	cout << "A: " << perguntas[perguntaID]["a"] << '\n';
+	cout << "B: " << perguntas[perguntaID]["b"] << '\n';
+	cout << "C: " << perguntas[perguntaID]["c"] << '\n';
+	cout << "D: " << perguntas[perguntaID]["d"] << '\n';
+	cout << "E: " << perguntas[perguntaID]["e"] << '\n';
 	cout << "P: PEDIR DICA" << '\n';
 	
+
+	bool valida = false;
 	// Resposta pergunta
-	cout << "Resposta: ";
-	string resposta,resposta1;
-	cin >> resposta1;
-	resposta = tolower(resposta1);
+	string resposta;
+
+	do {
+		cout << "Resposta: ";
+		cin >> resposta;
+
+		resposta = tolower(resposta);
+
+		for (int i = 0; i <= validas.size())
+  		valida = std::find(std::begin(validas), std::end(validas), resposta) != std::end(validas);
+		
+	} while (valida != true);
 
 	if (resposta == "p" || resposta == "P") {
 		cout << endl;
-		int tipoDica = exibirDicas(key);
+		int tipoDica = exibirDicas(perguntaID);
 		
 		if (tipoDica != 3) {
-			cout << "Resposta final: ";
-			cin >> resposta;
+			do {
+				cout << "Resposta final: ";
+				cin >> resposta;
+
+				resposta = tolower(resposta);
+				bool valida = find(validas.begin(), validas.end(), resposta) != validas.end();
+				
+			} while (valida != true);
 		}
 	}
 
-
-	if (resposta == perguntas[key]["resposta"]){
+	if (resposta == perguntas[perguntaID]["resposta"]){
 		cout << "\033[0;32m" << "Acertou!!!" << endl << endl;
 		acertos++;
 	}
 	else{
-		cout << "\033[1;31m" << "Voce errou. A resposta certa era a letra " << perguntas[key]["resposta"] << endl << endl;
+		cout << "\033[1;31m" << "Voce errou. A resposta certa era a letra " << perguntas[perguntaID]["resposta"] << endl << endl;
 		erros++;
 	}
 	cout << "\x1b[0m";
@@ -253,7 +263,7 @@ void criarPergunta(){
 /* 
 	Função que exibe as dicas para o usuário, conforme ele pedir.
 */
-int exibirDicas(string Key) {
+int exibirDicas(int perguntaID) {
 	ifstream json_file("perguntas.json");
 	json perguntas;
 	json_file >> perguntas;
@@ -276,15 +286,15 @@ int exibirDicas(string Key) {
 	switch (tipoDica) {
 		// Eliminar respostas
 		case 1:{
-			cout << "Uma das alternativas a seguir esta correta: " << perguntas[Key]["eliminacao"] << endl;
+			cout << "Uma das alternativas a seguir esta correta: \n" << (string) perguntas[perguntaID]["eliminacao"] << endl;
 			dicaEliminacao = true;
 			break;
 		}
 		// Porcentagem das questões
 		case 2:{
-			cout << "Essa eh a opiniao dos internautas: " << perguntas[Key]["porcentagens"];
+			cout << "Essa eh a opiniao dos internautas: \n" << (string) perguntas[perguntaID]["porcentagens"];
 			dicaPorcentagens = true;
-				break;
+			break;
 		}
 		// Pular pergunta
 		case 3:{

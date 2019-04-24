@@ -1,5 +1,5 @@
-{
-  "0" : {
+[
+  {
    "pergunta": "Normalmente, quantos litros de sangue uma pessoa tem? Em media, quantos sao retirados numa doacao de sangue?",
    "b": "Tem entre 4 a 6 litros. São retirados 450 mililitros",
    "a": "Tem entre 2 a 4 litros. Sao retirados 450 mililitros",
@@ -8,10 +8,10 @@
    "e": "Tem 0,5 litros. Sao retirados 0,5 litros",
    "tipo": "natureza",
    "resposta": "b",
-   "eliminacao": "A\nB\nD",
+   "eliminacao": "\nA\nB\nD",
    "porcentagens": "A: 30%\nB: 35%\nC: 10%\nD: 15%\nE: 10%"
  },
-  "1" : {
+  {
    "pergunta": "De quem eh a famosa frase “Penso, logo existo”?",
    "b": "Galileu Galilei",
    "a": "Platao",
@@ -20,10 +20,10 @@
    "e": "Francis Bacon",
    "tipo": "humanas",
    "resposta": "c",
-   "eliminacao": "A\nC\nD",
+   "eliminacao": "\nA\nC\nD",
    "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%"
 },
-  "2" : {
+  {
    "pergunta": "De onde eh a invenção do chuveiro eletrico?",
    "b": "Inglaterra",
    "a": "Franca",
@@ -32,10 +32,10 @@
    "e": "Italia",
    "tipo": "humanas",
    "resposta": "c",
-    "eliminacao": "A\nB\nC",
+    "eliminacao": "\nA\nB\nC",
     "porcentagens": "A: 30%\nB: 30%\nC: 35%\nD: 1%\nE: 4%"
   },
-  "3" : {
+  {
    "pergunta": "Quais são o menor e o maior pais do mundo?",
    "b": "Nauru e China",
    "a": "Vaticano e Rússia",
@@ -44,10 +44,10 @@
    "e": "Sao Marino e India",
    "tipo": "humanas",
    "resposta": "a",
-   "eliminacao": "A\nC\nE",
+   "eliminacao": "\nA\nC\nE",
    "porcentagens": "A: 50%\nB: 10%\nC: 25%\nD: 10%\nE: 5%"
  },
-  "4" : {
+  {
    "pergunta": "Qual o nome do presidente do Brasil que ficou conhecido como Jango?",
    "b": "Jacinto Anjos",
    "a": "Janio Quadros",
@@ -56,7 +56,7 @@
    "e": "Joao Goulart",
    "tipo": "humanas",
    "resposta": "e",
-    "eliminacao": "A\tC\tD",
+    "eliminacao": "\nA\tC\tD",
     "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%"
   }
-}
+]
