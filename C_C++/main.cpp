@@ -26,11 +26,11 @@ using jsonf = nlohmann::json;
 
 
 // Funções
-void multiPlayer();		 							// Sem cabimento
-void playAgain();									// A fazer
+void multiPlayer();		 							// Em andamento (falta testar e ajustar, se for preciso)
+void playAgain();									// Em andamento (falta testar e ajustar, se for preciso)
 
 // Feitos
-void criaPartidaMenu();  							// Feito -> Ajustar para Multiplayer
+void criaPartidaMenu();  							// Feito -> Ajustando para Multiplayer
 void criarPergunta();								// Feito
 void singlePlayer();	 							// Feito -> Ajustar calculo pontuação
 int randomValue(int max); 							// Feito
@@ -70,6 +70,7 @@ int main() {
 	cout << "===== PerguntUP =====" << endl << endl;
 	criaPartidaMenu();
 	cout << "Tempo: " << (time(0) - t) << "'s"<< endl;
+	playAgain();
 }
 
 /* 
@@ -102,17 +103,18 @@ void criaPartidaMenu() {
 
 				string modalidade;
 				do{
-					/* cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
-						cin >> modalidade;
+					cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
+					cin >> modalidade;
+					modo = 2;
 
-						if (modalidade == "s" || modalidade == "S") {
-							modo = 0;
-						} else if (modalidade == "m" || modalidade == "M") {
-							modo = 1;
-						} else {
-							modo = 2;
-						} */
-					modo = 0;
+					if (tolower(modalidade) == "s") {
+						modo = 0;
+					} else if (tolower(modalidade) == "m") {
+						modo = 1;
+					} else {
+						modo = 2;
+					}
+
 					switch (modo){
 						case 0:{
 							singlePlayer();
@@ -174,10 +176,19 @@ void singlePlayer() {
 }
 
 /* 
-	Função que inicia o modo MultiPlayer competindo contra um outro jogador (vamo verificar isso).
+	Função que inicia o modo MultiPlayer competindo contra um outro jogador.
 */
 void multiPlayer() {
-	// Inicia o modo MultiPlayer
+	cout << "===== MODO MULTIPLAYER =====" << endl << endl;
+
+	cout << "===== Vez do Jogador 1 =====" << endl;
+	singlePlayer();
+
+	system("cls");
+
+	cout << "===== Vez do Jogador 1 =====" << endl;
+	singlePlayer();
+
 }
 
 /*
@@ -502,5 +513,14 @@ int randomValue(int max) {
 	Função que faz com que o jogador jogue novamente, se ele desejar
 */
 void playAgain() {
+	string opcao;
+	do {
+		cout << "===== Partida encerrada =====" << endl << "Deseja jogar novamente?" << endl;
+		cin >> opcao;
+		if (tolower(opcao) == "s") {
+			criaPartidaMenu();
+		}
+	} while (tolower(opcao) != "s");
+	
 	
 }
