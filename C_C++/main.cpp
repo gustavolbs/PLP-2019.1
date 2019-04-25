@@ -181,12 +181,12 @@ void singlePlayer() {
 void multiPlayer() {
 	cout << "===== MODO MULTIPLAYER =====" << endl << endl;
 
-	cout << "===== Vez do Jogador 1 =====" << endl;
+	cout << "----- Vez do Jogador 1 -----" << endl;
 	singlePlayer();
 
 	system("cls");
 
-	cout << "===== Vez do Jogador 1 =====" << endl;
+	cout << "----- Vez do Jogador 1 -----" << endl;
 	singlePlayer();
 
 }
