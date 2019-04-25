@@ -1,18 +1,19 @@
 # PerguntUP - C/C++
-> Um jogo de perguntas e respostas PxB ou PxP.
+> Um jogo de perguntas e respostas como nenhum outro.
 
 
-## TO DO:
+## Features:
 
-- [x] Criar partida (vs máquina ou vs jogador);
+- [x] Criar partida;
+- [x] Exibir perguntas;
 - [x] Responder perguntas;
-- [x] Escolher ajuda*;
-- [ ] Ver Ranking;
-- [ ] Ativar recompensa;
-- [x] Criar Perguntas;
-- [x] Pergunta randomica;
 - [x] SinglePlayer;
-- [x] ToLower;
-- [x] ExibirDicas;
+- [x] Random ID;
+- [x] To Lower;
+- [x] Pedir dicas;
+- [x] Exibir dicas;
+- [x] Dar dicas/recompensas;
+- [x] Armazenar dados;
+- [x] Print Vector;
 - [ ] MultiPlayer;
 - [ ] PlayAgain;

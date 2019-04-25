@@ -28,7 +28,6 @@ using jsonf = nlohmann::json;
 // Funções
 void multiPlayer();		 							// Sem cabimento
 void playAgain();									// A fazer
-void darRecompensa(); 								// A fazer
 
 // Feitos
 void criaPartidaMenu();  							// Feito -> Ajustar para Multiplayer
@@ -39,6 +38,8 @@ string tolower(string word); 						// Feito
 int exibirDicas(int perguntaID); 					// Feito
 void armazenaInfos(string jogador, int pontuacao);  // Feito
 void verRanking();		 							// Feito
+void darRecompensa(); 								// Feito
+void print(vector<int> const &a);					// Feito
 
 
 // Variáveis Globais
