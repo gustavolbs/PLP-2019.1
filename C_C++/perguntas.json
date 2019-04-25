@@ -56,8 +56,8 @@
     "e": "Joao Goulart",
     "tipo": "humanas",
     "resposta": "e",
-    "eliminacao": "A\tC\tD",
-    "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%\n"
+    "eliminacao": "A\tC\tE",
+    "porcentagens": "A: 30%\nB: 0%\nC: 20%\nD: 15%\nE: 35%\n"
   },
   {
     "pergunta": "Qual o grupo em que todas as palavras foram escritas corretamente?",

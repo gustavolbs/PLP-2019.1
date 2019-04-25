@@ -4,14 +4,15 @@
 
 ## TO DO:
 
-- [ ] Criar partida (vs máquina ou vs jogador);
-- [ ] Responder perguntas;
-- [ ] Escolher ajuda*;
+- [x] Criar partida (vs máquina ou vs jogador);
+- [x] Responder perguntas;
+- [x] Escolher ajuda*;
 - [ ] Ver Ranking;
 - [ ] Ativar recompensa;
-- [ ] Finalizar partida.
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [x] Criar Perguntas;
+- [x] Pergunta randomica;
+- [x] SinglePlayer;
+- [x] ToLower;
+- [x] ExibirDicas;
+- [ ] MultiPlayer;
+- [ ] PlayAgain;

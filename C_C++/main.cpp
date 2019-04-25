@@ -11,36 +11,42 @@
 #include <ctime>
 #include "json.hpp"
 #include <iterator> // for std::begin, std::end
+#include <ctime>
 
 using namespace std;
 using json = nlohmann::json;
+using jsonf = nlohmann::json;
 
 #define UP_A 65
 #define UP_Z 91
 #define LOW_A 97
 #define LOW_Z 122
 
+//Precisamos adicionar mais perguuntas de matematica
 
 
 // Funções
-void multiPlayer();		 // Sem cabimento
-void verRanking();		 // A fazer (sei nao, viss...)
-void ativarRecompensa(); // A fazer
-void finalizarPartida(); // Expliquem a ideia desse metodo
-void playAgain();	// A fazer
-int exibirDicas(int perguntaID); // A fazer -> Só falta pular
+void multiPlayer();		 							// Sem cabimento
+void playAgain();									// A fazer
+void darRecompensa(); 								// A fazer
 
 // Feitos
-void criaPartidaMenu();  // Feito -> Ajustar para Multiplayer
-void criarPergunta();	// Feito
-void singlePlayer();	 // Feito
-int randomValue(int max); // Feito
-string tolower(string word); // Feito
+void criaPartidaMenu();  							// Feito -> Ajustar para Multiplayer
+void criarPergunta();								// Feito
+void singlePlayer();	 							// Feito -> Ajustar calculo pontuação
+int randomValue(int max); 							// Feito
+string tolower(string word); 						// Feito
+int exibirDicas(int perguntaID); 					// Feito
+void armazenaInfos(string jogador, int pontuacao);  // Feito
+void verRanking();		 							// Feito
 
+
+// Variáveis Globais
 vector<int> perguntasUsadas;
 vector<string> validas = {"a","b","c","d","e","p"};
 int acertos = 0;
 int erros = 0;
+int tempoTotal = 0;
 bool dicaEliminacao = false;
 bool dicaPorcentagens = false;
 bool dicaPular = false;
@@ -49,7 +55,7 @@ bool dicaPular = false;
 /* 
 	Printa os valores dentro de um vetor
 */
-void print(vector<int> const &a){
+void print(vector<int> const &a) {
 	cout << "The vector elements are : ";
 
 	for (int i = 0; i < a.size(); i++){
@@ -58,81 +64,92 @@ void print(vector<int> const &a){
 }
 
 // Main
-int main(){
+int main() {
+	time_t t = time(0);
 	cout << "===== PerguntUP =====" << endl << endl;
 	criaPartidaMenu();
+	cout << "Tempo: " << (time(0) - t) << "'s"<< endl;
 }
 
 /* 
 	Função que cria o menu do jogo e verifica se o usuário quer realmente jogar.
 */
-void criaPartidaMenu(){
+void criaPartidaMenu() {
 	int modo;
 	int comecar;
+
+
 	do{
+		verRanking();
 		string iniciar;
 		cout << "Deseja iniciar uma nova partida?" << endl;
-		cout << "(s = sim; n = não) \n";
+		cout << "(s = sim; n = não): ";
 		cin >> iniciar;
 
-		if (iniciar == "s" || iniciar == "S"){
+		if (tolower(iniciar) == "s"){
 			comecar = 1;
 		}
-		else if (iniciar == "n" || iniciar == "N"){
+		else if (tolower(iniciar) == "n") {
 			comecar = 0;
 		}
 		else{
 			comecar = 2;
 		}
 
-		switch (comecar){
-		case 1:{
+		switch (comecar) {
+			case 1:{
 
-			string modalidade;
-			do{
-				/* cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
-					cin >> modalidade;
+				string modalidade;
+				do{
+					/* cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
+						cin >> modalidade;
 
-					if (modalidade == "s" || modalidade == "S") {
-						modo = 0;
-					} else if (modalidade == "m" || modalidade == "M") {
-						modo = 1;
-					} else {
-						modo = 2;
-					} */
-				modo = 0;
-				switch (modo){
-				case 0:{
-					singlePlayer();
-					break;
-				}
-				case 1:{
-					multiPlayer();
-					break;
-				}
-				default:{
-					cout << "OPCAO INVALIDA!" << endl;
-				}
-				}
-			} while (modo != 0 && modo != 1);
-			break;
-		}
-		case 0:{
-			cout << "Obrigado por jogar!" << endl;
-			exit(0);
-			break;
-		}
-		default:{
-			cout << "OPCAO INVALIDA!" << endl;
-		}
+						if (modalidade == "s" || modalidade == "S") {
+							modo = 0;
+						} else if (modalidade == "m" || modalidade == "M") {
+							modo = 1;
+						} else {
+							modo = 2;
+						} */
+					modo = 0;
+					switch (modo){
+						case 0:{
+							singlePlayer();
+							break;
+						}
+						case 1:{
+							multiPlayer();
+							break;
+						}
+						default:{
+							cout << "OPCAO INVALIDA!" << endl;
+						}
+					}
+				} while (modo != 0 && modo != 1);
+				break;
+			}
+			case 0:{
+				cout << "Obrigado por jogar!" << endl;
+				exit(0);
+				break;
+			}
+			default:{
+				cout << "OPCAO INVALIDA!" << endl;
+			}
 		}
 	} while (modo != 0 && modo != 1);
+
+	
 }
 
 /* 
 	Função que inicia o modo SinglePlayer competindo contra o BOT (vamo verificar isso).
 */
-void singlePlayer(){
+void singlePlayer() {
+	string nomeJogador;
+	cout << "Nome do jogador: ";
+	cin >> nomeJogador;
+
 	do {
 		cout << endl;
 		criarPergunta();
@@ -140,51 +157,143 @@ void singlePlayer(){
 		cout << "===== PLACAR =====" << endl;
 		cout << "Acertos: " << acertos << endl;
 		cout << "Erros: " << erros << endl << endl;
-	} while (acertos <= 10 && erros < 3); 
+	} while (acertos < 10 && erros < 3); 
 
 	
-	int pontuacaoFinal = (acertos * 0.6) - (erros * 0.4); //falta ajustar
+	int pontuacaoFinal = (acertos * 0.6) + ((180 - tempoTotal) * 0.4);
 	if (pontuacaoFinal < 0) {
 		pontuacaoFinal = 0;
 	}
 	
+	armazenaInfos(nomeJogador, pontuacaoFinal);
 	cout << "Obrigado por jogar, pontuacao final: " << pontuacaoFinal << endl;
 	cout << endl << endl << endl << endl;
 	
+	verRanking();
 }
 
 /* 
 	Função que inicia o modo MultiPlayer competindo contra um outro jogador (vamo verificar isso).
 */
-void multiPlayer(){
+void multiPlayer() {
 	// Inicia o modo MultiPlayer
 }
 
 /*
-	Função que exibe o ranking de pontuacao quando fora da partida. (Isso vai ser loko)
+	Função que armazena as informações do jogador (nome e pontuacao).
 */
-void verRanking(){
-	// Exibe o ranking enquanto fora de uma partida
+void armazenaInfos(string jogador, int pontuacao) {
+	ifstream json_file("rankinInfos.json");
+	jsonf jsonfile;
+	json_file >> jsonfile;
+
+	json j = {jogador, pontuacao};
+	jsonfile += j;
+
+	ofstream file("rankinInfos.json");
+    file << jsonfile;
+	
+}
+
+/*
+	Função que exibe o ranking das 10 melhores pontuações quando fora da partida.
+*/
+void verRanking() {
+	ifstream json_file("rankinInfos.json");
+	jsonf jsonfile;
+	json_file >> jsonfile;
+
+	cout << "====== RANKING ======" << endl;
+
+	int max;
+	json temp;
+	for (int i=0; i < jsonfile.size(); i++){
+		max = i;
+		for (int j=i+1; j < jsonfile.size(); j++){
+			if (jsonfile[j][1] > jsonfile[max][1]){
+				max = j;
+			}
+		}
+		temp=jsonfile[i];
+        jsonfile[i]=jsonfile[max];
+        jsonfile[max]=temp;
+	}
+
+	int pos = 1;
+
+	for (int i=0; i < 11 && i < jsonfile.size(); i++) {
+		if (pos == 1) {
+			cout << "\033[33;1m" << pos << ". "
+				<< jsonfile[i][0] << " - "
+				<< jsonfile[i][1] << "\x1b[0m"
+				<< endl;
+		} else if (pos == 2) {
+			cout << "\033[34;1m" << pos << ". "
+				<< jsonfile[i][0] << " - "
+				<< jsonfile[i][1] << "\x1b[0m"
+				<< endl;
+		} else if (pos == 3) {
+			cout << "\033[36m" << pos << ". "
+				<< jsonfile[i][0] << " - "
+				<< jsonfile[i][1] << "\x1b[0m"
+				<< endl;
+		} else {
+			cout << pos << ". "
+				<< jsonfile[i][0] << " - "
+				<< jsonfile[i][1]
+				<< endl;
+		}	
+		pos ++;
+	}
+	cout << "=====================" << endl << endl;
+
 }
 
 /*
 	Função que ativa o bônus/recompensa do jogador durante a partida
 */
-void ativarRecompensa(){
-	// usado dentro de uma partida
-}
+void darRecompensa() {
+	int v = -1;
 
-/*
-	Função que finaliza uma partida (tenho minhas duvidas sobre esse método)
-*/
-void finalizarPartida(){
-	// Encerra a partida atual (caso o usuário não esteja em uma pegunta)
+	if (dicaEliminacao == true && dicaPorcentagens == true && dicaPular == true) {
+		do {
+			v = randomValue(4);
+		} while (v < 1 || v > 3);
+	} else if (dicaEliminacao == true && dicaPorcentagens == false && dicaPular == false) {
+		v = 1;
+	} else if (dicaEliminacao == false && dicaPorcentagens == true && dicaPular == false) {
+		v = 2;
+	} else if (dicaEliminacao == false && dicaPorcentagens == false && dicaPular == true) {
+		v = 3;
+	} else if (dicaEliminacao == true && dicaPorcentagens == true && dicaPular == false) {
+		do {
+			v = randomValue(3);
+		} while (v < 1 || v > 2);
+	} else if (dicaEliminacao == true && dicaPorcentagens == false && dicaPular == true) {
+		do {
+			v = randomValue(4);
+		} while (v < 1 || v > 3 || v == 2);
+	} else if (dicaEliminacao == false && dicaPorcentagens == true && dicaPular == true) {
+		do {
+			v = randomValue(4);
+		} while (v < 2 || v > 3);
+	}
+
+	
+	if (v == 1) {
+		dicaEliminacao = false;
+	} else if (v == 2) {
+		dicaPorcentagens = false;
+	} else if (v == 3) {
+		dicaPular = false;
+	}
+	
 }
 
 /*
 	Função que exibe uma pergunta do BD excolhida aleatoriamente utilizando o ID de uma pergunta e chama a função que pede a resposta da questão
 */
-void criarPergunta(){
+void criarPergunta() {
 	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
 	ifstream json_file("perguntas.json");
 	json perguntas;
@@ -197,25 +306,27 @@ void criarPergunta(){
 		perguntaID = randomValue(perguntas.size());
 		jaUsada = find(perguntasUsadas.begin(), perguntasUsadas.end(), perguntaID) != perguntasUsadas.end();
 
-	} while(jaUsada == true);
-	
-	
-	//Precisamos adicionar mais perguuntas de matematica
-
+	} while (jaUsada == true);
+		
 	perguntasUsadas.push_back(perguntaID);
 
 	// Enunciado pergunta
 	cout << "Tipo: " << perguntas[perguntaID]["tipo"] << endl;
 	cout << "Pergunta: " << perguntas[perguntaID]["pergunta"] << endl;
-
 	// Opções
 	cout << "A: " << perguntas[perguntaID]["a"] << '\n';
 	cout << "B: " << perguntas[perguntaID]["b"] << '\n';
 	cout << "C: " << perguntas[perguntaID]["c"] << '\n';
 	cout << "D: " << perguntas[perguntaID]["d"] << '\n';
 	cout << "E: " << perguntas[perguntaID]["e"] << '\n';
-	cout << "P: PEDIR DICA" << '\n';
 	
+	if (dicaEliminacao == false || dicaPorcentagens == false || dicaPular == false) {
+		cout << "P: PEDIR DICA" << '\n';
+	} else {
+		cout << "P: Você não possui mais dicas" << '\n';
+	}
+
+	time_t tempo = time(0);
 
 	bool valida = false;
 	// Resposta pergunta
@@ -224,32 +335,43 @@ void criarPergunta(){
 	do {
 		cout << "Resposta: ";
 		cin >> resposta;
-
+		
 		resposta = tolower(resposta);
-
 		valida = find(validas.begin(), validas.end(), resposta) != validas.end();
 
 	} while (valida != true);
 
-	if (resposta == "p" || resposta == "P") {
-		cout << endl;
-		int tipoDica = exibirDicas(perguntaID);
-		
-		if (tipoDica != 3) {
+	if (tolower(resposta) == "p") {
+		if (dicaEliminacao == false || dicaPorcentagens == false || dicaPular == false) {
+			cout << endl;
+			int tipoDica = exibirDicas(perguntaID);
 			
-			
-			
+			if (tipoDica != 3) {
+				
+				do {
+					cout << "Resposta final: ";
+					cin >> resposta;
+
+					resposta = tolower(resposta);
+					valida = find(validas.begin(), validas.end(), resposta) != validas.end();
+
+				} while (valida != true);
+
+			} else {
+				return;				
+			}
+		} else {
 			do {
-				cout << "Resposta final: ";
+				cout << "Resposta: ";
 				cin >> resposta;
 
 				resposta = tolower(resposta);
-
 				valida = find(validas.begin(), validas.end(), resposta) != validas.end();
 
-			} while (valida != true);
-
+			} while (valida != true || resposta == "p");
 		}
+		
+
 	}
 
 	if (resposta == perguntas[perguntaID]["resposta"]){
@@ -257,9 +379,16 @@ void criarPergunta(){
 		acertos++;
 	}
 	else{
-		cout << "\033[1;31m" << "Voce errou. A resposta certa era a letra " << perguntas[perguntaID]["resposta"] << endl << endl;
+		cout << "\033[31;1m" << "Voce errou. A resposta certa era a letra " << perguntas[perguntaID]["resposta"] << endl << endl;
 		erros++;
 	}
+
+	tempo = time(0) - tempo; 
+	if (tempo <= 5) {
+		darRecompensa();
+	}
+
+	tempoTotal += tempo;
 	cout << "\x1b[0m";
 }
 
@@ -283,32 +412,45 @@ int exibirDicas(int perguntaID) {
 		cout << "3) Pular pergunta" << endl;
 	}
 
-	cout << "Sua escolha: " << endl;
+	bool valida;
 	int tipoDica;
-	cin >> tipoDica;
-	cout << endl;
+	do {
+		cout << "Sua escolha: ";
+		cin >> tipoDica;
+		cin.sync();
+
+		if (tipoDica == 1 && dicaEliminacao == false) {
+			valida = true;
+		} else if (tipoDica == 2 && dicaPorcentagens == false) {
+			valida = true;
+		} else if (tipoDica == 3 && dicaPular == false) {
+			valida = true;
+		}
+
+	} while (valida != true);
+
 
 	switch (tipoDica) {
 		// Eliminar respostas
 		case 1:{
-			cout << "Uma das alternativas a seguir esta correta: \n" << (string) perguntas[perguntaID]["eliminacao"] << endl;
+			cout << "\nUma das alternativas a seguir esta correta: \n" << (string) perguntas[perguntaID]["eliminacao"] << endl;
 			dicaEliminacao = true;
 			break;
 		}
 		// Porcentagem das questões
 		case 2:{
-			cout << "Essa eh a opiniao dos internautas: \n" << (string) perguntas[perguntaID]["porcentagens"];
+			cout << "\nEssa eh a opiniao dos internautas: \n" << (string) perguntas[perguntaID]["porcentagens"];
 			dicaPorcentagens = true;
 			break;
 		}
 		// Pular pergunta
 		case 3:{
-			cout << "Vamos para a próxima questão" << endl;
+			cout << "\nVamos para a próxima pergunta!\n";
 			dicaPular = true;
 			break;
 		}
 		default:{
-			cout << "FAZER VERIFICAÇÂO DICA INVALIDA" << endl;
+			cout << "Opção inválida! Selecione uma opção válida!" << endl;
 			break;
 		}
 	}
@@ -317,9 +459,8 @@ int exibirDicas(int perguntaID) {
 
 /*
 	Metodo que e responsavel por receber uma string e deixa-la em minusculo.
-		Usado principalmente para a validacao das respostas.
 */
-string tolower(string word){
+string tolower(string word) {
 	string lower;
 	for (int i = 0; i < word.length(); i++) {
 		if (word.at(i) >= UP_A && word.at(i) <= UP_Z) {
@@ -335,7 +476,7 @@ string tolower(string word){
 /*
 	Função que calcula um inteiro aleatoriamente para servir de ID para cada questão.
 */
-int randomValue(int max){
+int randomValue(int max) {
 	int perguntaID = 100 + max;
 	int r;
 	/* Random number --> Bad alloc */
@@ -353,4 +494,12 @@ int randomValue(int max){
 		}
 	}
 	return perguntaID;
+}
+
+
+/*
+	Função que faz com que o jogador jogue novamente, se ele desejar
+*/
+void playAgain() {
+	
 }
