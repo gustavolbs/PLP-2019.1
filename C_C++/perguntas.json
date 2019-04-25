@@ -68,8 +68,8 @@
     "e": "Asterisco, beneficiente, metereologia, entretido",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "B\tD\tE",
+    "porcentagens": "A: 10%\nB: 30%\nC: 20%\nD: 10%\nE: 30%\n"
   },
   {
     "pergunta": "Qual o livro mais vendido no mundo a seguir a Biblia?",
@@ -80,8 +80,8 @@
     "e": "Um Conto de Duas Cidades",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "B\tA\tC",
+    "porcentagens": "A: 32,5%\nB: 30%\nC: 22,5%\nD: 10%\nE: 5%\n"
   },
   {
     "pergunta": "Quantas casas decimais tem o numero pi?",
@@ -92,8 +92,8 @@
     "e": "Milhares",
     "tipo": "matematica",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "B\tC\tE",
+    "porcentagens": "A: 10%\nB: 5%\nC: 40%\nD: 10%\nE: 35%\n"
   },
   {
     "pergunta": "Atualmente, quantos elementos quimicos a tabela periodica possui?",
@@ -104,8 +104,8 @@
     "e": "92",
     "tipo": "natureza",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tD",
+    "porcentagens": "A: 30%\nB: 25%\nC: 10%\nD: 35%\nE: 0%\n"
   },
   {
     "pergunta": "Quais os paises que tem a maior e a menor expectativa de vida do mundo?",
@@ -116,8 +116,8 @@
     "e": "Estados Unidos e Angola",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 35%\nB: 20%\nC: 10%\nD: 5%\nE: 30%\n"
   },
   {
     "pergunta": "O que a palavra legend significa em portugues?",
@@ -128,8 +128,8 @@
     "e": "Legendario",
     "tipo": "linguagens",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tD\tE",
+    "porcentagens": "A: 30%\nB: 0%\nC: 0%\nD: 35%\nE: 35%\n"
   },
   {
     "pergunta": "Qual o numero minimo de jogadores numa partida de futebol?(por time)",
@@ -140,8 +140,8 @@
     "e": "14",
     "tipo": "linguagens",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tE",
+    "porcentagens": "A: 35%\nB: 10%\nC: 10%\nD: 10%\nE: 35%\n"
   },
   {
     "pergunta": "Quais os principais autores do Barroco no Brasil?",
@@ -152,8 +152,8 @@
     "e": "Alvares de Azevedo, Gregorio de Matos e Bento Teixeira",
     "tipo": "linguagens",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Quais as duas datas que sao comemoradas em novembro?",
@@ -164,8 +164,8 @@
     "e": "Black Friday e Dia da Arvore",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 15%\nB: 60%\nC: 5%\nD: 10%\nE: 10%\n"
   },
   {
     "pergunta": "Quem pintou \"Guernica\"?",
@@ -176,8 +176,8 @@
     "e": "Salvador Dali",
     "tipo": "linguagens",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 20%\nB: 30%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Quanto tempo a luz do Sol demora para chegar a Terra?",
@@ -188,8 +188,8 @@
     "e": "segundos",
     "tipo": "natureza",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tD\tE",
+    "porcentagens": "A: 25%\nB: 5%\nC: 10%\nD: 25%\nE: 35%\n"
   },
   {
     "pergunta": "Qual a traducao da frase “Fabiano cogio su saco antes de salir”?",
@@ -200,8 +200,8 @@
     "e": "Fabiano rasgou seu paleto antes de cair",
     "tipo": "linguagens",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tE",
+    "porcentagens": "A: 30%\nB: 25%\nC: 30%\nD: 10%\nE: 5%\n"
   },
   {
     "pergunta": "Qual a nacionalidade de Che Guevara?",
@@ -212,8 +212,8 @@
     "e": "Argentina",
     "tipo": "humanas",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Qual a altura da rede de volei nos jogos masculino e feminino?",
@@ -224,8 +224,8 @@
     "e": "2,43 m e 2,24 m",
     "tipo": "linguagens",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Em que ordem surgiram os modelos atomicos?",
@@ -236,8 +236,8 @@
     "e": "Dalton, Thomson, Rutherford, Rutherford-Bohr",
     "tipo": "natureza",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "C\tD\tE",
+    "porcentagens": "A: 10%\nB: 10%\nC: 25%\nD: 25%\nE: 30%\n"
   },
   {
     "pergunta": "Qual personagem folclorico costuma ser agradado pelos cacadores com a oferta de fumo?",
@@ -248,8 +248,8 @@
     "e": "Negrinho do Pastoreiro",
     "tipo": "linguagens",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Em que periodo da pré-historia o fogo foi descoberto?",
@@ -260,8 +260,8 @@
     "e": "Idade Media",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 40%\nC: 15%\nD: 10%\nE: 5%\n"
   },
   {
     "pergunta": "Qual das alternativas abaixo apenas contem classes de palavras?",
@@ -272,8 +272,8 @@
     "e": "Substantivo, verbo e preposição",
     "tipo": "linguagens",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 25%\nB: 20%\nC: 5%\nD: 10%\nE: 40%\n"
   },
   {
     "pergunta": "Qual a montanha mais alta do Brasil?",
@@ -284,8 +284,8 @@
     "e": "Pico da Bandeira",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 30%\nB: 25%\nC: 20%\nD: 10%\nE: 15%\n"
   },
   {
     "pergunta": "Qual a velocidade da luz?",
@@ -296,8 +296,8 @@
     "e": "30 000 000 metros por segundo (m/s)",
     "tipo": "natureza",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tD",
+    "porcentagens": "A: 30%\nB: 15%\nC: 20%\nD: 25%\nE: 10%\n"
   },
   {
     "pergunta": "Em qual local da Asia o portugues eh lingua oficial?",
@@ -308,8 +308,8 @@
     "e": "Portugal",
     "tipo": "humanas",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "B\tC\tD",
+    "porcentagens": "A: 5%\nB: 5%\nC: 30%\nD: 35%\nE: 25%\n"
   },
   {
     "pergunta": "It is six twenty or twenty past six. Que horas sao em ingles?",
@@ -320,8 +320,8 @@
     "e": "12:20",
     "tipo": "linguagens",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tD",
+    "porcentagens": "A: 10%\nB: 50%\nC: 15%\nD: 10%\nE: 15%\n"
   },
   {
     "pergunta": "Quem eh o autor de “O Principe”?",
@@ -332,8 +332,8 @@
     "e": "Rousseau",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 40%\nB: 15%\nC: 15%\nD: 20%\nE: 10%\n"
   },
   {
     "pergunta": "Como eh a conjugacao do verbo caber na 1a pessoa do singular do presente do indicativo?",
@@ -344,8 +344,8 @@
     "e": "Nenhuma das alternativas",
     "tipo": "linguagens",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 35%\nB: 20%\nC: 10%\nD: 5%\nE: 30%\n"
   },
   {
     "pergunta": "Quais destas construcoes famosas ficam nos Estados Unidos?",
@@ -356,8 +356,8 @@
     "e": "30 St Mary Axe, The High Line e Residencial 148 Spruce Street",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 40%\nB: 20%\nC: 15%\nD: 10%\nE: 15%\n"
   },
   {
     "pergunta": "Quais destas doencas sao sexualmente transmissiveis?",
@@ -368,8 +368,8 @@
     "e": "Hepatite B, febre tifoide e hanseniase",
     "tipo": "natureza",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tD",
+    "porcentagens": "A: 10%\nB: 20%\nC: 30%\nD: 25%\nE: 15%\n"
   },
   {
     "pergunta": "Qual destes paises e transcontinental?",
@@ -380,8 +380,8 @@
     "e": "Tazania",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tD",
+    "porcentagens": "A: 35%\nB: 20%\nC: 15%\nD: 25%\nE: 5%\n"
   },
   {
     "pergunta": "Em qual das oracaes abaixo a palavra foi empregada incorretamente?",
@@ -392,8 +392,8 @@
     "e": "Eh um mau vendedor.",
     "tipo": "linguagens",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 20%\nB: 30%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Qual foi o recurso utilizado inicialmente pelo homem para explicar a origem das coisas?",
@@ -404,8 +404,8 @@
     "e": "Mitologia",
     "tipo": "humanas",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 10%\nD: 10%\nE: 30%\n"
   },
   {
     "pergunta": "Qual das alternativas menciona apenas simbolos nacionais?",
@@ -416,8 +416,8 @@
     "e": "Bandeira insignia da presidência, brasao flora e fauna e hinos",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 25%\nC: 20%\nD: 15%\nE: 10%\n"
   },
   {
     "pergunta": "Quais os planetas do sistema solar?",
@@ -428,8 +428,8 @@
     "e": "Terra, Venus, Saturno, Jupiter, Marte, Netuno, Mercurio",
     "tipo": "natureza",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Qual era o nome de Aleijadinho?",
@@ -440,8 +440,8 @@
     "e": "Antonio Francisco Lisboa",
     "tipo": "humanas",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "C\tD\tE",
+    "porcentagens": "A: 10%\nB: 15%\nC: 20%\nD: 30%\nE: 25%\n"
   },
   {
     "pergunta": "Jupiter e Plutao sao os correlatos romanos de quais deuses gregos?",
@@ -452,8 +452,8 @@
     "e": "Zeus e Ares",
     "tipo": "humanas",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 20%\nB: 10%\nC: 40%\nD: 5%\nE: 25%\n"
   },
   {
     "pergunta": "Qual o maior animal terrestre?",
@@ -464,8 +464,8 @@
     "e": "Girafa",
     "tipo": "natureza",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tE",
+    "porcentagens": "A: 15%\nB: 20%\nC: 25%\nD: 10%\nE: 30%\n"
   },
   {
     "pergunta": "Qual o tema do famoso discurso Eu Tenho um Sonho, de Martin Luther King?",
@@ -476,8 +476,8 @@
     "e": "Luta contra o Apartheid",
     "tipo": "humanas",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 20%\nB: 30%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Que lider mundial ficou conhecida como “Dama de Ferro”?",
@@ -488,8 +488,8 @@
     "e": "Christine Lagarde",
     "tipo": "humanas",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tC\tD",
+    "porcentagens": "A: 15%\nB: 20%\nC: 30%\nD: 25%\nE: 10%\n"
   },
   {
     "pergunta": "Quais os nomes dos tres Reis Magos?",
@@ -500,8 +500,8 @@
     "e": "Melchior, Noe e Galileu",
     "tipo": "humanas",
     "resposta": "b",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 40%\nC: 15%\nD: 10%\nE: 5%\n"
   },
   {
     "pergunta": "Quais os principais heteronimos de Fernando Pessoa?",
@@ -512,8 +512,8 @@
     "e": " Bento Teixeira, Ricardo Reis e Augusto de Campos",
     "tipo": "linguagens",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tD",
+    "porcentagens": "A: 40%\nB: 20%\nC: 15%\nD: 15%\nE: 15%\n"
   },
   {
     "pergunta": "Qual a religiao monoteista que conta com o maior numero de adeptos no mundo?",
@@ -524,8 +524,8 @@
     "e": "Hinduismo",
     "tipo": "humanas",
     "resposta": "d",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "C\tD\tE",
+    "porcentagens": "A: 10%\nB: 5%\nC: 30%\nD: 35%\nE: 20%\n"
   },
   {
     "pergunta": "Qual desses filmes foi baseado na obra de Shakespeare?",
@@ -536,8 +536,8 @@
     "e": "Excalibur",
     "tipo": "linguagens",
     "resposta": "a",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
     "pergunta": "Quem foi o primeiro homem a pisar na Lua? Em que ano aconteceu?",
@@ -548,8 +548,8 @@
     "e": "Neils Armstrong, em 1969.",
     "tipo": "humanas",
     "resposta": "e",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 10%\nB: 20%\nC: 15%\nD: 10%\nE: 45%\n"
   },
   {
     "pergunta": "Qual o nome do cientista que descobriu o processo de pasteurizacao e a vacina contra a raiva?",
@@ -560,8 +560,8 @@
     "e": "Charles Darwin",
     "tipo": "natureza",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 20%\nB: 25%\nC: 35%\nD: 15%\nE: 5%\n"
   },
   {
     "pergunta": "As pessoas de qual tipo sanguineo sao consideradas doadores universais?",
@@ -572,7 +572,7 @@
     "e": "C",
     "tipo": "natureza",
     "resposta": "c",
-    "eliminacao": "",
-    "porcentagens": ""
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 10%\nB: 25%\nC: 45%\nD: 10%\nE: 5%\n"
   }
  ]

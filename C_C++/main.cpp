@@ -30,14 +30,14 @@ void multiPlayer();		 							// Em andamento (falta testar e ajustar, se for pre
 void playAgain();									// Em andamento (falta testar e ajustar, se for preciso)
 
 // Feitos
-void criaPartidaMenu();  							// Feito -> Ajustando para Multiplayer
-void criarPergunta();								// Feito
-void singlePlayer();	 							// Feito -> Ajustar calculo pontuação
+void criaPartidaMenu();  							// Feito -> Ajustar para Multiplayer
+void criarPergunta();								// Feito 
+void singlePlayer();	 							// Feito -> Ajustar calculo pontuação, verificar quantidade de acertos e erros
 int randomValue(int max); 							// Feito
 string tolower(string word); 						// Feito
 int exibirDicas(int perguntaID); 					// Feito
 void armazenaInfos(string jogador, int pontuacao);  // Feito
-void verRanking();		 							// Feito
+void verRanking();		 							// Feito -> Verificar maior q zero
 void darRecompensa(); 								// Feito
 void print(vector<int> const &a);					// Feito
 
@@ -69,7 +69,7 @@ int main() {
 	time_t t = time(0);
 	cout << "===== PerguntUP =====" << endl << endl;
 	criaPartidaMenu();
-	cout << "Tempo: " << (time(0) - t) << "'s"<< endl;
+	cout << "Tempo de Jogo: " << (time(0) - t) << "'s"<< endl;
 	playAgain();
 }
 
@@ -105,7 +105,6 @@ void criaPartidaMenu() {
 				do{
 					cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
 					cin >> modalidade;
-					modo = 2;
 
 					if (tolower(modalidade) == "s") {
 						modo = 0;
@@ -146,7 +145,7 @@ void criaPartidaMenu() {
 }
 
 /* 
-	Função que inicia o modo SinglePlayer competindo contra o BOT (vamo verificar isso).
+	Função que inicia o modo SinglePlayer.
 */
 void singlePlayer() {
 	string nomeJogador;
@@ -184,9 +183,9 @@ void multiPlayer() {
 	cout << "----- Vez do Jogador 1 -----" << endl;
 	singlePlayer();
 
-	system("cls");
+	// system("cls");
 
-	cout << "----- Vez do Jogador 1 -----" << endl;
+	cout << "----- Vez do Jogador 2 -----" << endl;
 	singlePlayer();
 
 }
@@ -515,12 +514,11 @@ int randomValue(int max) {
 void playAgain() {
 	string opcao;
 	do {
-		cout << "===== Partida encerrada =====" << endl << "Deseja jogar novamente?" << endl;
+		cout << "===== Partida encerrada =====" << endl << "Deseja jogar novamente? " << endl << "(s = sim; n = nao) ";
 		cin >> opcao;
 		if (tolower(opcao) == "s") {
 			criaPartidaMenu();
 		}
 	} while (tolower(opcao) != "s");
-	
 	
 }
