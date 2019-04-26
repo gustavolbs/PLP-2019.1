@@ -450,7 +450,7 @@ void criarPergunta() {
 	}
 	perguntasPartida++;
 	tempo = time(0) - tempo; 
-	if(tempo > 15){
+	if(tempo > 15 || resposta != perguntas[perguntaID]["resposta"]){
 		tempo = 15;
 	}
 	if (tempo <= 5 && resposta == perguntas[perguntaID]["resposta"]) {
