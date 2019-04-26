@@ -450,7 +450,7 @@ void criarPergunta() {
 	}
 	perguntasPartida++;
 	tempo = time(0) - tempo; 
-	if (tempo <= 5) {
+	if (tempo <= 5 && resposta == perguntas[perguntaID]["resposta"]) {
 		darRecompensa();
 	}
 
@@ -479,24 +479,27 @@ int exibirDicas(int perguntaID) {
 	}
 
 	bool valida;
-	int tipoDica;
+	string tipoDica;
+	int dica;
 	do {
 		cout << "Sua escolha: ";
 		cin >> tipoDica;
-		cin.sync();
 
-		if (tipoDica == 1 && dicaEliminacao == false) {
+		if (tipoDica == "1" && dicaEliminacao == false) {
 			valida = true;
-		} else if (tipoDica == 2 && dicaPorcentagens == false) {
+			dica = 1;
+		} else if (tipoDica == "2" && dicaPorcentagens == false) {
 			valida = true;
-		} else if (tipoDica == 3 && dicaPular == false) {
+			dica = 2;
+		} else if (tipoDica == "3" && dicaPular == false) {
 			valida = true;
+			dica = 3;
 		}
 
 	} while (valida != true);
 
 
-	switch (tipoDica) {
+	switch (dica) {
 		case 1:{
 			cout << "\nUma das alternativas a seguir esta correta: \n" << (string) perguntas[perguntaID]["eliminacao"] << endl;
 			dicaEliminacao = true;
@@ -517,7 +520,7 @@ int exibirDicas(int perguntaID) {
 			break;
 		}
 	}
-	return tipoDica;
+	return dica;
 }
 
 /*
