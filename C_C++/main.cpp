@@ -450,6 +450,9 @@ void criarPergunta() {
 	}
 	perguntasPartida++;
 	tempo = time(0) - tempo; 
+	if(tempo > 15){
+		tempo = 15;
+	}
 	if (tempo <= 5 && resposta == perguntas[perguntaID]["resposta"]) {
 		darRecompensa();
 	}
