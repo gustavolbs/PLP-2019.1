@@ -22,32 +22,32 @@ using jsonf = nlohmann::json;
 #define LOW_A 97
 #define LOW_Z 122
 
-//Precisamos adicionar mais perguuntas de matematica
-
+// Precisamos adicionar mais perguuntas de matematica
+// Precisamos das instruções
 
 // Funções
-void multiPlayer();		 							// Em andamento (falta testar e ajustar, se for preciso)
-void playAgain();									// Em andamento (falta testar e ajustar, se for preciso)
-
-// Feitos
-void criaPartidaMenu();  							// Feito -> Ajustar para Multiplayer
+void criaPartidaMenu();  							// Feito 
 void criarPergunta();								// Feito 
-void singlePlayer();	 							// Feito -> Ajustar calculo pontuação, verificar quantidade de acertos e erros
+void singlePlayer();	 							// Feito
 int randomValue(int max); 							// Feito
 string tolower(string word); 						// Feito
 int exibirDicas(int perguntaID); 					// Feito
 void armazenaInfos(string jogador, int pontuacao);  // Feito
-void verRanking();		 							// Feito -> Verificar maior q zero
+void verRanking();		 							// Feito
 void darRecompensa(); 								// Feito
 void print(vector<int> const &a);					// Feito
-
+string playAgain();									// Feito
+void multiPlayer();		 							// Feito
+void instrucoes();									// Feito
 
 // Variáveis Globais
 vector<int> perguntasUsadas;
 vector<string> validas = {"a","b","c","d","e","p"};
 int acertos = 0;
 int erros = 0;
+int perguntasPartida = 0;
 int tempoTotal = 0;
+double pontuacaoFinal;
 bool dicaEliminacao = false;
 bool dicaPorcentagens = false;
 bool dicaPular = false;
@@ -66,11 +66,42 @@ void print(vector<int> const &a) {
 
 // Main
 int main() {
-	time_t t = time(0);
-	cout << "===== PerguntUP =====" << endl << endl;
-	criaPartidaMenu();
-	cout << "Tempo de Jogo: " << (time(0) - t) << "'s"<< endl;
-	playAgain();
+	string p;
+	do {
+		string opcao;
+		time_t t = time(0);
+		cout << "===== PerguntUP =====" << endl;
+		cout << "by GERIGE" << endl << endl;
+		cout << "Deseja ver as instruções?" << endl << "(s = sim; n = não)" << endl;
+		cin >> opcao;
+		if (tolower(opcao) == "s" ) {
+			instrucoes();
+		}
+		criaPartidaMenu();
+		cout << "Tempo total da Partida: " << (time(0) - t) << "'s"<< endl;
+
+		p = playAgain();
+	} while (p == "s");
+}
+
+void instrucoes() {
+	cout << "===== Instruções =====" << endl << endl
+		 << "O PerguntUP é um jogo de perguntas que pode ser jogado de duas maneiras:" << endl
+		 << "-> Singleplayer ou Multiplayer" << endl
+		 << "Cada partida possui 12 perguntas, divididas em 4 áreas de conhecimento:" << endl
+		 << "- Ciências da Natureza" << endl
+		 << "- Linguagens" << endl
+		 << "- Ciências Exatas" << endl
+		 << "- Ciências Humanas" << endl
+		 << "Você terá 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuação final será penalizada)" << endl
+		 << "Além disso, haverão dicas limitadas disponíveis:" << endl
+		 << "- Eliminar alternativas: elimina duas alternativas" << endl
+		 << "- Opinião dos internautas: mostra a porcentagem de concordancia com cada alternativa" << endl
+		 << "- Pular pergunta: pula para a próxima pergunta" << endl
+		 << "A cada inicio de partida, você terá 1 dica de cada" << endl
+		 << "Para obter mais dicas, você deverá responder a pergunta em menos de 5 segundos" << endl
+		 << "Se já tiver sido usado alguma dica, ela será reposta. Caso contrário, a dica recebida será aleatória" << endl
+		 << "Além disso, o sistema conta com um ranking com as 10 melhores pontuações. Ele é exibido no início e no final de cada partida" << endl;
 }
 
 /* 
@@ -103,7 +134,9 @@ void criaPartidaMenu() {
 
 				string modalidade;
 				do{
-					cout << "Qual a forma de jogar?" << endl << "s = singlePlayer; m = multiPlayer" << endl;
+					cout << endl
+						 << "Qual a forma de jogar?" << endl
+						 << "(s = singlePlayer; m = multiPlayer) ";
 					cin >> modalidade;
 
 					if (tolower(modalidade) == "s") {
@@ -148,8 +181,16 @@ void criaPartidaMenu() {
 	Função que inicia o modo SinglePlayer.
 */
 void singlePlayer() {
+	acertos = 0;
+	erros = 0;
+	tempoTotal = 0;
+	dicaEliminacao = false;
+	dicaPorcentagens = false;
+	dicaPular = false;
+	
 	string nomeJogador;
-	cout << "Nome do jogador: ";
+	cout << endl 
+		 << "Nome do jogador: ";
 	cin >> nomeJogador;
 
 	do {
@@ -159,10 +200,15 @@ void singlePlayer() {
 		cout << "===== PLACAR =====" << endl;
 		cout << "Acertos: " << acertos << endl;
 		cout << "Erros: " << erros << endl << endl;
-	} while (acertos < 10 && erros < 3); 
+	} while (perguntasPartida < 12); 
 
-	
-	int pontuacaoFinal = (acertos * 0.6) + ((180 - tempoTotal) * 0.4);
+	double q = (acertos * 50)/12;
+	double t = 50 - ((tempoTotal - 60) * (50/120));
+	if (t > 50) {
+		t = 50;
+	}
+	pontuacaoFinal = ceil(q + t);
+
 	if (pontuacaoFinal < 0) {
 		pontuacaoFinal = 0;
 	}
@@ -182,11 +228,19 @@ void multiPlayer() {
 
 	cout << "----- Vez do Jogador 1 -----" << endl;
 	singlePlayer();
-
-	// system("cls");
+	int p1 = pontuacaoFinal;
 
 	cout << "----- Vez do Jogador 2 -----" << endl;
 	singlePlayer();
+	int p2 = pontuacaoFinal;
+
+	if (p1 > p2) {
+		cout << "\033[0;32;1m" << "O jogador 1 venceu" << endl;
+	} else if (p1 < p2) {
+		cout << "\033[0;32;1m" << "O jogador 2 venceu" << endl;
+	} else {
+		cout << "\033[36;1m" << "Tivemos um EMPATE" << endl;
+	}
 
 }
 
@@ -214,49 +268,52 @@ void verRanking() {
 	jsonf jsonfile;
 	json_file >> jsonfile;
 
-	cout << "====== RANKING ======" << endl;
+	if (!(jsonfile.empty())) {
+		cout << "====== RANKING ======" << endl;
 
-	int max;
-	json temp;
-	for (int i=0; i < jsonfile.size(); i++){
-		max = i;
-		for (int j=i+1; j < jsonfile.size(); j++){
-			if (jsonfile[j][1] > jsonfile[max][1]){
-				max = j;
+		int max;
+		json temp;
+		for (int i=0; i < jsonfile.size(); i++){
+			max = i;
+			for (int j=i+1; j < jsonfile.size(); j++){
+				if (jsonfile[j][1] > jsonfile[max][1]){
+					max = j;
+				}
 			}
+			temp=jsonfile[i];
+			jsonfile[i]=jsonfile[max];
+			jsonfile[max]=temp;
 		}
-		temp=jsonfile[i];
-        jsonfile[i]=jsonfile[max];
-        jsonfile[max]=temp;
+
+		int pos = 1;
+
+		for (int i=0; i < 11 && i < jsonfile.size(); i++) {
+			if (pos == 1) {
+				cout << "\033[33;1m" << pos << ". "
+					<< jsonfile[i][0] << " - "
+					<< jsonfile[i][1] << "\x1b[0m"
+					<< endl;
+			} else if (pos == 2) {
+				cout << "\033[34;1m" << pos << ". "
+					<< jsonfile[i][0] << " - "
+					<< jsonfile[i][1] << "\x1b[0m"
+					<< endl;
+			} else if (pos == 3) {
+				cout << "\033[36m" << pos << ". "
+					<< jsonfile[i][0] << " - "
+					<< jsonfile[i][1] << "\x1b[0m"
+					<< endl;
+			} else {
+				cout << pos << ". "
+					<< jsonfile[i][0] << " - "
+					<< jsonfile[i][1]
+					<< endl;
+			}	
+			pos ++;
+		}
+		cout << "=====================" << endl << endl;
 	}
 
-	int pos = 1;
-
-	for (int i=0; i < 11 && i < jsonfile.size(); i++) {
-		if (pos == 1) {
-			cout << "\033[33;1m" << pos << ". "
-				<< jsonfile[i][0] << " - "
-				<< jsonfile[i][1] << "\x1b[0m"
-				<< endl;
-		} else if (pos == 2) {
-			cout << "\033[34;1m" << pos << ". "
-				<< jsonfile[i][0] << " - "
-				<< jsonfile[i][1] << "\x1b[0m"
-				<< endl;
-		} else if (pos == 3) {
-			cout << "\033[36m" << pos << ". "
-				<< jsonfile[i][0] << " - "
-				<< jsonfile[i][1] << "\x1b[0m"
-				<< endl;
-		} else {
-			cout << pos << ". "
-				<< jsonfile[i][0] << " - "
-				<< jsonfile[i][1]
-				<< endl;
-		}	
-		pos ++;
-	}
-	cout << "=====================" << endl << endl;
 
 }
 
@@ -393,7 +450,7 @@ void criarPergunta() {
 		cout << "\033[31;1m" << "Voce errou. A resposta certa era a letra " << perguntas[perguntaID]["resposta"] << endl << endl;
 		erros++;
 	}
-
+	perguntasPartida++;
 	tempo = time(0) - tempo; 
 	if (tempo <= 5) {
 		darRecompensa();
@@ -507,18 +564,14 @@ int randomValue(int max) {
 	return perguntaID;
 }
 
-
 /*
 	Função que faz com que o jogador jogue novamente, se ele desejar
 */
-void playAgain() {
+string playAgain() {
 	string opcao;
-	do {
-		cout << "===== Partida encerrada =====" << endl << "Deseja jogar novamente? " << endl << "(s = sim; n = nao) ";
+		cout << "===== Partida encerrada =====" << endl 
+			 << "Deseja jogar novamente? " << endl 
+			 << "(s = sim; n = nao) ";
 		cin >> opcao;
-		if (tolower(opcao) == "s") {
-			criaPartidaMenu();
-		}
-	} while (tolower(opcao) != "s");
-	
+	return tolower(opcao);
 }

@@ -168,7 +168,7 @@
     "porcentagens": "A: 15%\nB: 60%\nC: 5%\nD: 10%\nE: 10%\n"
   },
   {
-    "pergunta": "Quem pintou \"Guernica\"?",
+    "pergunta": "Quem pintou “Guernica”?",
     "b": "Pablo Picasso",
     "a": "Paul Cezanne",
     "c": "Diego Rivera",
@@ -336,7 +336,7 @@
     "porcentagens": "A: 40%\nB: 15%\nC: 15%\nD: 20%\nE: 10%\n"
   },
   {
-    "pergunta": "Como eh a conjugacao do verbo caber na 1a pessoa do singular do presente do indicativo?",
+    "pergunta": "Como eh a conjugacao do verbo “caber” na 1a pessoa do singular do presente do indicativo?",
     "b": "Ele cabe",
     "a": "Eu caibo",
     "c": "Que eu caiba",
@@ -422,7 +422,7 @@
   {
     "pergunta": "Quais os planetas do sistema solar?",
     "b": "Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Terra, Urano, Venus",
-    "a": "Mercurio, Venus, Terra, Marte, Jupiter",
+    "a": "Mercurio, Vênus, Terra, Marte, Jupiter, Saturno, Urano, Netuno",
     "c": "Venus, Saturno, Urano, Jupiter, Marte, Netuno, Mercurio",
     "d": "Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Sol, Terra, Urano, Venus",
     "e": "Terra, Venus, Saturno, Jupiter, Marte, Netuno, Mercurio",
@@ -432,7 +432,7 @@
     "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
-    "pergunta": "Qual era o nome de Aleijadinho?",
+    "pergunta": "Qual era o nome de “Aleijadinho”?",
     "b": "Manuel Francisco Lisboa",
     "a": "Alexandrino Francisco Lisboa",
     "c": "Alex Francisco Lisboa",
@@ -574,5 +574,149 @@
     "resposta": "c",
     "eliminacao": "A\tB\tC",
     "porcentagens": "A: 10%\nB: 25%\nC: 45%\nD: 10%\nE: 5%\n"
+  },
+  {
+    "pergunta": "Quantos numeros 1 eu tenho de 1 ate 191?",
+    "b": "140",
+    "a": "136",
+    "c": "132",
+    "d": "150",
+    "e": "126",
+    "tipo": "matematica",
+    "resposta": "c",
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 10%\nB: 25%\nC: 45%\nD: 10%\nE: 5%\n"
+  },
+  {
+    "pergunta": "Um feirante guardou 3 centenas de laranjas em 6 caixotes. Quantas laranjas foram guardadas em cada caixote?",
+    "b": "50",
+    "a": "40",
+    "c": "60",
+    "d": "30",
+    "e": "80",
+    "tipo": "matematica",
+    "resposta": "a",
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 44%\nB: 25%\nC: 16%\nD: 10%\nE: 5%\n"
+  },
+  {
+    "pergunta": "Um pedreiro diz: Se eu tivesse dois tijolos a mais, o dobro deste número seria 100. Quantos tijolos ele tem?",
+    "b": "48",
+    "a": "42",
+    "c": "50",
+    "d": "52",
+    "e": "44",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "A\tB\tC",
+    "porcentagens": "A: 25%\nB: 44%\nC: 12%\nD: 14%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "Se seis latas de leite custam 72 reais, qual o preço de 9 latas?",
+    "b": "115",
+    "a": "90",
+    "c": "87",
+    "d": "108",
+    "e": "100",
+    "tipo": "matematica",
+    "resposta": "d",
+    "eliminacao": "C\tD\tE",
+    "porcentagens": "A: 17%\nB: 25%\nC: 43%\nD: 10%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "Que número abaixo completa a sequência a seguir? 12 - 6 - 18 - 24 - ?",
+    "b": "26",
+    "a": "42",
+    "c": "30",
+    "d": "24",
+    "e": "36",
+    "tipo": "matematica",
+    "resposta": "a",
+    "eliminacao": "A\tD\tE",
+    "porcentagens": "A: 44%\nB: 25%\nC: 10%\nD: 16%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "O termometro subiu 6 graus, e isso representa a metade da temperatura de antes. A quantos graus esta agora?",
+    "b": "18 graus",
+    "a": "16 graus",
+    "c": "22 graus",
+    "d": "12 graus",
+    "e": "24 graus",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "A\tB\tE",
+    "porcentagens": "A: 40%\nB: 29%\nC: 8%\nD: 18%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "Dois pais e dois filhos sentaram-se para comer ovos no cafe da manha. Cada um comeu um ovo. Quanto ovos eles comeram no total?",
+    "b": "1",
+    "a": "3",
+    "c": "5",
+    "d": "8",
+    "e": "10",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "A\tB\tD",
+    "porcentagens": "A: 30%\nB: 39%\nC: 7%\nD: 19%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "Se 3 gatos matam 3 ratos em 3 minutos, quanto tempo levarao 100 gatos para matar 100 ratos?",
+    "b": "1 minuto",
+    "a": "3 minutos",
+    "c": "30 minutos",
+    "d": "100 minutos",
+    "e": "110 minutos",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "B\tC\tD",
+    "porcentagens": "A: 29%\nB: 2%\nC: 44%\nD: 20%\nE: 5%\n"
+  }, 
+  {
+    "pergunta": "Qual a derivada de x?",
+    "b": "1",
+    "a": "3",
+    "c": "4",
+    "d": "44",
+    "e": "131",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "B\tD\tE",
+    "porcentagens": "A: 1%\nB: 2%\nC: 47%\nD: 20%\nE: 30%\n"
+  }, 
+  {
+    "pergunta": "Qual a derivada de x?",
+    "b": "1",
+    "a": "3",
+    "c": "4",
+    "d": "44",
+    "e": "131",
+    "tipo": "matematica",
+    "resposta": "b",
+    "eliminacao": "B\tD\tE",
+    "porcentagens": "A: 1%\nB: 2%\nC: 47%\nD: 20%\nE: 30%\n"
+  }, 
+  {
+    "pergunta": "Leandro tem 40 balas chupou 12 e deu 10 para sua irmã. Com quantas balas ele ficou?",
+    "b": "15",
+    "a": "18",
+    "c": "14",
+    "d": "16",
+    "e": "13",
+    "tipo": "matematica",
+    "resposta": "a",
+    "eliminacao": "A\tC\tD",
+    "porcentagens": "A: 44%\nB: 2%\nC: 4%\nD: 15%\nE: 35%\n"
+  },
+  {
+    "pergunta": "Em um cubo, a quantidade de conjuntos distintos formados por duas arestas paralelas eh igual a:",
+    "b": "6",
+    "a": "8",
+    "c": "14",
+    "d": "16",
+    "e": "18",
+    "tipo": "matematica",
+    "resposta": "e",
+    "eliminacao": "C\tD\tE",
+    "porcentagens": "A: 9%\nB: 7%\nC: 3%\nD: 1%\nE: 80%\n"
   }
- ]
+]
