@@ -1,7 +1,7 @@
 [
   {
     "pergunta": "Normalmente, quantos litros de sangue uma pessoa tem? Em media, quantos sao retirados numa doacao de sangue?",
-    "b": "Tem entre 4 a 6 litros. São retirados 450 mililitros",
+    "b": "Tem entre 4 a 6 litros. Sao retirados 450 mililitros",
     "a": "Tem entre 2 a 4 litros. Sao retirados 450 mililitros",
     "c": "Tem 10 litros. Sao retirados 2 litros",
     "d": "Tem 7 litros. Sao retirados 1,5 litros",
@@ -24,7 +24,7 @@
     "porcentagens": "A: 30%\nB: 5%\nC: 45%\nD: 20%\nE: 0%\n"
   },
   {
-    "pergunta": "De onde eh a invenção do chuveiro eletrico?",
+    "pergunta": "De onde eh a invencao do chuveiro eletrico?",
     "b": "Inglaterra",
     "a": "Franca",
     "c": "Brasil",
@@ -38,7 +38,7 @@
   {
     "pergunta": "Quais o menor e o maior pais do mundo?",
     "b": "Nauru e China",
-    "a": "Vaticano e Rússia",
+    "a": "Vaticano e Russia",
     "c": "Monaco e Canada",
     "d": "Malta e Estados Unidos",
     "e": "Sao Marino e India",
@@ -157,8 +157,8 @@
   },
   {
     "pergunta": "Quais as duas datas que sao comemoradas em novembro?",
-    "b": "Proclamação da República e Dia Nacional da Consciência Negra",
-    "a": "Independência do Brasil e Dia da Bandeira",
+    "b": "Proclamacao da Republica e Dia Nacional da Consciencia Negra",
+    "a": "Independencia do Brasil e Dia da Bandeira",
     "c": "Dia do Medico e Dia de Sao Lucas",
     "d": "Dia de Finados e Dia Nacional do Livro",
     "e": "Black Friday e Dia da Arvore",
@@ -195,7 +195,7 @@
     "pergunta": "Qual a traducao da frase “Fabiano cogio su saco antes de salir”?",
     "b": "Fabiano fechou o saco antes de sair",
     "a": "Fabiano coseu seu paleto antes de sair",
-    "c": "Fabiano pegou seu paletó antes de sair",
+    "c": "Fabiano pegou seu paleto antes de sair",
     "d": "Fabiano cortou o saco antes de cair",
     "e": "Fabiano rasgou seu paleto antes de cair",
     "tipo": "linguagens",
@@ -252,9 +252,9 @@
     "porcentagens": "A: 30%\nB: 20%\nC: 15%\nD: 10%\nE: 25%\n"
   },
   {
-    "pergunta": "Em que periodo da pré-historia o fogo foi descoberto?",
-    "b": "Paleolítico",
-    "a": "Neolítico",
+    "pergunta": "Em que periodo da preh-historia o fogo foi descoberto?",
+    "b": "Paleolitico",
+    "a": "Neolitico",
     "c": "Idade dos Metais",
     "d": "Periodo da Pedra Polida",
     "e": "Idade Media",
@@ -269,7 +269,7 @@
     "a": "Vogais, semivogais e consoantes",
     "c": "Fonologia, Morfologia e Sintaxe",
     "d": "Hiatos, ditongos e tritongos",
-    "e": "Substantivo, verbo e preposição",
+    "e": "Substantivo, verbo e preposicao",
     "tipo": "linguagens",
     "resposta": "e",
     "eliminacao": "A\tB\tE",
@@ -413,7 +413,7 @@
     "a": "Bandeira insignia da presidencia, bandeira nacional, brasao, hinos e selo",
     "c": "Bandeira nacional, brasao, hino nacional e hino da independencia",
     "d": "Bandeira nacional, cores nacionais, hino nacional e hino da independencia",
-    "e": "Bandeira insignia da presidência, brasao flora e fauna e hinos",
+    "e": "Bandeira insignia da presidencia, brasao flora e fauna e hinos",
     "tipo": "humanas",
     "resposta": "b",
     "eliminacao": "A\tB\tE",
@@ -422,7 +422,7 @@
   {
     "pergunta": "Quais os planetas do sistema solar?",
     "b": "Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Terra, Urano, Venus",
-    "a": "Mercurio, Vênus, Terra, Marte, Jupiter, Saturno, Urano, Netuno",
+    "a": "Mercurio, Venus, Terra, Marte, Jupiter, Saturno, Urano, Netuno",
     "c": "Venus, Saturno, Urano, Jupiter, Marte, Netuno, Mercurio",
     "d": "Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Sol, Terra, Urano, Venus",
     "e": "Terra, Venus, Saturno, Jupiter, Marte, Netuno, Mercurio",
@@ -470,7 +470,7 @@
   {
     "pergunta": "Qual o tema do famoso discurso Eu Tenho um Sonho, de Martin Luther King?",
     "b": "Justica para os menos favorecidos",
-    "a": "Igualdade das raças",
+    "a": "Igualdade das racas",
     "c": "Intolerancia religiosa",
     "d": "Premio Nobel da Paz",
     "e": "Luta contra o Apartheid",
@@ -529,10 +529,10 @@
   },
   {
     "pergunta": "Qual desses filmes foi baseado na obra de Shakespeare?",
-    "b": "Capitães de Areia ",
+    "b": "Capitaes de Areia ",
     "a": "Muito Barulho por Nada",
-    "c": "A Dama das Camélias",
-    "d": "A Revolução dos Bichos",
+    "c": "A Dama das Camehlias",
+    "d": "A Revolucao dos Bichos",
     "e": "Excalibur",
     "tipo": "linguagens",
     "resposta": "a",
@@ -600,7 +600,7 @@
     "porcentagens": "A: 44%\nB: 25%\nC: 16%\nD: 10%\nE: 5%\n"
   },
   {
-    "pergunta": "Um pedreiro diz: Se eu tivesse dois tijolos a mais, o dobro deste número seria 100. Quantos tijolos ele tem?",
+    "pergunta": "Um pedreiro diz: Se eu tivesse dois tijolos a mais, o dobro deste numero seria 100. Quantos tijolos ele tem?",
     "b": "48",
     "a": "42",
     "c": "50",
@@ -612,7 +612,7 @@
     "porcentagens": "A: 25%\nB: 44%\nC: 12%\nD: 14%\nE: 5%\n"
   }, 
   {
-    "pergunta": "Se seis latas de leite custam 72 reais, qual o preço de 9 latas?",
+    "pergunta": "Se seis latas de leite custam 72 reais, qual o preco de 9 latas?",
     "b": "115",
     "a": "90",
     "c": "87",
@@ -624,7 +624,7 @@
     "porcentagens": "A: 17%\nB: 25%\nC: 43%\nD: 10%\nE: 5%\n"
   }, 
   {
-    "pergunta": "Que número abaixo completa a sequência a seguir? 12 - 6 - 18 - 24 - ?",
+    "pergunta": "Que numero abaixo completa a sequencia a seguir? 12 - 6 - 18 - 24 - ?",
     "b": "26",
     "a": "42",
     "c": "30",
@@ -696,7 +696,7 @@
     "porcentagens": "A: 1%\nB: 2%\nC: 47%\nD: 20%\nE: 30%\n"
   }, 
   {
-    "pergunta": "Leandro tem 40 balas chupou 12 e deu 10 para sua irmã. Com quantas balas ele ficou?",
+    "pergunta": "Leandro tem 40 balas chupou 12 e deu 10 para sua irma. Com quantas balas ele ficou?",
     "b": "15",
     "a": "18",
     "c": "14",

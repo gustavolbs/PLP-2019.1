@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "json.hpp"
-#include <iterator> // for std::begin, std::end
+#include <iterator> 
 #include <ctime>
 
 using namespace std;
@@ -22,25 +22,22 @@ using jsonf = nlohmann::json;
 #define LOW_A 97
 #define LOW_Z 122
 
-// Precisamos adicionar mais perguuntas de matematica
-// Precisamos das instruções
+// Funcoes
+void criaPartidaMenu();  							 
+void criarPergunta();								 
+void singlePlayer();	 							
+int randomValue(int max); 							
+string tolower(string word); 						
+int exibirDicas(int perguntaID); 					
+void armazenaInfos(string jogador, int pontuacao);  
+void verRanking();		 							
+void darRecompensa(); 								
+void print(vector<int> const &a);					
+string playAgain();									
+void multiPlayer();		 							
+void instrucoes();									
 
-// Funções
-void criaPartidaMenu();  							// Feito 
-void criarPergunta();								// Feito 
-void singlePlayer();	 							// Feito
-int randomValue(int max); 							// Feito
-string tolower(string word); 						// Feito
-int exibirDicas(int perguntaID); 					// Feito
-void armazenaInfos(string jogador, int pontuacao);  // Feito
-void verRanking();		 							// Feito
-void darRecompensa(); 								// Feito
-void print(vector<int> const &a);					// Feito
-string playAgain();									// Feito
-void multiPlayer();		 							// Feito
-void instrucoes();									// Feito
-
-// Variáveis Globais
+// Variaveis Globais
 vector<int> perguntasUsadas;
 vector<string> validas = {"a","b","c","d","e","p"};
 int acertos = 0;
@@ -72,7 +69,7 @@ int main() {
 		time_t t = time(0);
 		cout << "===== PerguntUP =====" << endl;
 		cout << "by GERIGE" << endl << endl;
-		cout << "Deseja ver as instruções?" << endl << "(s = sim; n = não)" << endl;
+		cout << "Deseja ver as instrucoes?" << endl << "(s = sim; n = nao) ";
 		cin >> opcao;
 		if (tolower(opcao) == "s" ) {
 			instrucoes();
@@ -84,28 +81,31 @@ int main() {
 	} while (p == "s");
 }
 
+/*
+	Funcao que exibe as instrucoes do jogo.
+*/
 void instrucoes() {
-	cout << "===== Instruções =====" << endl << endl
-		 << "O PerguntUP é um jogo de perguntas que pode ser jogado de duas maneiras:" << endl
+	cout << "===== Instrucoes =====" << endl << endl
+		 << "O PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:" << endl
 		 << "-> Singleplayer ou Multiplayer" << endl
-		 << "Cada partida possui 12 perguntas, divididas em 4 áreas de conhecimento:" << endl
-		 << "- Ciências da Natureza" << endl
+		 << "Cada partida possui 12 perguntas, divididas em 4 areas de conhecimento:" << endl
+		 << "- Ciencias da Natureza" << endl
 		 << "- Linguagens" << endl
-		 << "- Ciências Exatas" << endl
-		 << "- Ciências Humanas" << endl
-		 << "Você terá 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuação final será penalizada)" << endl
-		 << "Além disso, haverão dicas limitadas disponíveis:" << endl
+		 << "- Ciencias Exatas" << endl
+		 << "- Ciencias Humanas" << endl
+		 << "Voce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)" << endl
+		 << "Alehm disso, haverao dicas limitadas disponiveis:" << endl
 		 << "- Eliminar alternativas: elimina duas alternativas" << endl
-		 << "- Opinião dos internautas: mostra a porcentagem de concordancia com cada alternativa" << endl
-		 << "- Pular pergunta: pula para a próxima pergunta" << endl
-		 << "A cada inicio de partida, você terá 1 dica de cada" << endl
-		 << "Para obter mais dicas, você deverá responder a pergunta em menos de 5 segundos" << endl
-		 << "Se já tiver sido usado alguma dica, ela será reposta. Caso contrário, a dica recebida será aleatória" << endl
-		 << "Além disso, o sistema conta com um ranking com as 10 melhores pontuações. Ele é exibido no início e no final de cada partida" << endl;
+		 << "- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa" << endl
+		 << "- Pular pergunta: pula para a proxima pergunta" << endl
+		 << "A cada inicio de partida, voce tera 1 dica de cada" << endl
+		 << "Para obter mais dicas, voce devera responder a pergunta em menos de 5 segundos" << endl
+		 << "Se ja tiver sido usado alguma dica, ela sera reposta. Caso contrario, a dica recebida sera aleatoria" << endl
+		 << "Alem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida" << endl << endl;
 }
 
 /* 
-	Função que cria o menu do jogo e verifica se o usuário quer realmente jogar.
+	Funcao que cria o menu do jogo e verifica se o usuario quer realmente jogar.
 */
 void criaPartidaMenu() {
 	int modo;
@@ -116,7 +116,7 @@ void criaPartidaMenu() {
 		verRanking();
 		string iniciar;
 		cout << "Deseja iniciar uma nova partida?" << endl;
-		cout << "(s = sim; n = não): ";
+		cout << "(s = sim; n = nao): ";
 		cin >> iniciar;
 
 		if (tolower(iniciar) == "s"){
@@ -178,7 +178,7 @@ void criaPartidaMenu() {
 }
 
 /* 
-	Função que inicia o modo SinglePlayer.
+	Funcao que inicia o modo SinglePlayer.
 */
 void singlePlayer() {
 	acertos = 0;
@@ -187,7 +187,8 @@ void singlePlayer() {
 	dicaEliminacao = false;
 	dicaPorcentagens = false;
 	dicaPular = false;
-	
+	perguntasPartida = 0;
+
 	string nomeJogador;
 	cout << endl 
 		 << "Nome do jogador: ";
@@ -215,13 +216,13 @@ void singlePlayer() {
 	
 	armazenaInfos(nomeJogador, pontuacaoFinal);
 	cout << "Obrigado por jogar, pontuacao final: " << pontuacaoFinal << endl;
-	cout << endl << endl << endl << endl;
+	cout << endl << endl << endl;
 	
 	verRanking();
 }
 
 /* 
-	Função que inicia o modo MultiPlayer competindo contra um outro jogador.
+	Funcao que inicia o modo MultiPlayer competindo contra um outro jogador.
 */
 void multiPlayer() {
 	cout << "===== MODO MULTIPLAYER =====" << endl << endl;
@@ -241,11 +242,11 @@ void multiPlayer() {
 	} else {
 		cout << "\033[36;1m" << "Tivemos um EMPATE" << endl;
 	}
-
+	cout << "\x1b[0m";
 }
 
 /*
-	Função que armazena as informações do jogador (nome e pontuacao).
+	Funcao que armazena as informacoes do jogador (nome e pontuacao).
 */
 void armazenaInfos(string jogador, int pontuacao) {
 	ifstream json_file("rankinInfos.json");
@@ -261,7 +262,7 @@ void armazenaInfos(string jogador, int pontuacao) {
 }
 
 /*
-	Função que exibe o ranking das 10 melhores pontuações quando fora da partida.
+	Funcao que exibe o ranking das 10 melhores pontuacoes quando fora da partida.
 */
 void verRanking() {
 	ifstream json_file("rankinInfos.json");
@@ -269,7 +270,7 @@ void verRanking() {
 	json_file >> jsonfile;
 
 	if (!(jsonfile.empty())) {
-		cout << "====== RANKING ======" << endl;
+		cout << endl << "====== RANKING ======" << endl;
 
 		int max;
 		json temp;
@@ -318,7 +319,7 @@ void verRanking() {
 }
 
 /*
-	Função que ativa o bônus/recompensa do jogador durante a partida
+	Funcao que ativa o bônus/recompensa do jogador durante a partida
 */
 void darRecompensa() {
 	int v = -1;
@@ -359,10 +360,9 @@ void darRecompensa() {
 }
 
 /*
-	Função que exibe uma pergunta do BD excolhida aleatoriamente utilizando o ID de uma pergunta e chama a função que pede a resposta da questão
+	Funcao que exibe uma pergunta do BD excolhida aleatoriamente utilizando o ID de uma pergunta e chama a funcao que pede a resposta da questao
 */
 void criarPergunta() {
-	// Exibe uma pergunta do banco de dados aleatoriamente utilizando o id da pergunta ao usuário e pede uma resposta
 	ifstream json_file("perguntas.json");
 	json perguntas;
 	json_file >> perguntas;
@@ -378,10 +378,9 @@ void criarPergunta() {
 		
 	perguntasUsadas.push_back(perguntaID);
 
-	// Enunciado pergunta
 	cout << "Tipo: " << perguntas[perguntaID]["tipo"] << endl;
 	cout << "Pergunta: " << perguntas[perguntaID]["pergunta"] << endl;
-	// Opções
+	
 	cout << "A: " << perguntas[perguntaID]["a"] << '\n';
 	cout << "B: " << perguntas[perguntaID]["b"] << '\n';
 	cout << "C: " << perguntas[perguntaID]["c"] << '\n';
@@ -391,13 +390,12 @@ void criarPergunta() {
 	if (dicaEliminacao == false || dicaPorcentagens == false || dicaPular == false) {
 		cout << "P: PEDIR DICA" << '\n';
 	} else {
-		cout << "P: Você não possui mais dicas" << '\n';
+		cout << "P: Voce nao possui mais dicas" << '\n';
 	}
 
 	time_t tempo = time(0);
 
 	bool valida = false;
-	// Resposta pergunta
 	string resposta;
 
 	do {
@@ -461,7 +459,7 @@ void criarPergunta() {
 }
 
 /* 
-	Função que exibe as dicas para o usuário, conforme ele pedir.
+	Funcao que exibe as dicas para o usuario, conforme ele pedir.
 */
 int exibirDicas(int perguntaID) {
 	ifstream json_file("perguntas.json");
@@ -499,26 +497,23 @@ int exibirDicas(int perguntaID) {
 
 
 	switch (tipoDica) {
-		// Eliminar respostas
 		case 1:{
 			cout << "\nUma das alternativas a seguir esta correta: \n" << (string) perguntas[perguntaID]["eliminacao"] << endl;
 			dicaEliminacao = true;
 			break;
 		}
-		// Porcentagem das questões
 		case 2:{
 			cout << "\nEssa eh a opiniao dos internautas: \n" << (string) perguntas[perguntaID]["porcentagens"];
 			dicaPorcentagens = true;
 			break;
 		}
-		// Pular pergunta
 		case 3:{
-			cout << "\nVamos para a próxima pergunta!\n";
+			cout << "\nVamos para a proxima pergunta!\n";
 			dicaPular = true;
 			break;
 		}
 		default:{
-			cout << "Opção inválida! Selecione uma opção válida!" << endl;
+			cout << "Opcao invalida! Selecione uma opcao valida!" << endl;
 			break;
 		}
 	}
@@ -542,16 +537,16 @@ string tolower(string word) {
 }
 
 /*
-	Função que calcula um inteiro aleatoriamente para servir de ID para cada questão.
+	Funcao que calcula um inteiro aleatoriamente para servir de ID para cada questao.
 */
 int randomValue(int max) {
 	int perguntaID = 100 + max;
 	int r;
-	/* Random number --> Bad alloc */
+	
 	while (perguntaID > max){
-		random_device rd;						  // obtain a random number from hardware
-		mt19937 eng(rd());						  // seed the generator
-		uniform_int_distribution<> distr(0, max); // define the range
+		random_device rd;						  
+		mt19937 eng(rd());						
+		uniform_int_distribution<> distr(0, max);
 
 		for (int n = 0; n < 40; ++n){
 			r = distr(eng);
@@ -565,7 +560,7 @@ int randomValue(int max) {
 }
 
 /*
-	Função que faz com que o jogador jogue novamente, se ele desejar
+	Funcao que faz com que o jogador jogue novamente, se ele desejar
 */
 string playAgain() {
 	string opcao;
