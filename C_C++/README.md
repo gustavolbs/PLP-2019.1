@@ -15,5 +15,7 @@
 - [x] Dar dicas/recompensas;
 - [x] Armazenar dados;
 - [x] Print Vector;
-- [ ] MultiPlayer;
-- [ ] PlayAgain;
+- [x] MultiPlayer;
+- [x] PlayAgain;
+- [x] Exibir Ranking
+- [x] Instruções.
