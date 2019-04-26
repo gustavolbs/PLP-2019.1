@@ -85,7 +85,7 @@ int main() {
 	Funcao que exibe as instrucoes do jogo.
 */
 void instrucoes() {
-	cout << "===== Instrucoes =====" << endl << endl
+	cout << "\n===== Instrucoes =====" << endl << endl
 		 << "O PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:" << endl
 		 << "-> Singleplayer ou Multiplayer" << endl
 		 << "Cada partida possui 12 perguntas, divididas em 4 areas de conhecimento:" << endl
