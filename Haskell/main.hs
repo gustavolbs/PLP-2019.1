@@ -15,49 +15,71 @@ data Pergunta =
             , resposta :: String
                 } deriving Show
 
+-- Funcao que só mostra as instrucoes do jogo                
 instrucoes :: String
 instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nVoce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)\nAlehm disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nPara obter mais dicas, voce devera responder a pergunta em menos de 5 segundos\nSe ja tiver sido usado alguma dica, ela sera reposta. Caso contrario, a dica recebida sera aleatoria\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
 
+-- Funcao principal do programa. Executa a parte logica atraves de chamadas de funcoes secundarias
 main :: IO ()
 main = do 
-    ent <- entradaUser ("\n===== PerguntUP =====" ++ "\nby GERIGE" ++ "\n(1) Ver as instrucoes\n(2) Seguir para o jogo\n(3) Sair\n")
+    ent <- entradaUser ("\n===== PerguntUP =====" ++ "\nby GERIGE" ++ "\n\n(1) Ver as instrucoes\n(2) Seguir para o jogo\n(3) Sair\n")
     case ent of
-        "1" ->
+        "1" -> -- Ver as instrucoes chamando a funcao "instrucoes"
             do
                 putStrLn (instrucoes)
-                main
-                return()
-        "2" ->
+                main -- Chama novamente o "main" apos a execucao
+                return() -- Fecha a funcao apos toda a recursividade
+        "2" -> -- Seguir para o jogo em si chamando a funcao "criarPartida"
             do
-                criarPartida
-                return()
-        "3" ->
-            return()
-        _ ->
+                criarPartida -- Executa a funcao que inicia o menu para comecar uma partida
+                return() -- Fecha a funcao apos toda a recursividade
+        "3" -> -- Sai do jogo
+            return()  -- Fecha a funcao apos toda a recursividade
+        _ -> -- Qualquer outra entradaUser que nao seja "1", "2" ou "3" sera ignorada e a funcao sera chamada novamente
             do
                 putStrLn ("\nOpcao Invalida!\n")
-                main
-                return()
+                main -- Chamada do "main" para entradas invalidas
+                return()  -- Fecha a funcao apos toda a recursividade
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+-- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
 criarPartida = do
     ent <- entradaUser ("\nDeseja iniciar uma nova partida?\n(1) Sim\n(2) Nao\n")
     case ent of
-        "1" ->
+        "1" -> -- Iniciar um nova partida chamando a funcao "modoJogo"
             do
                 modoJogo
-                criarPartida
-                return()
-        "2" ->
+                criarPartida -- Chama novamente a funcao "criarPartida" caso o usuario deseje jogar novamente
+                return()  -- Fecha a funcao apos toda a recursividade
+        "2" -> -- Fecha o jogo e retorna para o "main"
             do
                 putStrLn ("\nObrigado por jogar!\n")
-                return()
+                main -- Chama o "main" para que o programa reinicie
+                return()  -- Fecha a funcao apos toda a recursividade
         _ ->
             do
                 putStrLn ("\nOpcao Invalida!\n")
-                criarPartida
-                return()
+                criarPartida -- Chama a funcao 
+                return()  -- Fecha a funcao apos toda a recursividade
 
+-- Funcao que 
 modoJogo :: IO ()
 modoJogo = do
     ent <- entradaUser ("\nQual o modo de jogo?\n(1) SinglePlayer\n(2) MultiPlayer\n")
@@ -65,17 +87,16 @@ modoJogo = do
         "1" ->
             do
                 singlePlayer
-                leitura
-                return()
+                return()  -- Fecha a funcao apos toda a recursividade
         "2" ->
             do
                 putStrLn ("\nMultiPlayer\n")
-                return()
+                return()  -- Fecha a funcao apos toda a recursividade
         _ ->
             do
                 putStrLn ("\nOpcao Invalida!\n")
                 modoJogo
-                return()
+                return()  -- Fecha a funcao apos toda a recursividade
 
 entradaUser :: String -> IO String
 entradaUser ent = do
@@ -84,32 +105,63 @@ entradaUser ent = do
 
 singlePlayer :: IO ()
 singlePlayer = do
-    ent <- entrada("\nNome do Jogador:\n")
+
+-- Definir "VARIÀVEIS"
+
+    ent <- entradaUser("\nNome do Jogador:")
+    
+    printPergunta12 12    
+    
+    
+    
     escrita (ent,"pontuacao")
     
-entrada :: String -> IO String
-entrada ent = do
-    putStrLn (ent)
-    getLine
+
+printPergunta12 n
+    | n == 0 = do return ()
+    | otherwise = do 
+        gerandoPerguntaAleatoria
+        printPergunta12 (n-1)
+
 
 escrita :: (String,String) -> IO ()
 escrita inth = do
-    writeFile "ranking.txt" ("(" ++ fst inth ++ ", " ++ snd inth ++ ")")
+    arq <- readFile "ranking.txt"
+    let newArq = arq ++ (fst inth ++ ":" ++ snd inth ++ "\r\n")
+    when (length newArq > 0) $
+        writeFile "ranking.txt" newArq
 
-leitura :: IO ()
-leitura = do
-    arq <- readFile "perguntas.txt"
-    putStrLn (show $ splitOn "\r\n" (printaBonito (splitOn "--" arq)))
-
-gerandoPerguntaAleatoria :: IO ()
+    
+gerandoPerguntaAleatoria :: IO String
 gerandoPerguntaAleatoria = do
-    num <- randomRIO (1,540::Int)
-    if num `elem` [2,11..540]
-        then do putStrLn (show $ num)
-        else do gerandoPerguntaAleatoria
 
-printaBonito :: [String] -> String
-printaBonito lista
-                    | (len == 1) = head lista
-                    | otherwise = (printaBonito (splitOn "\r\n" (head lista))) ++ "\n" ++ printaBonito (tail lista)
-                    where len = length lista
+    -- Tirar pergunta da Lista
+
+
+    arq <- readFile "perguntas.txt"
+    let lista = splitOn "---" arq
+    num <- randomRIO (0,47::Int)
+    let pergunta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 0)
+        letraA = ((splitOn "\r\n" (lista !! num)) !! 1)
+        letraB = ((splitOn "\r\n" (lista !! num)) !! 2)
+        letraC = ((splitOn "\r\n" (lista !! num)) !! 3)
+        letraD = ((splitOn "\r\n" (lista !! num)) !! 4)
+        letraE = ((splitOn "\r\n" (lista !! num)) !! 5)
+        tipo = "\n" ++ ((splitOn "\r\n" (lista !! num)) !! 6)
+        resposta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 7)
+    
+    putStrLn (show $ tipo)
+    putStrLn (show $ pergunta)
+    putStrLn (show $ letraA)
+    putStrLn (show $ letraB)
+    putStrLn (show $ letraC)
+    putStrLn (show $ letraD)
+    putStrLn (show $ letraE)
+
+    entradaUser("\nResposta:")
+    -- resp <- entradaUser("\nResposta:\n")
+    -- case resp of
+    --     resposta ->
+    --         do
+                
+
