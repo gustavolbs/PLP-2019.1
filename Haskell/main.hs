@@ -110,18 +110,17 @@ singlePlayer = do
 
     ent <- entradaUser("\nNome do Jogador:")
     
-    printPergunta12 12    
+    printPergunta12 ent 12
     
     
     
     escrita (ent,"pontuacao")
     
-
-printPergunta12 n
-    | n == 0 = do return ()
-    | otherwise = do 
-        gerandoPerguntaAleatoria
-        printPergunta12 (n-1)
+printPergunta12 nome n
+    | n == 0 = return ()
+    | otherwise = do
+        gerandoPerguntaAleatoria nome
+        printPergunta12 nome (n-1)
 
 
 escrita :: (String,String) -> IO ()
@@ -132,8 +131,8 @@ escrita inth = do
         writeFile "ranking.txt" newArq
 
     
-gerandoPerguntaAleatoria :: IO String
-gerandoPerguntaAleatoria = do
+gerandoPerguntaAleatoria :: String -> IO ()
+gerandoPerguntaAleatoria nome = do
 
     -- Tirar pergunta da Lista
 
@@ -141,6 +140,16 @@ gerandoPerguntaAleatoria = do
     arq <- readFile "perguntas.txt"
     let lista = splitOn "---" arq
     num <- randomRIO (0,47::Int)
+    
+    printaPergunta nome lista num
+    let newArq = arq
+    when (length newArq > 0) $
+        writeFile "perguntas.txt" arq
+
+    
+                
+printaPergunta :: String -> [String] -> Int -> IO ()
+printaPergunta nome lista num = do
     let pergunta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 0)
         letraA = ((splitOn "\r\n" (lista !! num)) !! 1)
         letraB = ((splitOn "\r\n" (lista !! num)) !! 2)
@@ -150,18 +159,71 @@ gerandoPerguntaAleatoria = do
         tipo = "\n" ++ ((splitOn "\r\n" (lista !! num)) !! 6)
         resposta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 7)
     
-    putStrLn (show $ tipo)
-    putStrLn (show $ pergunta)
-    putStrLn (show $ letraA)
-    putStrLn (show $ letraB)
-    putStrLn (show $ letraC)
-    putStrLn (show $ letraD)
-    putStrLn (show $ letraE)
+    putStrLn (tipo)
+    putStrLn (pergunta)
+    putStrLn (letraA)
+    putStrLn (letraB)
+    putStrLn (letraC)
+    putStrLn (letraD)
+    putStrLn (letraE)
+    putStrLn (resposta)
+    putStrLn ("\np: Pedir dica\n")
 
-    entradaUser("\nResposta:")
-    -- resp <- entradaUser("\nResposta:\n")
-    -- case resp of
-    --     resposta ->
-    --         do
-                
+    resp <- entradaUser("\nResposta:\n")
+    if (resp `elem` ["a","b","c","d","e","p"])
+        then if (resp == resposta)
+            then do
+                putStrLn ("\nResposta certa!\n")
+                return ()
+            else do
+                case resp of
+                    "p" ->
+                        do
+                            ajuda nome lista num
+                            return ()
+                    _ ->
+                        do
+                            putStrLn ("\nResposta errada.\n")
+                            return ()
+        else do
+            putStrLn ("\nResposta invalida!\n")
+            printaPergunta nome lista num
+            return ()
 
+ajuda :: String -> [String] -> Int -> IO ()
+ajuda nome lista num = do
+    arq <- readFile "perguntas.txt"
+    
+    if (last lista == nome ++ "dica1") || (last lista == nome ++ "dica2") || (last lista == nome ++ "dica3")
+        
+        then do
+            putStrLn ("\nVoce nao tem mais dicas para essa pergunta\n")
+            printaPergunta nome lista num
+            return()
+    else do
+        ajuda <- entradaUser("\nQual ajuda vc deseja?\n(1) Dica 1\n(2) Dica 2\n(3) Dica 3\n")
+        case ajuda of
+            "1" ->
+                do
+                    putStrLn ("\ndica um\n")
+                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    when (length newArq > 0) $
+                        writeFile "perguntas.txt" newArq
+                    printaPergunta nome (lista ++ [nome ++ "dica1"]) num
+                    return ()
+            "2" ->
+                do
+                    putStrLn ("\ndica dois\n")
+                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    when (length newArq > 0) $
+                        writeFile "perguntas.txt" newArq
+                    printaPergunta nome (lista ++ [nome ++ "dica2"]) num
+                    return ()
+            "3" ->
+                do
+                    putStrLn ("\ndica tres\n")
+                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    when (length newArq > 0) $
+                        writeFile "perguntas.txt" newArq
+                    printaPergunta nome (lista ++ [nome ++ "dica3"]) num
+                    return ()
