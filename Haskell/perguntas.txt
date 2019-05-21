@@ -250,7 +250,7 @@ c: Venus Saturno Urano Jupiter Marte Netuno Mercurio
 d: Jupiter Marte Mercurio Netuno Plutao Saturno Sol Terra Urano Venus
 e: Terra Venus Saturno Jupiter Marte Netuno Mercurio
 Tipo: natureza
-resposta: a---pergunta: Qual era o nome de Aleijadinho”?
+resposta: a---npergunta: Qual era o nome de Aleijadinho”?
 a: Alexandrino Francisco Lisboa
 b: Manuel Francisco Lisboa
 c: Alex Francisco Lisboa
@@ -389,13 +389,6 @@ b: 1 minuto
 c: 30 minutos
 d: 100 minutos
 e: 110 minutos
-Tipo: matematica
-resposta: b---pergunta: Qual a derivada de x?
-a: 3
-b: 1
-c: 4
-d: 44
-e: 131
 Tipo: matematica
 resposta: b---pergunta: Qual a derivada de x?
 a: 3

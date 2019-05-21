@@ -2,6 +2,7 @@ import System.IO
 import Data.Char
 import System.Random
 import Data.List.Split
+import Data.List
 import Control.Monad
 
 data Pergunta =
@@ -41,23 +42,6 @@ main = do
                 main -- Chamada do "main" para entradas invalidas
                 return()  -- Fecha a funcao apos toda a recursividade
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
 -- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
 criarPartida = do
@@ -82,7 +66,7 @@ criarPartida = do
 -- Funcao que 
 modoJogo :: IO ()
 modoJogo = do
-    ent <- entradaUser ("\nQual o modo de jogo?\n(1) SinglePlayer\n(2) MultiPlayer\n")
+    ent <- entradaUser ("\nQual a forma de jogar?\n(1) SinglePlayer\n(2) MultiPlayer\n")
     case ent of
         "1" ->
             do
@@ -103,24 +87,29 @@ entradaUser ent = do
     putStrLn (ent)
     getLine
 
+-- Modo SinglePlayer
 singlePlayer :: IO ()
 singlePlayer = do
 
--- Definir "VARIÀVEIS"
+    -- Definir "VARIÀVEIS"
 
     ent <- entradaUser("\nNome do Jogador:")
     
+    
     printPergunta12 ent 12
-    
-    
-    
+
     escrita (ent,"pontuacao")
-    
+
+printPergunta12 :: String -> Int -> IO ()
 printPergunta12 nome n
     | n == 0 = return ()
     | otherwise = do
-        gerandoPerguntaAleatoria nome
+        arq <- readFile "perguntas.txt"
+        gerandoPerguntaAleatoria arq nome
         printPergunta12 nome (n-1)
+        let newArq = arq
+        when (length newArq > 0) $
+            writeFile "perguntas.txt" arq
 
 
 escrita :: (String,String) -> IO ()
@@ -131,33 +120,54 @@ escrita inth = do
         writeFile "ranking.txt" newArq
 
     
-gerandoPerguntaAleatoria :: String -> IO ()
-gerandoPerguntaAleatoria nome = do
+gerandoPerguntaAleatoria :: String -> String -> IO ()
+gerandoPerguntaAleatoria arq nome = do
 
     -- Tirar pergunta da Lista
 
-
-    arq <- readFile "perguntas.txt"
     let lista = splitOn "---" arq
     num <- randomRIO (0,47::Int)
-    
-    printaPergunta nome lista num
-    let newArq = arq
-    when (length newArq > 0) $
-        writeFile "perguntas.txt" arq
+    let pergunta = lista !! num
 
+    if (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "-RESPc") || (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "RESPe")
+        then do
+            gerandoPerguntaAleatoria arq nome
+        else
+            do
+                putStrLn ("\n==== Placar ====")
+                erros <- contaErros
+                acertos <- contaAcertos
+                putStr ("Erros:")
+                putStrLn (show $ erros)
+                putStr ("Acertos:")
+                putStrLn (show $ acertos)
+                printaPergunta nome lista num
     
+
+contaErros :: IO Int
+contaErros = do
+    arq <- readFile "perguntas.txt"
+    let erros = length (splitOn "-RESPe" arq) - 1 
+    return (erros)
+
+contaAcertos :: IO Int
+contaAcertos = do
+    arq <- readFile "perguntas.txt"
+    let acertos = length (splitOn "-RESPc" arq) - 1
+    return (acertos)
+
                 
 printaPergunta :: String -> [String] -> Int -> IO ()
 printaPergunta nome lista num = do
-    let pergunta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 0)
-        letraA = ((splitOn "\r\n" (lista !! num)) !! 1)
-        letraB = ((splitOn "\r\n" (lista !! num)) !! 2)
-        letraC = ((splitOn "\r\n" (lista !! num)) !! 3)
-        letraD = ((splitOn "\r\n" (lista !! num)) !! 4)
-        letraE = ((splitOn "\r\n" (lista !! num)) !! 5)
-        tipo = "\n" ++ ((splitOn "\r\n" (lista !! num)) !! 6)
-        resposta = drop 10 ((splitOn "\r\n" (lista !! num)) !! 7)
+    let perg = lista !! num
+    let pergunta = drop 10 ((splitOn "\r\n" (perg)) !! 0)
+        letraA = ((splitOn "\r\n" (perg)) !! 1)
+        letraB = ((splitOn "\r\n" (perg)) !! 2)
+        letraC = ((splitOn "\r\n" (perg)) !! 3)
+        letraD = ((splitOn "\r\n" (perg)) !! 4)
+        letraE = ((splitOn "\r\n" (perg)) !! 5)
+        tipo = "\n" ++ ((splitOn "\r\n" (perg)) !! 6)
+        resposta = drop 10 ((splitOn "\r\n" (perg)) !! 7)
     
     putStrLn (tipo)
     putStrLn (pergunta)
@@ -174,7 +184,10 @@ printaPergunta nome lista num = do
         then if (resp == resposta)
             then do
                 putStrLn ("\nResposta certa!\n")
-                return ()
+                let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPc"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
+                when (length newArq > 0) $
+                    writeFile "perguntas.txt" newArq
+                
             else do
                 case resp of
                     "p" ->
@@ -184,7 +197,10 @@ printaPergunta nome lista num = do
                     _ ->
                         do
                             putStrLn ("\nResposta errada.\n")
-                            return ()
+                            let newArq = ((intercalate "---" (take num lista)) ++ "---n" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
+                            when (length newArq > 0) $
+                                writeFile "perguntas.txt" newArq
+                            
         else do
             putStrLn ("\nResposta invalida!\n")
             printaPergunta nome lista num
@@ -201,7 +217,7 @@ ajuda nome lista num = do
             printaPergunta nome lista num
             return()
     else do
-        ajuda <- entradaUser("\nQual ajuda vc deseja?\n(1) Dica 1\n(2) Dica 2\n(3) Dica 3\n")
+        ajuda <- entradaUser("\n(1) Dica 1\n(2) Dica 2\n(3) Dica 3\n")
         case ajuda of
             "1" ->
                 do
