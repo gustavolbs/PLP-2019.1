@@ -5,16 +5,7 @@ import Data.List.Split
 import Data.List
 import Control.Monad
 
-data Pergunta =
-    Pergunta { pergunta :: String
-            , a :: String
-            , b :: String
-            , c :: String
-            , d :: String
-            , e :: String
-            , tipo :: String
-            , resposta :: String
-                } deriving Show
+
 
 -- Funcao que só mostra as instrucoes do jogo                
 instrucoes :: String
@@ -94,11 +85,88 @@ singlePlayer = do
     -- Definir "VARIÀVEIS"
 
     ent <- entradaUser("\nNome do Jogador:")
-    
-    
+    arq <- readFile "perguntas.txt"
+
     printPergunta12 ent 12
 
-    escrita (ent,"pontuacao")
+    acertos <- contaAcertos
+    putStr ("\nSua pontuacao final: ")
+    putStrLn (show $ acertos)
+
+    
+    let newArq = arq
+    when (length newArq > 0) $
+        writeFile "perguntas.txt" newArq
+
+    escrita (ent, pontuacaoAcertos acertos)
+
+exibeRanking :: IO ()
+exibeRanking = do
+    arq <- readFile "ranking.txt"
+    putStr ("====== RANKING ======")
+    printa10Users 1
+
+printa10Users :: Int -> IO ()
+printa10Users n
+    | n == 11 = return ()
+    | otherwise = do
+        arq <- readFile "ranking.txt"
+        let linha = splitOn "\r\n" arq
+        putStr $ ((show n) ++ ". ")
+        putStr $ show (head (splitOn ":" (linha !! (length linha -2))))
+        putStr (" - ")
+        putStr $ show (last (splitOn ":" (linha !! (length linha -2))))
+        printa10Users (n+1)        
+                            
+
+
+        
+multiPlayer :: IO ()
+multiPlayer = do
+    putStr ("\n==== Jogador 1 ====\n")
+    singlePlayer
+    rank <- readFile "ranking.txt"
+    let rankSplit = splitOn "\r\n" rank
+    let p1 = read (last (splitOn ":" (rankSplit !! (length rankSplit -2)))) :: Int
+
+    putStr ("\n==== Jogador 2 ====\n")
+    singlePlayer
+    rank <- readFile "ranking.txt"
+    let rankSplit = splitOn "\r\n" rank
+    let p2 = read (last (splitOn ":" (rankSplit !! (length rankSplit -2)))) :: Int
+
+    if (p1 > p2)
+        then do
+            putStrLn ("\nJogador 1 venceu!\n")
+        else if (p2 > p1)
+            then do
+                putStrLn ("\nJogador 2 venceu!\n")
+            else do
+                putStrLn ("\nEmpate!\n")
+
+
+pontuacaoAcertos :: Int -> Int
+pontuacaoAcertos acertos = (acertos * 50) div 12
+
+-- pontuacaoTempo :: Int -> Int
+-- pontuacaoTempo tempoTotal = 50 - ((tempoTotal - 60) * (50/120))
+
+-- pontuacaoFinal :: Int
+-- pontuacaoFinal =
+--     if (pontuacaoTempo tempoTotal > 50)
+--         then
+--             if (ceiling (pontuacaoAcertos acertos + 50) < 0)
+--                 then
+--                     0
+--                 else
+--                     ceiling (pontuacaoAcertos acertos + 50)
+--         else
+--             if (ceiling (pontuacaoAcertos acertos + pontuacaoTempo tempoTotal) < 0)
+--                 then
+--                     0
+--                 else
+--                     ceiling (pontuacaoAcertos acertos + pontuacaoTempo tempoTotal)
+    
 
 printPergunta12 :: String -> Int -> IO ()
 printPergunta12 nome n
@@ -107,15 +175,13 @@ printPergunta12 nome n
         arq <- readFile "perguntas.txt"
         gerandoPerguntaAleatoria arq nome
         printPergunta12 nome (n-1)
-        let newArq = arq
-        when (length newArq > 0) $
-            writeFile "perguntas.txt" arq
+        
 
 
-escrita :: (String,String) -> IO ()
+escrita :: (String,Int) -> IO ()
 escrita inth = do
     arq <- readFile "ranking.txt"
-    let newArq = arq ++ (fst inth ++ ":" ++ snd inth ++ "\r\n")
+    let newArq = arq ++ (fst inth ++ ":" ++ show (snd inth) ++ "\r\n")
     when (length newArq > 0) $
         writeFile "ranking.txt" newArq
 
@@ -197,7 +263,7 @@ printaPergunta nome lista num = do
                     _ ->
                         do
                             putStrLn ("\nResposta errada.\n")
-                            let newArq = ((intercalate "---" (take num lista)) ++ "---n" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
+                            let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
                             when (length newArq > 0) $
                                 writeFile "perguntas.txt" newArq
                             
