@@ -4,7 +4,7 @@ import System.Random
 import Data.List.Split
 import Data.List
 import Control.Monad
-
+import Control.DeepSeq
 
 
 -- Funcao que só mostra as instrucoes do jogo                
@@ -14,7 +14,7 @@ instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que 
 -- Funcao principal do programa. Executa a parte logica atraves de chamadas de funcoes secundarias
 main :: IO ()
 main = do 
-    ent <- entradaUser ("\n===== PerguntUP =====" ++ "\nby GERIGE" ++ "\n\n(1) Ver as instrucoes\n(2) Seguir para o jogo\n(3) Sair\n")
+    ent <- entradaUser ("\n===== PerguntUP =====" ++ "\nby GERIGE" ++ "\n\n(1) Ver as instrucoes\n(2) Seguir para o jogo\n(3) Exibir o ranking\n(4) Sair\nEscolha:")
     case ent of
         "1" -> -- Ver as instrucoes chamando a funcao "instrucoes"
             do
@@ -25,18 +25,23 @@ main = do
             do
                 criarPartida -- Executa a funcao que inicia o menu para comecar uma partida
                 return() -- Fecha a funcao apos toda a recursividade
-        "3" -> -- Sai do jogo
+        "3" -> 
+            do
+                exibeRanking
+                main -- Chama novamente o "main" apos a execucao
+                return()  -- Fecha a funcao apos toda a recursividade
+        "4" -> -- Sai do jogo
             return()  -- Fecha a funcao apos toda a recursividade
         _ -> -- Qualquer outra entradaUser que nao seja "1", "2" ou "3" sera ignorada e a funcao sera chamada novamente
             do
-                putStrLn ("\nOpcao Invalida!\n")
+                putStrLn ("Opcao Invalida!")
                 main -- Chamada do "main" para entradas invalidas
                 return()  -- Fecha a funcao apos toda a recursividade
 
 -- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
 criarPartida = do
-    ent <- entradaUser ("\nDeseja iniciar uma nova partida?\n(1) Sim\n(2) Nao\n")
+    ent <- entradaUser ("\nDeseja iniciar uma nova partida?\n(1) Sim\n(2) Nao\nEscolha:")
     case ent of
         "1" -> -- Iniciar um nova partida chamando a funcao "modoJogo"
             do
@@ -45,19 +50,19 @@ criarPartida = do
                 return()  -- Fecha a funcao apos toda a recursividade
         "2" -> -- Fecha o jogo e retorna para o "main"
             do
-                putStrLn ("\nObrigado por jogar!\n")
+                putStrLn ("Obrigado por jogar!")
                 main -- Chama o "main" para que o programa reinicie
                 return()  -- Fecha a funcao apos toda a recursividade
         _ ->
             do
-                putStrLn ("\nOpcao Invalida!\n")
+                putStrLn ("Opcao Invalida!")
                 criarPartida -- Chama a funcao 
                 return()  -- Fecha a funcao apos toda a recursividade
 
 -- Funcao que 
 modoJogo :: IO ()
 modoJogo = do
-    ent <- entradaUser ("\nQual a forma de jogar?\n(1) SinglePlayer\n(2) MultiPlayer\n")
+    ent <- entradaUser ("\nQual a forma de jogar?\n(1) SinglePlayer\n(2) MultiPlayer\nEscolha:")
     case ent of
         "1" ->
             do
@@ -65,11 +70,11 @@ modoJogo = do
                 return()  -- Fecha a funcao apos toda a recursividade
         "2" ->
             do
-                putStrLn ("\nMultiPlayer\n")
+                multiPlayer
                 return()  -- Fecha a funcao apos toda a recursividade
         _ ->
             do
-                putStrLn ("\nOpcao Invalida!\n")
+                putStrLn ("Opcao Invalida!")
                 modoJogo
                 return()  -- Fecha a funcao apos toda a recursividade
 
@@ -81,55 +86,61 @@ entradaUser ent = do
 -- Modo SinglePlayer
 singlePlayer :: IO ()
 singlePlayer = do
-
-    -- Definir "VARIÀVEIS"
-
     ent <- entradaUser("\nNome do Jogador:")
-    arq <- readFile "perguntas.txt"
+    handle <- openFile "perguntas.txt" ReadMode
+    contents <- hGetContents handle
+    writeFile "perguntas.txt" contents
 
-    printPergunta12 ent 12
+    printPergunta12 handle ent 12
+
+    hClose handle
 
     acertos <- contaAcertos
     putStr ("\nSua pontuacao final: ")
     putStrLn (show $ acertos)
 
     
-    let newArq = arq
-    when (length newArq > 0) $
-        writeFile "perguntas.txt" newArq
+    let newArq = contents
+    seq (length newArq) (return ())
+    writeFile "perguntas.txt" newArq
 
     escrita (ent, pontuacaoAcertos acertos)
 
 exibeRanking :: IO ()
 exibeRanking = do
     arq <- readFile "ranking.txt"
-    putStr ("====== RANKING ======")
-    printa10Users 1
+    if (length arq > 0)
+        then do
+            putStrLn ("\n====== RANKING ======")
+            printa10Users arq 1
+        else
+            return ()
 
-printa10Users :: Int -> IO ()
-printa10Users n
-    | n == 11 = return ()
+printa10Users :: String -> Int -> IO ()
+printa10Users arq n
+    | (n == 11) = return ()
     | otherwise = do
-        arq <- readFile "ranking.txt"
         let linha = splitOn "\r\n" arq
-        putStr $ ((show n) ++ ". ")
-        putStr $ show (head (splitOn ":" (linha !! (length linha -2))))
-        putStr (" - ")
-        putStr $ show (last (splitOn ":" (linha !! (length linha -2))))
-        printa10Users (n+1)        
-                            
-
-
-        
+        if (length linha > 1)
+            then do
+                putStr $ ((show n) ++ ". ")
+                putStr $ show (head (splitOn ":" (linha !! 0))) -- User
+                putStr (" - ")
+                putStrLn $ show (last (splitOn ":" (linha !! 0))) -- Pontuacao
+                let newArq = intercalate "\r\n" (drop 1 linha)
+                printa10Users newArq (n+1)         
+            else
+                return ()         
+      
 multiPlayer :: IO ()
 multiPlayer = do
-    putStr ("\n==== Jogador 1 ====\n")
+    putStr ("\n===== Jogador 1 =====\n")
     singlePlayer
     rank <- readFile "ranking.txt"
     let rankSplit = splitOn "\r\n" rank
     let p1 = read (last (splitOn ":" (rankSplit !! (length rankSplit -2)))) :: Int
 
-    putStr ("\n==== Jogador 2 ====\n")
+    putStr ("\n===== Jogador 2 =====\n")
     singlePlayer
     rank <- readFile "ranking.txt"
     let rankSplit = splitOn "\r\n" rank
@@ -144,9 +155,8 @@ multiPlayer = do
             else do
                 putStrLn ("\nEmpate!\n")
 
-
 pontuacaoAcertos :: Int -> Int
-pontuacaoAcertos acertos = (acertos * 50) div 12
+pontuacaoAcertos acertos = div (acertos * 50) 12
 
 -- pontuacaoTempo :: Int -> Int
 -- pontuacaoTempo tempoTotal = 50 - ((tempoTotal - 60) * (50/120))
@@ -168,26 +178,24 @@ pontuacaoAcertos acertos = (acertos * 50) div 12
 --                     ceiling (pontuacaoAcertos acertos + pontuacaoTempo tempoTotal)
     
 
-printPergunta12 :: String -> Int -> IO ()
-printPergunta12 nome n
+printPergunta12 :: Handle -> String -> Int -> IO ()
+printPergunta12 handle nome n
     | n == 0 = return ()
     | otherwise = do
-        arq <- readFile "perguntas.txt"
-        gerandoPerguntaAleatoria arq nome
-        printPergunta12 nome (n-1)
+        contents <- hGetContents handle
+        gerandoPerguntaAleatoria handle contents nome
+        printPergunta12 handle nome (n-1)
         
-
 
 escrita :: (String,Int) -> IO ()
 escrita inth = do
     arq <- readFile "ranking.txt"
     let newArq = arq ++ (fst inth ++ ":" ++ show (snd inth) ++ "\r\n")
-    when (length newArq > 0) $
-        writeFile "ranking.txt" newArq
+    seq (length newArq) (writeFile "ranking.txt" newArq)
 
     
-gerandoPerguntaAleatoria :: String -> String -> IO ()
-gerandoPerguntaAleatoria arq nome = do
+gerandoPerguntaAleatoria :: Handle -> String -> String -> IO ()
+gerandoPerguntaAleatoria handle arq nome = do
 
     -- Tirar pergunta da Lista
 
@@ -195,9 +203,9 @@ gerandoPerguntaAleatoria arq nome = do
     num <- randomRIO (0,47::Int)
     let pergunta = lista !! num
 
-    if (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "-RESPc") || (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "RESPe")
+    if (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "-RESPc") || (drop 11 ((splitOn "\r\n" (pergunta)) !! 7) == "-RESPe")
         then do
-            gerandoPerguntaAleatoria arq nome
+            gerandoPerguntaAleatoria handle arq nome
         else
             do
                 putStrLn ("\n==== Placar ====")
@@ -207,9 +215,9 @@ gerandoPerguntaAleatoria arq nome = do
                 putStrLn (show $ erros)
                 putStr ("Acertos:")
                 putStrLn (show $ acertos)
-                printaPergunta nome lista num
-    
+                printaPergunta handle nome lista num
 
+                
 contaErros :: IO Int
 contaErros = do
     arq <- readFile "perguntas.txt"
@@ -223,8 +231,8 @@ contaAcertos = do
     return (acertos)
 
                 
-printaPergunta :: String -> [String] -> Int -> IO ()
-printaPergunta nome lista num = do
+printaPergunta :: Handle -> String -> [String] -> Int -> IO ()
+printaPergunta handle nome lista num = do
     let perg = lista !! num
     let pergunta = drop 10 ((splitOn "\r\n" (perg)) !! 0)
         letraA = ((splitOn "\r\n" (perg)) !! 1)
@@ -242,70 +250,74 @@ printaPergunta nome lista num = do
     putStrLn (letraC)
     putStrLn (letraD)
     putStrLn (letraE)
-    putStrLn (resposta)
-    putStrLn ("\np: Pedir dica\n")
+    putStrLn ("p: Pedir dica\n")
 
-    resp <- entradaUser("\nResposta:\n")
+    resp <- entradaUser("Resposta:")
     if (resp `elem` ["a","b","c","d","e","p"])
         then if (resp == resposta)
             then do
-                putStrLn ("\nResposta certa!\n")
+                putStrLn ("Resposta certa!")
                 let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPc"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
-                when (length newArq > 0) $
-                    writeFile "perguntas.txt" newArq
+                seq (length newArq) (return ())
+                writeFile "perguntas.txt" newArq
+                -- when (length newArq > 0) $
+                --     writeFile "perguntas.txt" newArq
                 
             else do
                 case resp of
                     "p" ->
                         do
-                            ajuda nome lista num
+                            ajuda handle nome lista num
                             return ()
                     _ ->
                         do
-                            putStrLn ("\nResposta errada.\n")
+                            putStrLn ("Resposta errada.")
                             let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
-                            when (length newArq > 0) $
-                                writeFile "perguntas.txt" newArq
+                            -- seq (length newArq) (return ())
+                            -- writeFile "perguntas.txt" newArq
+                            -- when (length newArq > 0) $
+                            --     writeFile "perguntas.txt" newArq
+                            rnf newArq `seq` (writeFile "perguntas.txt" $ newArq)
                             
         else do
-            putStrLn ("\nResposta invalida!\n")
-            printaPergunta nome lista num
+            putStrLn ("Resposta invalida!")
+            printaPergunta handle nome lista num
             return ()
 
-ajuda :: String -> [String] -> Int -> IO ()
-ajuda nome lista num = do
-    arq <- readFile "perguntas.txt"
+ajuda :: Handle -> String -> [String] -> Int -> IO ()
+ajuda handle nome lista num = do
+    arq <- hGetContents handle
     
-    if (last lista == nome ++ "dica1") || (last lista == nome ++ "dica2") || (last lista == nome ++ "dica3")
+    if (last lista == "dica1") || (last lista == "dica2") || (last lista == "dica3")
         
         then do
             putStrLn ("\nVoce nao tem mais dicas para essa pergunta\n")
-            printaPergunta nome lista num
+            printaPergunta handle nome lista num
             return()
     else do
-        ajuda <- entradaUser("\n(1) Dica 1\n(2) Dica 2\n(3) Dica 3\n")
+        ajuda <- entradaUser("\n(1) Dica 1\n(2) Dica 2\n(3) Pular pergunta\n")
         case ajuda of
             "1" ->
                 do
                     putStrLn ("\ndica um\n")
-                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    let newArq = arq ++ "\r\n---" ++ "dica1"
                     when (length newArq > 0) $
                         writeFile "perguntas.txt" newArq
-                    printaPergunta nome (lista ++ [nome ++ "dica1"]) num
+                    printaPergunta handle nome (lista ++ ["dica1"]) num
                     return ()
             "2" ->
                 do
                     putStrLn ("\ndica dois\n")
-                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    let newArq = arq ++ "\r\n---" ++ "dica1"
                     when (length newArq > 0) $
                         writeFile "perguntas.txt" newArq
-                    printaPergunta nome (lista ++ [nome ++ "dica2"]) num
+                    printaPergunta handle nome (lista ++ ["dica2"]) num
                     return ()
             "3" ->
                 do
                     putStrLn ("\ndica tres\n")
-                    let newArq = arq ++ "\r\n---" ++ nome ++ "dica1"
+                    let newArq = arq ++ "\r\n---" ++ "dica1"
                     when (length newArq > 0) $
                         writeFile "perguntas.txt" newArq
-                    printaPergunta nome (lista ++ [nome ++ "dica3"]) num
+                    printaPergunta handle nome (lista ++ ["dica3"]) num
                     return ()

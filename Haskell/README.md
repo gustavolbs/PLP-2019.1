@@ -4,21 +4,20 @@
 
 ## Features:
 
-- [ ] Criar partida;
-- [ ] Exibir perguntas;
-- [ ] Responder perguntas;
-- [ ] SinglePlayer;
-- [ ] Random ID;
-- [ ] To Lower;
-- [ ] Pedir dicas;
+- [x] Criar partida;
+- [x] Random ID;
+- [x] Pedir dicas; <- Problema File is locked
+- [x] Armazenar dados;
+- [x] Exibir Ranking;
+- [x] PlayAgain;
+- [x] Instruções;
+- [x] MultiPlayer; <- Problema File is locked
+- [x] SinglePlayer; <- Problema File is locked
+- [x] Exibir perguntas; <- Problema File is locked
+- [ ] Ordenar exibicao;
+- [ ] Responder perguntas; <- Problema File is locked
 - [ ] Exibir dicas;
-- [ ] Dar dicas/recompensas;
-- [ ] Armazenar dados;
-- [ ] Print Vector;
-- [ ] MultiPlayer;
-- [ ] PlayAgain;
-- [ ] Exibir Ranking
-- [ ] Instruções.
-- [ ] Porcentagens "aleatórias"
-- [ ] Random Eliminar Respostas
+- [ ] Problema File is locked;
+- [ ] Porcentagens "aleatórias";
+- [ ] Random Eliminar Respostas.
 
