@@ -14,7 +14,7 @@
 - [x] MultiPlayer; <- Problema File is locked
 - [x] SinglePlayer; <- Problema File is locked
 - [x] Exibir perguntas; <- Problema File is locked
-- [ ] Ordenar exibicao;
+- [x] Ordenar exibicao;
 - [ ] Responder perguntas; <- Problema File is locked
 - [ ] Exibir dicas;
 - [ ] Problema File is locked;

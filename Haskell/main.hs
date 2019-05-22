@@ -96,42 +96,78 @@ singlePlayer = do
     hClose handle
 
     acertos <- contaAcertos
+    erros <- contaErros
+    
     putStr ("\nSua pontuacao final: ")
-    putStrLn (show $ acertos)
+    putStrLn (show $ pontuacao acertos erros)
 
     
     let newArq = contents
     seq (length newArq) (return ())
     writeFile "perguntas.txt" newArq
 
-    escrita (ent, pontuacaoAcertos acertos)
+    escrita (ent, (pontuacao acertos erros))
 
 exibeRanking :: IO ()
 exibeRanking = do
     arq <- readFile "ranking.txt"
+    let linha = splitOn "\r\n" arq
     if (length arq > 0)
         then do
             putStrLn ("\n====== RANKING ======")
-            printa10Users arq 1
+            if (length linha > 10)
+                then do
+                    converterLista arq 10
+                else
+                    converterLista arq (length linha)
         else
             return ()
+            
+converterLista :: String -> Int -> IO ()
+converterLista arq n = do
+    let linha = splitOn "\r\n" arq
+    let listaResult = []
+    let lul = vamo linha (n-1) listaResult
 
-printa10Users :: String -> Int -> IO ()
-printa10Users arq n
-    | (n == 11) = return ()
+    let resultado0 = sortOn snd (map segundoInt (map listToPair lul)) -- [(),(),()]
+    let resultado1 = (map segundoString resultado0)
+    let resultado2 = tupleToList resultado1
+    printaTudo (reverse resultado2) n   
+    
+printaTudo :: [[String]] -> Int -> IO ()
+printaTudo resultado n 
+    | (n == 0) = return ()
     | otherwise = do
-        let linha = splitOn "\r\n" arq
-        if (length linha > 1)
-            then do
-                putStr $ ((show n) ++ ". ")
-                putStr $ show (head (splitOn ":" (linha !! 0))) -- User
-                putStr (" - ")
-                putStrLn $ show (last (splitOn ":" (linha !! 0))) -- Pontuacao
-                let newArq = intercalate "\r\n" (drop 1 linha)
-                printa10Users newArq (n+1)         
-            else
-                return ()         
-      
+        putStr $ ((show (abs(n-10)+1)) ++ ". ")
+        putStr $ show (head (head resultado)) -- User
+        putStr (" - ")
+        putStrLn $ show (last (head resultado)) -- Pontos
+        printaTudo (tail resultado) (n-1)
+        
+
+vamo :: [String] -> Int -> [String] -> [[String]]
+vamo lista (-1) listaResult = []
+vamo lista (n)listaResult = resultado : vamo lista (n-1) listaResult
+    where 
+        tupla = splitOn ":" (lista !! n)
+        resultado = tupla ++ listaResult
+    
+segundoInt :: (String,String) -> (String, Int)
+segundoInt (x,y) = (x, (read y :: Int))
+
+segundoString :: (String,Int) -> (String, String)
+segundoString (x,y) = (x, (show y))
+
+
+listToPair :: [a] -> (a,a)
+listToPair [x,y] = (x, y)
+
+pairToList :: (a, a) -> [a]
+pairToList (x,y) = [x,y]
+
+tupleToList :: [(String, String)] -> [[String]]
+tupleToList = map pairToList  
+
 multiPlayer :: IO ()
 multiPlayer = do
     putStr ("\n===== Jogador 1 =====\n")
@@ -155,28 +191,8 @@ multiPlayer = do
             else do
                 putStrLn ("\nEmpate!\n")
 
-pontuacaoAcertos :: Int -> Int
-pontuacaoAcertos acertos = div (acertos * 50) 12
-
--- pontuacaoTempo :: Int -> Int
--- pontuacaoTempo tempoTotal = 50 - ((tempoTotal - 60) * (50/120))
-
--- pontuacaoFinal :: Int
--- pontuacaoFinal =
---     if (pontuacaoTempo tempoTotal > 50)
---         then
---             if (ceiling (pontuacaoAcertos acertos + 50) < 0)
---                 then
---                     0
---                 else
---                     ceiling (pontuacaoAcertos acertos + 50)
---         else
---             if (ceiling (pontuacaoAcertos acertos + pontuacaoTempo tempoTotal) < 0)
---                 then
---                     0
---                 else
---                     ceiling (pontuacaoAcertos acertos + pontuacaoTempo tempoTotal)
-    
+pontuacao :: Int -> Int -> Int
+pontuacao acertos erros = ((div (acertos * 70) 12) - (div (erros * 30) 12))
 
 printPergunta12 :: Handle -> String -> Int -> IO ()
 printPergunta12 handle nome n
