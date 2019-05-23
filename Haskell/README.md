@@ -6,7 +6,6 @@
 
 - [x] Criar partida;
 - [x] Random ID;
-- [x] Pedir dicas; <- Problema File is locked
 - [x] Armazenar dados;
 - [x] Exibir Ranking;
 - [x] PlayAgain;
@@ -16,6 +15,7 @@
 - [x] Exibir perguntas; <- Problema File is locked
 - [x] Ordenar exibicao;
 - [ ] Responder perguntas; <- Problema File is locked
+- [ ] Pedir dicas; <- Problema File is locked
 - [ ] Exibir dicas;
 - [ ] Problema File is locked;
 - [ ] Porcentagens "aleatórias";
