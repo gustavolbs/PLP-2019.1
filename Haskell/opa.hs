@@ -487,3 +487,31 @@ pairToList (x,y) = [x,y]
 
 tupleToList :: [(String, String)] -> [[String]]
 tupleToList = map pairToList  
+
+
+
+
+
+
+randomList :: Int -> [Int] -> IO ([Int])
+randomList 0 lista = return []
+randomList n lista = do
+    if (n == 1)
+        then do
+            let valor = (100 - (sum lista))
+            r  <- randomRIO (valor,valor)
+            rs <- randomList (n-1) (r:lista)
+            return (reverse (sort (r:rs)))
+        else do
+            if (n == 5)
+                then do 
+                    let valor = 100
+                    r  <- randomRIO (0,valor)
+                    rs <- randomList (n-1) (r:lista)
+                    return (reverse (sort (r:rs)))
+                else do 
+                    let valor = (100 - (sum lista))
+                    r  <- randomRIO (0,valor)
+                    rs <- randomList (n-1) (r:lista)
+                    return (reverse (sort (r:rs)))
+

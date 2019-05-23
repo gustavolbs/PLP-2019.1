@@ -201,7 +201,7 @@ c: Que eu caiba
 d: Eu cabo
 e: Nenhuma das alternativas
 Tipo: linguagens
-resposta: a---pergunta: Quais destas construcoes famosas ficam nos Estados Unidos?
+resposta: a-RESPc---pergunta: Quais destas construcoes famosas ficam nos Estados Unidos?
 a: Estatua da Liberdade Golden Gate Bridge e Empire State Building
 b: Estatua da Liberdade Big Ben e The High Line
 c: Angkor Wat Taj Mahal e Skywalk no Grand Canyon
@@ -243,14 +243,14 @@ c: Bandeira nacional brasao hino nacional e hino da independencia
 d: Bandeira nacional cores nacionais hino nacional e hino da independencia
 e: Bandeira insignia da presidencia brasao flora e fauna e hinos
 Tipo: humanas
-resposta: b---pergunta: Quais os planetas do sistema solar?
+resposta: b-RESPe---pergunta: Quais os planetas do sistema solar?
 a: Mercurio Venus Terra Marte Jupiter Saturno Urano Netuno
 b: Jupiter Marte Mercurio Netuno Plutao Saturno Terra Urano Venus
 c: Venus Saturno Urano Jupiter Marte Netuno Mercurio
 d: Jupiter Marte Mercurio Netuno Plutao Saturno Sol Terra Urano Venus
 e: Terra Venus Saturno Jupiter Marte Netuno Mercurio
 Tipo: natureza
-resposta: a---pergunta: Qual era o nome de Aleijadinho”?
+resposta: a-RESPc---pergunta: Qual era o nome de Aleijadinho”?
 a: Alexandrino Francisco Lisboa
 b: Manuel Francisco Lisboa
 c: Alex Francisco Lisboa
@@ -280,12 +280,12 @@ e: Luta contra o Apartheid
 Tipo: humanas
 resposta: a---pergunta: Que lider mundial ficou conhecida como Dama de Ferro”?
 a: Dilma Rousseff
-b: Angela Merkel
+b: 
 c: Margaret Thatcher
-d: Hillary Clinton
+d: 
 e: Christine Lagarde
 Tipo: humanas
-resposta: c---pergunta: Quais os nomes dos tres Reis Magos?
+resposta: c-RESPe---pergunta: Quais os nomes dos tres Reis Magos?
 a: Gaspar Nicolau e Natanael
 b: Belchior Gaspar e Baltazar
 c: Belchior Gaspar e Nataniel
@@ -299,7 +299,7 @@ c: Bento Teixeira Ricardo Reis e Haroldo de Campos
 d: Alberto Caeiro Ricardo Leite e Augusto de Campos
 e:  Bento Teixeira Ricardo Reis e Augusto de Campos
 Tipo: linguagens
-resposta: a---pergunta: Qual a religiao monoteista que conta com o maior numero de adeptos no mundo?
+resposta: a-RESPc---pergunta: Qual a religiao monoteista que conta com o maior numero de adeptos no mundo?
 a: Judaismo
 b: Zoroastrismo
 c: Islamismo

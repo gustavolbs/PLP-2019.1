@@ -10,14 +10,14 @@
 - [x] Exibir Ranking;
 - [x] PlayAgain;
 - [x] Instruções;
-- [x] MultiPlayer; <- Problema File is locked
-- [x] SinglePlayer; <- Problema File is locked
-- [x] Exibir perguntas; <- Problema File is locked
+- [x] MultiPlayer;
+- [x] SinglePlayer;
+- [x] Exibir perguntas;
 - [x] Ordenar exibicao;
-- [ ] Responder perguntas; <- Problema File is locked
-- [ ] Pedir dicas; <- Problema File is locked
+- [x] Responder perguntas;
+- [x] Pedir dicas;
+- [x] Problema File is locked;
+- [x] Random Eliminar Respostas.
 - [ ] Exibir dicas;
-- [ ] Problema File is locked;
 - [ ] Porcentagens "aleatórias";
-- [ ] Random Eliminar Respostas.
 
