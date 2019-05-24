@@ -39,7 +39,7 @@ main = do
 
 -- Funcao que só mostra as instrucoes do jogo                
 instrucoes :: String
-instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nVoce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)\nAlem disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
+instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nAlem disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
 
 -- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
@@ -255,50 +255,61 @@ gerandoPerguntaAleatoria nome n arq
 printaPergunta :: [String] -> Int -> IO ()
 printaPergunta lista num = do
     let perg = lista !! num
-    let pergunta = drop 10 ((splitOn "\n" (perg)) !! 0)
-        letraA = ((splitOn "\n" (perg)) !! 1)
-        letraB = ((splitOn "\n" (perg)) !! 2)
-        letraC = ((splitOn "\n" (perg)) !! 3)
-        letraD = ((splitOn "\n" (perg)) !! 4)
-        letraE = ((splitOn "\n" (perg)) !! 5)
-        tipo = "\n" ++ ((splitOn "\n" (perg)) !! 6)
-        resposta = drop 10 ((splitOn "\n" (perg)) !! 7)
-    
-    putStrLn (tipo)
-    putStrLn (pergunta)
-    putStrLn (letraA)
-    putStrLn (letraB)
-    putStrLn (letraC)
-    putStrLn (letraD)
-    putStrLn (letraE)
-    putStrLn ("p: Pedir ajuda\n")
-
-    resp <- entradaUser("Resposta:")
-    if (resp `elem` ["a","b","c","d","e","p"])
-        then if (resp == resposta)
-            then do
-                putStrLn ("Resposta certa!")
-                let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPc"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
-                putStrLn ("\n=== Marcando pergunta como respondida...")
-                rnf newArq `seq` (writeFile "perguntas.txt" $ newArq)
+    if ((drop 11 ((splitOn "\n" (perg)) !! 7) == "-RESPc") || (drop 11 ((splitOn "\n" (perg)) !! 7) == "-RESPe"))
+        then do
+            return ()
+        else
+            do
+                let pergunta = drop 10 ((splitOn "\n" (perg)) !! 0)
+                    letraA = ((splitOn "\n" (perg)) !! 1)
+                    letraB = ((splitOn "\n" (perg)) !! 2)
+                    letraC = ((splitOn "\n" (perg)) !! 3)
+                    letraD = ((splitOn "\n" (perg)) !! 4)
+                    letraE = ((splitOn "\n" (perg)) !! 5)
+                    tipo = "\n" ++ ((splitOn "\n" (perg)) !! 6)
+                    resposta = drop 10 ((splitOn "\n" (perg)) !! 7)
                 
-            else do
-                case resp of
-                    "p" ->
-                        do
-                            ajuda lista num
-                    _ ->
-                        do
-                            putStrLn ("Resposta errada.")
-                            let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
+                putStrLn (tipo)
+                putStrLn (pergunta)
+                putStrLn (letraA)
+                putStrLn (letraB)
+                putStrLn (letraC)
+                putStrLn (letraD)
+                putStrLn (letraE)
+                putStrLn ("p: Pedir ajuda\n")
+
+                resp <- entradaUser("Resposta:")
+                if (resp `elem` ["a","b","c","d","e","p"])
+                    then if (resp == resposta)
+                        then do
+                            putStrLn ("Resposta certa!")
+                            let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPc"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
                             putStrLn ("\n=== Marcando pergunta como respondida...")
                             rnf newArq `seq` (writeFile "perguntas.txt" $ newArq)
-
                             
-        else do
-            putStrLn ("Resposta invalida!")
-            printaPergunta lista num
-            return ()
+                        else do
+                            case resp of
+                                "p" ->
+                                    do
+                                        ajuda lista num
+                                _ ->
+                                    do
+                                        putStrLn ("Resposta errada.")
+                                        let newArq = ((intercalate "---" (take num lista)) ++ "---" ++ (intercalate "---" [perg ++ "-RESPe"]) ++ "---" ++ (intercalate "---" (drop (num+1) lista)))
+                                        putStrLn ("\n=== Marcando pergunta como respondida...")
+                                        rnf newArq `seq` (writeFile "perguntas.txt" $ newArq)
+
+                                        
+                    else do
+                        putStrLn ("Resposta invalida!")
+                        printaPergunta lista num
+                        return ()
+
+verificaDica :: [String] -> Int -> Bool
+verificaDica dicasLista num =
+    if (((show num) ++ "dica1") `elem` dicasLista) || (((show num) ++ "dica2") `elem` dicasLista) || (((show num) ++ "dica3") `elem` dicasLista)
+        then True
+        else False
 
 ajuda :: [String] -> Int -> IO ()
 ajuda lista num = do
@@ -347,9 +358,13 @@ ajuda lista num = do
                             putStrLn ("\n==== Pergunta pulada ====")
                             if num == 47
                                 then do 
-                                    printaPergunta lista (num-1)
+                                    printaPergunta lista (num - 1)        
                                 else do
-                                    printaPergunta lista (num + 1)        
+                                    printaPergunta lista (num + 1)
+                    _ ->
+                        do
+                            putStrLn ("\nOpcao Invalida!")
+                            printaPergunta lista num    
     return ()
 
 dicaUm :: [String] -> Int -> [String]

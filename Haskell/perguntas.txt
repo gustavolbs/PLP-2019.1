@@ -12,14 +12,14 @@ c: Descartes
 d: Socrates
 e: Francis Bacon
 Tipo: humanas
-resposta: c---pergunta: De onde eh a invencao do chuveiro eletrico?
+resposta: c-RESPe---pergunta: De onde eh a invencao do chuveiro eletrico?
 a: Franca
 b: Inglaterra
 c: Brasil
 d: Australia
 e: Italia
 Tipo: humanas
-resposta: c---pergunta: Quais o menor e o maior pais do mundo?
+resposta: c-RESPe---pergunta: Quais o menor e o maior pais do mundo?
 a: Vaticano e Russia
 b: Nauru e China
 c: Monaco e Canada
@@ -61,7 +61,7 @@ c: 108
 d: 118
 e: 92
 Tipo: natureza
-resposta: d---pergunta: Quais os paises que tem a maior e a menor expectativa de vida do mundo?
+resposta: d-RESPe---pergunta: Quais os paises que tem a maior e a menor expectativa de vida do mundo?
 a: Japao e Serra Leoa
 b: Australia e Afeganistao
 c: Italia e Chade
@@ -110,7 +110,7 @@ c: 12 horas
 d: 8 minutos
 e: segundos
 Tipo: natureza
-resposta: d---pergunta: Qual a traducao da frase Fabiano cogio su saco antes de salir”?
+resposta: d-RESPe---pergunta: Qual a traducao da frase Fabiano cogio su saco antes de salir”?
 a: Fabiano coseu seu paleto antes de sair
 b: Fabiano fechou o saco antes de sair
 c: Fabiano pegou seu paleto antes de sair
@@ -124,7 +124,7 @@ c: Panamenha
 d: Boliviana
 e: Argentina
 Tipo: humanas
-resposta: e---pergunta: Qual a altura da rede de volei nos jogos masculino e feminino?
+resposta: e-RESPe---pergunta: Qual a altura da rede de volei nos jogos masculino e feminino?
 a: 24 para ambos
 b: 25 m e 20 m
 c: 18 m e 15 m
@@ -187,7 +187,7 @@ c: 02: 0
 d: 06: 2
 e: 12: 0
 Tipo: linguagens
-resposta: b---pergunta: Quem eh o autor de O Principe”?
+resposta: b-RESPe---pergunta: Quem eh o autor de O Principe”?
 a: Maquiavel
 b: Antoine de SaintExupery
 c: Montesquieu
@@ -208,7 +208,7 @@ c: Angkor Wat Taj Mahal e Skywalk no Grand Canyon
 d: Lincoln Memorial Sidney Opera House e Burj Khalifa
 e: 30 St Mary Axe The High Line e Residencial 148 Spruce Street
 Tipo: humanas
-resposta: a---pergunta: Quais destas doencas sao sexualmente transmissiveis?
+resposta: a-RESPc---pergunta: Quais destas doencas sao sexualmente transmissiveis?
 a: Aids tricomoniase e ebola
 b: Chikungunya aids e herpes genital
 c: Gonorreia clamidia e sifilis
@@ -236,7 +236,7 @@ c: Matematica
 d: Astronomia
 e: Mitologia
 Tipo: humanas
-resposta: e---pergunta: Qual das alternativas menciona apenas simbolos nacionais?
+resposta: e-RESPe---pergunta: Qual das alternativas menciona apenas simbolos nacionais?
 a: Bandeira insignia da presidencia bandeira nacional brasao hinos e selo
 b: Bandeira nacional armas nacionais hino nacional e selo nacional
 c: Bandeira nacional brasao hino nacional e hino da independencia
@@ -250,7 +250,7 @@ c: Venus Saturno Urano Jupiter Marte Netuno Mercurio
 d: Jupiter Marte Mercurio Netuno Plutao Saturno Sol Terra Urano Venus
 e: Terra Venus Saturno Jupiter Marte Netuno Mercurio
 Tipo: natureza
-resposta: a---pergunta: Qual era o nome de Aleijadinho”?
+resposta: a-RESPc---pergunta: Qual era o nome de Aleijadinho”?
 a: Alexandrino Francisco Lisboa
 b: Manuel Francisco Lisboa
 c: Alex Francisco Lisboa
@@ -292,7 +292,7 @@ c: Belchior Gaspar e Nataniel
 d: Gabriel Benjamim e Melchior
 e: Melchior Noe e Galileu
 Tipo: humanas
-resposta: b---pergunta: Quais os principais heteronimos de Fernando Pessoa?
+resposta: b-RESPe---pergunta: Quais os principais heteronimos de Fernando Pessoa?
 a: Alberto Caeiro Ricardo Reis e Alvaro de Campos
 b: Ariano Suassuna Raul Bopp e Quincas Borba
 c: Bento Teixeira Ricardo Reis e Haroldo de Campos
@@ -320,7 +320,7 @@ c: Charles Conrad em 1969
 d: Charles Duke em 1971
 e: Neils Armstrong em 1969.
 Tipo: humanas
-resposta: e---pergunta: Qual o nome do cientista que descobriu o processo de pasteurizacao e a vacina contra a raiva?
+resposta: e-RESPe---pergunta: Qual o nome do cientista que descobriu o processo de pasteurizacao e a vacina contra a raiva?
 a: Blaise Pascal
 b: Marie Curie
 c: Louis Pasteurs
