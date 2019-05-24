@@ -1,30 +1,23 @@
-user1:1
-user2:2
-user3:3
-user4:41
-user5:5
-user6:6
-user7:7
-user8:8
-user9:9
-oi:0
-Gabriel:13
-Gabriel:5
-Gabriel:12
-Matheus:45
-Gabriel:62
-Matheus:62
+Pizza Malucaaaaa:0
+Uiuiui:15
+Pizza Malucaaaaa:2
+Uiuiui:13
+Pizza Malucaaaaa:3
+Pizza Malucaaaaa:0
+Uiuiui:15
+Pizza Malucaaaaa:2
+Uiuiui:13
+Pizza Malucaaaaa:3
+Pizza Malucaaaaa:0
+Uiuiui:15
+Pizza Malucaaaaa:2
+Uiuiui:13
+Pizza Malucaaaaa:3
+Vamo DORMIR:0
 Gabriel:-3
-Matheus:-3
-Gabriel:-3
-Gabriel:13
-Gabriel:5
-Gabriel:13
-Gabriel:5
-Gabriel:-3
-Gabriel:5
-Gabriel:5
-Gabriel:13
-Gabriel:-3
-Gabriel:22
-Gabriel:5
+euclides:13
+a:0
+asda:0
+asdasdasd:17
+Player 1:53
+Player 2:17

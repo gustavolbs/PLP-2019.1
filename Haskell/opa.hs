@@ -39,7 +39,7 @@ main = do
 
 -- Funcao que só mostra as instrucoes do jogo                
 instrucoes :: String
-instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nVoce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)\nAlehm disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nPara obter mais dicas, voce devera responder a pergunta em menos de 5 segundos\nSe ja tiver sido usado alguma dica, ela sera reposta. Caso contrario, a dica recebida sera aleatoria\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
+instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nVoce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)\nAlem disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
 
 -- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
@@ -70,10 +70,12 @@ modoJogo = do
         "1" ->
             do
                 singlePlayer
+                exibeRanking
                 return()  -- Fecha a funcao apos toda a recursividade
         "2" ->
             do
                 multiPlayer
+                exibeRanking
                 return()  -- Fecha a funcao apos toda a recursividade
         _ ->
             do
@@ -103,9 +105,6 @@ escrita inth = do
     seq (length newArq) (writeFile "ranking.txt" newArq)
 
 
--- leArquivo :: String -> Handle
--- leArquivo nomeArquivo = do
---     handle <- openFile nomeArquivo ReadMode
 
 
 
@@ -127,8 +126,12 @@ escrita inth = do
     
 -- MATEMÁGICA
 pontuacao :: Int -> Int -> Int
-pontuacao acertos erros = ((div (acertos * 80) 12) - (div (erros * 20) 12))
-          
+pontuacao acertos erros = do
+    let pontos = ((div (acertos * 200) 12) - (div (erros * 20) 12))
+    if (pontos < 0)
+        then 0
+        else ((div (acertos * 200) 12) - (div (erros * 20) 12))
+
 contaErros :: IO Int
 contaErros = do
     arq <- readFile "perguntas.txt"
@@ -141,22 +144,13 @@ contaAcertos = do
     let acertos = length (splitOn "-RESPc" arq) - 1
     return (acertos)
 
--- porcentagens :: [Int] -> Int -> Int -> [Int]
--- porcentagens lista valorMax valAnterior
---     | ((length lista) == 4) = porcentagens ([valorMax - valAnterior] ++ lista) (valorMax - valAnterior) x
---     | ((length lista) < 5) = porcentagens ([x] ++ lista) (valorMax - valAnterior) x
---     | ((length lista) == 5) = lista
---     where x = randomRIO (0,(valorMax - valAnterior)::Int)    
 
 
-
-
-
-
-
-
-
-
+-- MISTURAR
+shuffles x = if length x < 2 then return x else do
+    i <- System.Random.randomRIO (0, length(x)-1)
+    r <- shuffles (take i x ++ drop (i+1) x)
+    return (x!!i : r)
 
 
 
@@ -191,7 +185,7 @@ multiPlayer = do
     let p1 = read (last (splitOn ":" (rankSplit !! (length rankSplit -3)))) :: Int
     let p2 = read (last (splitOn ":" (rankSplit !! (length rankSplit -2)))) :: Int
 
-    print "\n#### Resultado ####\n"
+    putStrLn ("\n#### Resultado ####\n")
 
     if (p1 > p2)
         then do
@@ -215,16 +209,7 @@ multiPlayer = do
 
 
 
--- TUDO SOBRE CRIAR E PRINTAR PERGUNTAS
-
--- printPergunta12 :: Int -> IO ()
--- printPergunta12 n
---    | n == 0 = return ()
---    | otherwise = do
---        arq <- readFile "perguntas.txt"
---        gerandoPerguntaAleatoria n arq
---        printPergunta12 (n-1)
-        
+-- TUDO SOBRE CRIAR E PRINTAR PERGUNTAS       
 gerandoPerguntaAleatoria :: String -> Int -> String -> IO ()
 gerandoPerguntaAleatoria nome n arq
     | n == 0 = do 
@@ -322,7 +307,7 @@ ajuda lista num = do
     content <- hGetContents arqDica
     let dicas = splitOn "---" content 
     
-    if (last dicas == (show num) ++ "dica1") || (last dicas == (show num) ++ "dica2") || (last dicas == (show num) ++ "dica3") || length dicas == 4
+    if (last dicas == (show num) ++ "dica1") || (last dicas == (show num) ++ "dica2") || (last dicas == (show num) ++ "dica3")
         
         then do
             putStrLn ("\n#### Voce nao tem mais ajuda para essa pergunta ####\n")
@@ -342,27 +327,29 @@ ajuda lista num = do
                             putStrLn ("\n=== Marcando ajuda 1 como usada...")
                             hClose arqDica
                             rnf newArq `seq` (writeFile "dicas.txt" $ newArq)
-                            --let newLista = dicaUm lista num
                             printaPergunta (dicaUm lista num) num
                             
                     "2" ->
                         do
-                            putStrLn ("\ndica dois\n")
                             let newArq = content ++ "---" ++ (show num) ++ "dica2"
                             putStrLn ("\n=== Marcando dica 2 como usada...")
                             hClose arqDica
                             rnf newArq `seq` (writeFile "dicas.txt" $ newArq)
-                            printaPergunta lista num
+                            dicaDois lista num
+                            printaPergunta (lista) num
                             
                     "3" ->
                         do
-                            putStrLn ("\ndica tres\n")
                             let newArq = content ++ "---" ++ (show num) ++ "dica3"
                             putStrLn ("\n=== Marcando dica 3 como usada...")
                             hClose arqDica
                             rnf newArq `seq` (writeFile "dicas.txt" $ newArq)
-                            printaPergunta lista num
-        
+                            putStrLn ("\n==== Pergunta pulada ====")
+                            if num == 47
+                                then do 
+                                    printaPergunta lista (num-1)
+                                else do
+                                    printaPergunta lista (num + 1)        
     return ()
 
 dicaUm :: [String] -> Int -> [String]
@@ -395,7 +382,7 @@ logicaDicaUm perg = do
                 then do
                     let newletraC = take 3 letraC
                     let newletraE = take 3 letraE
-                    let newPerg = pergunta ++ "\n" ++ letraA ++ "\n" ++ letraB ++ "\n" ++ letraC ++ "\n" ++ letraD ++ "\n" ++ newletraE ++ "\n" ++ tipo ++ "\n" ++ resposta
+                    let newPerg = pergunta ++ "\n" ++ letraA ++ "\n" ++ letraB ++ "\n" ++ newletraC ++ "\n" ++ letraD ++ "\n" ++ newletraE ++ "\n" ++ tipo ++ "\n" ++ resposta
                     newPerg
                     else do
                         if (last (resposta)) == 'c'
@@ -416,14 +403,65 @@ logicaDicaUm perg = do
                                         let newletraD = take 3 letraD
                                         let newPerg = pergunta ++ "\n" ++ letraA ++ "\n" ++ newletraB ++ "\n" ++ letraC ++ "\n" ++ newletraD ++ "\n" ++ letraE ++ "\n" ++ tipo ++ "\n" ++ resposta
                                         newPerg
+                
+dicaDois :: [String] -> Int -> IO ()
+dicaDois lista num = do
+    let perg = lista !! num
+        pergList = splitOn "\n" perg
+        resposta = (pergList !! 7)
+    porcentagens <- (randomList 5 [])
+    let letras = ["a","b","c","d","e"]
 
-geraRandom :: IO Int
-geraRandom = do
-    num <- randomRIO (1,5 :: Int)
-    return num
+    if (last (resposta)) == 'a'
+        then do 
+            let certa = head porcentagens
+            resto <- shuffles (tail porcentagens)
+            let final = [certa] ++ resto
+            printaPorcentagem final 
+        else if (last (resposta)) == 'b'
+            then do
+                let certa = head porcentagens
+                resto <- shuffles (tail porcentagens)
+                let final = [head resto] ++ [certa] ++ (tail resto)
+                printaPorcentagem final
+            else if (last (resposta)) == 'c'
+                then do
+                    let certa = head porcentagens
+                    resto <- shuffles (tail porcentagens)
+                    let final = (take 2 resto) ++ [certa] ++ (drop 2 resto)
+                    printaPorcentagem final
+                else if (last (resposta)) == 'd'
+                    then do
+                        let certa = head porcentagens
+                        resto <- shuffles (tail porcentagens)
+                        let final = (take 3 resto) ++ [certa] ++ (drop 3 resto)
+                        printaPorcentagem final
+                        
+                    else do
+                        let certa = head porcentagens
+                        resto <- shuffles (tail porcentagens)
+                        let final = resto ++ [certa]
+                        printaPorcentagem final
+                                    
+printaPorcentagem :: [Int] -> IO ()
+printaPorcentagem lista = do
+    putStrLn ("Opiniao dos Internautas:")
+    putStrLn ("A: " ++ (show (lista !! 0)) ++ "% dos internautas votaram nesta opcao") 
+    putStrLn ("B: " ++ (show (lista !! 1)) ++ "% dos internautas votaram nesta opcao")
+    putStrLn ("C: " ++ (show (lista !! 2)) ++ "% dos internautas votaram nesta opcao")
+    putStrLn ("D: " ++ (show (lista !! 3)) ++ "% dos internautas votaram nesta opcao")
+    putStrLn ("E: " ++ (show (lista !! 4)) ++ "% dos internautas votaram nesta opcao")
 
--- perg = "pergunta: De onde eh a invencao do chuveiro eletrico?\na: Franca\nb: Inglaterra\nc: Brasil\nd: Australia\ne: Italia\nTipo: humanas\nresposta: c"
--- pergList = ["pergunta: De onde eh a invencao do chuveiro eletrico?", "a: Franca", "b: Inglaterra", "c: Brasil", "d: Australia", "e: Italia", "Tipo: humanas", "resposta: c"]
+
+
+
+
+
+
+
+
+
+
 
 
 -- TUDO SOBRE EXIBICAO RANKING
@@ -435,7 +473,8 @@ exibeRanking = do
         then do
             putStrLn ("\n====== RANKING ======")
             converterLista arq (length linha)
-        else
+        else do
+            putStrLn ("\n====== RANKING VAZIO ======")
             return ()
             
 converterLista :: String -> Int -> IO ()
@@ -448,21 +487,22 @@ converterLista arq n = do
     let resultadoSort = sortOn snd resultado1
     let resultado2 = (map segundoString resultadoSort)
     let resultado3 = tupleToList resultado2
-    if (n > 10)
-        then do printaTudo (reverse resultado3) 10
-        else do printaTudo (reverse resultado3) n
+    let resultado4 = tail resultado3
+    printaTudo (reverse resultado4) 1
        
     
 printaTudo :: [[String]] -> Int -> IO ()
-printaTudo resultado n 
-    | (n == 0) = return ()
+printaTudo resultado n
+    | (n == 11) = return ()
     | otherwise = do
-        putStr $ ((show (abs(n-10)+1)) ++ ". ")
+        putStr ((show n) ++ ". ")
         putStr $ show (head (head resultado)) -- User
         putStr (" - ")
         let pontos = drop 5 (last (head resultado))
         putStrLn $ show (pontos) -- Pontos
-        printaTudo (tail resultado) (n-1)
+        if (length (tail resultado) /= 0)
+            then do printaTudo (tail resultado) (n+1)
+            else return ()
         
 
 vamo :: [String] -> Int -> [String] -> [[String]]
@@ -489,10 +529,6 @@ tupleToList :: [(String, String)] -> [[String]]
 tupleToList = map pairToList  
 
 
-
-
-
-
 randomList :: Int -> [Int] -> IO ([Int])
 randomList 0 lista = return []
 randomList n lista = do
@@ -514,4 +550,3 @@ randomList n lista = do
                     r  <- randomRIO (0,valor)
                     rs <- randomList (n-1) (r:lista)
                     return (reverse (sort (r:rs)))
-
