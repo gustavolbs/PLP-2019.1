@@ -483,6 +483,7 @@ printaPorcentagem lista = do
 -- TUDO SOBRE EXIBICAO RANKING
 exibeRanking :: IO ()
 exibeRanking = do
+    putStrLn ("\n==== Carregando o Ranking...")
     arq <- readFile "ranking.txt"
     let linha = splitOn "\r\n" arq
     if (length arq > 0)

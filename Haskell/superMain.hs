@@ -39,7 +39,7 @@ main = do
 
 -- Funcao que só mostra as instrucoes do jogo                
 instrucoes :: String
-instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nAlem disso, haverao dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
+instrucoes = "\n===== Instrucoes =====\nO PerguntUP eh um jogo de perguntas que pode ser jogado de duas maneiras:\n-> Singleplayer ou Multiplayer\nCada partida possui 12 perguntas, divididas em 4 areas de conhecimento:\n- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas\nAlem disso, havera dicas limitadas disponiveis:\n- Eliminar alternativas: elimina duas alternativas\n- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa\n- Pular pergunta: pula para a proxima pergunta\nA cada inicio de partida, voce tera 1 dica de cada\nAlem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"
 
 -- Funcao que cuida da criacao da partida atraves de chamadas de funcoes secundarias
 criarPartida :: IO ()
@@ -234,6 +234,7 @@ gerandoPerguntaAleatoria nome n arq
                 return ()
             else
                 do
+                    printaPergunta lista num
                     putStrLn ("\n==== Placar ====")
                     erros <- contaErros
                     acertos <- contaAcertos
@@ -241,7 +242,7 @@ gerandoPerguntaAleatoria nome n arq
                     putStrLn (show $ erros)
                     putStr ("Acertos:")
                     putStrLn (show $ acertos)
-                    printaPergunta lista num
+                    
                     arq <- openFile "perguntas.txt" ReadMode
                     content <- hGetContents arq
                     gerandoPerguntaAleatoria nome (n-1) content
@@ -460,7 +461,7 @@ dicaDois lista num = do
                                     
 printaPorcentagem :: [Int] -> IO ()
 printaPorcentagem lista = do
-    putStrLn ("Opiniao dos Internautas:")
+    putStrLn ("\nOpiniao dos Internautas:")
     putStrLn ("A: " ++ (show (lista !! 0)) ++ "% dos internautas votaram nesta opcao") 
     putStrLn ("B: " ++ (show (lista !! 1)) ++ "% dos internautas votaram nesta opcao")
     putStrLn ("C: " ++ (show (lista !! 2)) ++ "% dos internautas votaram nesta opcao")
@@ -482,6 +483,7 @@ printaPorcentagem lista = do
 -- TUDO SOBRE EXIBICAO RANKING
 exibeRanking :: IO ()
 exibeRanking = do
+    putStrLn ("\n==== Carregando o Ranking...")
     arq <- readFile "ranking.txt"
     let linha = splitOn "\r\n" arq
     if (length arq > 0)

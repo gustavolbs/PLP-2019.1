@@ -125,11 +125,11 @@ d: Boliviana
 e: Argentina
 Tipo: humanas
 resposta: e---pergunta: Qual a altura da rede de volei nos jogos masculino e feminino?
-a: 24 para ambos
-b: 25 m e 20 m
-c: 18 m e 15 m
-d: 245 m e 215 m
-e: 243 m e 224 m
+a: 2,4m para ambos
+b: 2,5m e 2,0m
+c: 1,8m e 1,5m
+d: 2,45m e 2,15m
+e: 2,43m e 2,24m
 Tipo: linguagens
 resposta: e---pergunta: Em que ordem surgiram os modelos atomicos?
 a: Thomson, Dalton, Rutherford e RutherfordBohr

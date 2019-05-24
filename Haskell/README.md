@@ -1,4 +1,4 @@
-# PerguntUP - C/C++
+# PerguntUP - Haskell
 > Um jogo de perguntas e respostas como nenhum outro.
 
 
