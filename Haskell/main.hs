@@ -234,6 +234,7 @@ gerandoPerguntaAleatoria nome n arq
                 return ()
             else
                 do
+		    printaPergunta lista num
                     putStrLn ("\n==== Placar ====")
                     erros <- contaErros
                     acertos <- contaAcertos
@@ -241,7 +242,7 @@ gerandoPerguntaAleatoria nome n arq
                     putStrLn (show $ erros)
                     putStr ("Acertos:")
                     putStrLn (show $ acertos)
-                    printaPergunta lista num
+                    
                     arq <- openFile "perguntas.txt" ReadMode
                     content <- hGetContents arq
                     gerandoPerguntaAleatoria nome (n-1) content
