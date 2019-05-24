@@ -18,6 +18,6 @@
 - [x] Pedir dicas;
 - [x] Problema File is locked;
 - [x] Random Eliminar Respostas.
-- [ ] Exibir dicas;
-- [ ] Porcentagens "aleatórias";
+- [x] Exibir dicas;
+- [x] Porcentagens "aleatórias";
 
