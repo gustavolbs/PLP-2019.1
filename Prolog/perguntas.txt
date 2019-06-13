@@ -1,0 +1,414 @@
+pergunta: Normalmente, quantos litros de sangue uma pessoa tem? Em media, quantos sao retirados numa doacao de sangue?
+a: Tem entre 2 a 4 litros. Sao retirados 450 mililitros
+b: Tem entre 4 a 6 litros. Sao retirados 450 mililitros
+c: Tem 10 litros. Sao retirados 2 litros
+d: Tem 7 litros. Sao retirados 15 litros
+e: Tem 05 litros. Sao retirados 05 litros
+Tipo: natureza
+resposta: b---pergunta: De quem eh a famosa frase "Penso logo existo"?
+a: Platao
+b: Galileu Galilei
+c: Descartes
+d: Socrates
+e: Francis Bacon
+Tipo: humanas
+resposta: c---pergunta: De onde eh a invencao do chuveiro eletrico?
+a: Franca
+b: Inglaterra
+c: Brasil
+d: Australia
+e: Italia
+Tipo: humanas
+resposta: c---pergunta: Quais o menor e o maior pais do mundo?
+a: Vaticano e Russia
+b: Nauru e China
+c: Monaco e Canada
+d: Malta e Estados Unidos
+e: Sao Marino e India
+Tipo: humanas
+resposta: a---pergunta: Qual o nome do presidente do Brasil que ficou conhecido como "Jango"?
+a: Janio Quadros
+b: Jacinto Anjos
+c: Getulio Vargas
+d: Joao Figueiredo
+e: Joao Goulart
+Tipo: humanas
+resposta: e---pergunta: Qual o grupo em que todas as palavras foram escritas corretamente?
+a: Asteristico, beneficiente, meteorologia, entertido
+b: Asterisco, beneficente, meteorologia, entretido
+c: Asterisco, beneficente, metereologia, entretido
+d: Asteristico, beneficiente, metereologia, entretido
+e: Asterisco, beneficiente, metereologia, entretido
+Tipo: humanas
+resposta: b---pergunta: Qual o livro mais vendido no mundo a seguir a Biblia?
+a: O Senhor dos Aneis
+b: Dom Quixote
+c: O Pequeno Principe
+d: Ela a Feiticeira
+e: Um Conto de Duas Cidades
+Tipo: humanas
+resposta: b---pergunta: Quantas casas decimais tem o numero pi?
+a: Duas
+b: Centenas
+c: Trilhares
+d: Vinte
+e: Milhares
+Tipo: matematica
+resposta: c---pergunta: Atualmente, quantos elementos quimicos a tabela periodica possui?
+a: 113
+b: 109
+c: 108
+d: 118
+e: 92
+Tipo: natureza
+resposta: d---pergunta: Quais os paises que tem a maior e a menor expectativa de vida do mundo?
+a: Japao e Serra Leoa
+b: Australia e Afeganistao
+c: Italia e Chade
+d: Brasil e Congo
+e: Estados Unidos e Angola
+Tipo: humanas
+resposta: a---pergunta: O que a palavra "legend" significa em portugues?
+a: Legenda
+b: Conto
+c: Historia
+d: Lenda
+e: Legendario
+Tipo: linguagens
+resposta: d---pergunta: Qual o numero minimo de jogadores numa partida de futebol?(por time)
+a: 13
+b: 11
+c: 15
+d: 12
+e: 14
+Tipo: linguagens
+resposta: e---pergunta: Quais os principais autores do Barroco no Brasil?
+a: Gregorio de Matos, Bento Teixeira e Manuel Botelho de Oliveira
+b: Miguel de Cervantes, Gregorio de Matos e Danthe Alighieri
+c: Padre Antonio Vieira, Padre Manuel de Melo e Gregorio de Matos
+d: Castro Alves, Bento Teixeira e Manuel Botelho de Oliveira
+e: Alvares de Azevedo, Gregorio de Matos e Bento Teixeira
+Tipo: linguagens
+resposta: a---pergunta: Quais as duas datas que sao comemoradas em novembro?
+a: Independencia do Brasil e Dia da Bandeira
+b: Proclamacao da Republica e Dia Nacional da Consciencia Negra
+c: Dia do Medico e Dia de Sao Lucas
+d: Dia de Finados e Dia Nacional do Livro
+e: Black Friday e Dia da Arvore
+Tipo: humanas
+resposta: b---pergunta: Quem pintou "Guernica"?
+a: Paul Cezanne
+b: Pablo Picasso
+c: Diego Rivera
+d: Tarsila do Amaral
+e: Salvador Dali
+Tipo: linguagens
+resposta: b---pergunta: Quanto tempo a luz do Sol demora para chegar a Terra?
+a: 12 minutos
+b: 1 dia
+c: 12 horas
+d: 8 minutos
+e: segundos
+Tipo: natureza
+resposta: d---pergunta: Qual a traducao da frase "Fabiano cogio su saco antes de salir"?
+a: Fabiano coseu seu paleto antes de sair
+b: Fabiano fechou o saco antes de sair
+c: Fabiano pegou seu paleto antes de sair
+d: Fabiano cortou o saco antes de cair
+e: Fabiano rasgou seu paleto antes de cair
+Tipo: linguagens
+resposta: c---pergunta: Qual a nacionalidade de Che Guevara?
+a: Cubana
+b: Peruana
+c: Panamenha
+d: Boliviana
+e: Argentina
+Tipo: humanas
+resposta: e---pergunta: Qual a altura da rede de volei nos jogos masculino e feminino?
+a: 2,4m para ambos
+b: 2,5m e 2,0m
+c: 1,8m e 1,5m
+d: 2,45m e 2,15m
+e: 2,43m e 2,24m
+Tipo: linguagens
+resposta: e---pergunta: Em que ordem surgiram os modelos atomicos?
+a: Thomson, Dalton, Rutherford e RutherfordBohr
+b: RutherfordBohr, Rutherford, Thomson e Dalton
+c: Dalton, RutherfordBohr, Thomson e Rutherford
+d: Dalton, Thomson, RutherfordBohr e Rutherford
+e: Dalton, Thomson, Rutherford e RutherfordBohr
+Tipo: natureza
+resposta: e---pergunta: Qual personagem folclorico costuma ser agradado pelos cacadores com a oferta de fumo?
+a: Caipora
+b: Saci
+c: Lobisomem
+d: Boitata
+e: Negrinho do Pastoreiro
+Tipo: linguagens
+resposta: a---pergunta: Em que periodo da prehistoria o fogo foi descoberto?
+a: Neolitico
+b: Paleolitico
+c: Idade dos Metais
+d: Periodo da Pedra Polida
+e: Idade Media
+Tipo: humanas
+resposta: b---pergunta: Qual das alternativas abaixo apenas contem classes de palavras?
+a: Vogais, semivogais e consoantes
+b: Artigo, verbo transitivo e verbo intransitivo
+c: Fonologia, Morfologia e Sintaxe
+d: Hiatos, ditongos e tritongos
+e: Substantivo, verbo e preposicao
+Tipo: linguagens
+resposta: e---pergunta: Qual a montanha mais alta do Brasil?
+a: Pico da Neblina
+b: Pico Parana
+c: Monte Roraima
+d: Pico Maior de Friburgo
+e: Pico da Bandeira
+Tipo: humanas
+resposta: a---pergunta: Qual a velocidade da luz?
+a: 300 000 000 metros por segundo (m/s)
+b: 150 000 000 metros por segundo (m/s)
+c: 199 792 458 metros por segundo (m/s)
+d: 299 792 458 metros por segundo (m/s)
+e: 30 000 000 metros por segundo (m/s)
+Tipo: natureza
+resposta: d---pergunta: Em qual local da Asia o portugues eh lingua oficial?
+a: India
+b: Filipinas
+c: Mocambique
+d: Macau
+e: Portugal
+Tipo: humanas
+resposta: d---pergunta: "It is twenty past six". Que horas sao em ingles?
+a: 12:06
+b: 06:20
+c: 02:06
+d: 06:02
+e: 20:06
+Tipo: linguagens
+resposta: b---pergunta: Quem eh o autor de "O Principe"?
+a: Maquiavel
+b: Antoine de SaintExupery
+c: Montesquieu
+d: Thomas Hobbes
+e: Rousseau
+Tipo: humanas
+resposta: a---pergunta: Como eh a conjugacao do verbo "caber" na 1a pessoa do singular do presente do indicativo?
+a: Eu caibo
+b: Ele cabe
+c: Que eu caiba
+d: Eu cabo
+e: Nenhuma das alternativas
+Tipo: linguagens
+resposta: a---pergunta: Quais destas construcoes famosas ficam nos Estados Unidos?
+a: Estatua da Liberdade, Golden Gate Bridge e Empire State Building
+b: Estatua da Liberdade, Big Ben e The High Line
+c: Angkor Wat, Taj Mahal e Skywalk no Grand Canyon
+d: Lincoln Memorial, Sidney Opera House e Burj Khalifa
+e: 30 St Mary Axe The High Line e Residencial 148 Spruce Street
+Tipo: humanas
+resposta: a---pergunta: Quais destas doencas sao sexualmente transmissiveis?
+a: Aids, tricomoniase e ebola
+b: Chikungunya, aids e herpes genital
+c: Gonorreia, clamidia e sifilis
+d: Botulismo, cistite e gonorreia
+e: Hepatite B, febre tifoide e hanseniase
+Tipo: natureza
+resposta: c---pergunta: Qual destes paises e transcontinental?
+a: Russia
+b: Filipinas
+c: Istambul
+d: Groelandia
+e: Tazania
+Tipo: humanas
+resposta: a---pergunta: Em qual das oracaes abaixo a palavra foi empregada incorretamente?
+a: Mais uma vez portou-se mal.
+b: Eh um homem mal.
+c: Esse eh o mal de todos.
+d: Mal falou nele o fulano apareceu.
+e: Eh um mau vendedor.
+Tipo: linguagens
+resposta: b---pergunta: Qual foi o recurso utilizado inicialmente pelo homem para explicar a origem das coisas?
+a: Filosofia
+b: Biologia
+c: Matematica
+d: Astronomia
+e: Mitologia
+Tipo: humanas
+resposta: e---pergunta: Qual das alternativas menciona apenas simbolos nacionais?
+a: Bandeira, insignia da presidencia, bandeira nacional, brasao, hinos e selo
+b: Bandeira nacional, armas nacionais, hino nacional e selo nacional
+c: Bandeira nacional, brasao, hino nacional e hino da independencia
+d: Bandeira nacional, cores nacionais, hino nacional e hino da independencia
+e: Bandeira, insignia da presidencia, brasao, flora, fauna e hinos
+Tipo: humanas
+resposta: b---pergunta: Quais os planetas do sistema solar?
+a: Mercurio, Venus, Terra, Marte, Jupiter, Saturno, Urano e Netuno
+b: Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Terra, Urano e Venus
+c: Venus, Saturno, Urano, Jupiter, Marte, Netuno e Mercurio
+d: Jupiter, Marte, Mercurio, Netuno, Plutao, Saturno, Sol, Terra, Urano e Venus
+e: Terra, Venus, Saturno, Jupiter, Marte, Netuno e Mercurio
+Tipo: natureza
+resposta: a---pergunta: Qual era o nome de "Aleijadinho"?
+a: Alexandrino Francisco Lisboa
+b: Manuel Francisco Lisboa
+c: Alex Francisco Lisboa
+d: Francisco Antonio Lisboa
+e: Antonio Francisco Lisboa
+Tipo: humanas
+resposta: e---pergunta: Jupiter e Plutao sao os correlatos romanos de quais deuses gregos?
+a: Ares e Hermes
+b: Cronos e Apolo
+c: Zeus e Hades
+d: Dionisio e Demeter
+e: Zeus e Ares
+Tipo: humanas
+resposta: c---pergunta: Qual o maior animal terrestre?
+a: Baleia Azul
+b: Dinossauro
+c: Elefante africano
+d: Tubarao Branco
+e: Girafa
+Tipo: natureza
+resposta: c---pergunta: Qual o tema do famoso discurso "Eu Tenho um Sonho" de Martin Luther King?
+a: Igualdade das racas
+b: Justica para os menos favorecidos
+c: Intolerancia religiosa
+d: Premio Nobel da Paz
+e: Luta contra o Apartheid
+Tipo: humanas
+resposta: a---pergunta: Que lider mundial ficou conhecida como "Dama de Ferro"?
+a: Dilma Rousseff
+b: Angela Merkel
+c: Margaret Thatcher
+d: Hillary Clinton
+e: Christine Lagarde
+Tipo: humanas
+resposta: c---pergunta: Quais os nomes dos tres Reis Magos?
+a: Gaspar, Nicolau e Natanael
+b: Belchior, Gaspar e Baltazar
+c: Belchior, Gaspar e Nataniel
+d: Gabriel, Benjamim e Melchior
+e: Melchior, Noe e Galileu
+Tipo: humanas
+resposta: b---pergunta: Quais os principais heteronimos de Fernando Pessoa?
+a: Alberto Caeiro, Ricardo Reis e Alvaro de Campos
+b: Ariano Suassuna, Raul Bopp e Quincas Borba
+c: Bento Teixeira, Ricardo Reis e Haroldo de Campos
+d: Alberto Caeiro, Ricardo Leite e Augusto de Campos
+e:  Bento Teixeira, Ricardo Reis e Augusto de Campos
+Tipo: linguagens
+resposta: a---pergunta: Qual a religiao monoteista que conta com o maior numero de adeptos no mundo?
+a: Judaismo
+b: Zoroastrismo
+c: Islamismo
+d: Cristianismo
+e: Hinduismo
+Tipo: humanas
+resposta: d---pergunta: Qual desses filmes foi baseado na obra de Shakespeare?
+a: Muito Barulho por Nada
+b: Capitaes de Areia 
+c: A Dama das Camehlias
+d: A Revolucao dos Bichos
+e: Excalibur
+Tipo: linguagens
+resposta: a---pergunta: Quem foi o primeiro homem a pisar na Lua? Em que ano aconteceu?
+a: Yuri Gagarin em 1961
+b: Buzz Aldrin em 1969
+c: Charles Conrad em 1969
+d: Charles Duke em 1971
+e: Neils Armstrong em 1969.
+Tipo: humanas
+resposta: e---pergunta: Qual o nome do cientista que descobriu o processo de pasteurizacao e a vacina contra a raiva?
+a: Blaise Pascal
+b: Marie Curie
+c: Louis Pasteurs
+d: Antoine Lavoisier
+e: Charles Darwin
+Tipo: natureza
+resposta: c---pergunta: As pessoas de qual tipo sanguineo sao consideradas doadores universais?
+a: AB+
+b: A-
+c: O-
+d: ABO
+e: C++
+Tipo: natureza
+resposta: c---pergunta: Quantos digitos "1" eu tenho de 1 ate 191?
+a: 136
+b: 140
+c: 132
+d: 150
+e: 126
+Tipo: matematica
+resposta: c---pergunta: Um feirante guardou 3 centenas de laranjas em 6 caixotes. Quantas laranjas foram guardadas em cada caixote?
+a: 40
+b: 50
+c: 60
+d: 30
+e: 80
+Tipo: matematica
+resposta: a---pergunta: Um pedreiro diz: "Se eu tivesse dois tijolos a mais o dobro deste numero seria 100". Quantos tijolos ele tem?
+a: 42
+b: 48
+c: 50
+d: 52
+e: 44
+Tipo: matematica
+resposta: b---pergunta: Se seis latas de leite custam 72 reais, qual o preco de 9 latas?
+a: 90
+b: 115
+c: 87
+d: 108
+e: 100
+Tipo: matematica
+resposta: d---pergunta: Que numero abaixo completa a sequencia a seguir? 12, 6, 18, 24  ?
+a: 42
+b: 26
+c: 30
+d: 24
+e: 36
+Tipo: matematica
+resposta: a---pergunta: O termometro subiu 6 graus e isso representa a metade da temperatura de antes. A quantos graus esta agora?
+a: 16 graus
+b: 18 graus
+c: 22 graus
+d: 12 graus
+e: 24 graus
+Tipo: matematica
+resposta: b---pergunta: Dois pais e dois filhos sentaramse para comer ovos no cafe da manha. Cada um comeu um ovo. Quanto ovos eles comeram no total?
+a: 3
+b: 1
+c: 5
+d: 8
+e: 10
+Tipo: matematica
+resposta: b---pergunta: Se 3 gatos matam 3 ratos em 3 minutos quanto tempo 100 gatos levam para matar 100 ratos?
+a: 3 minutos
+b: 1 minuto
+c: 30 minutos
+d: 100 minutos
+e: 110 minutos
+Tipo: matematica
+resposta: b---pergunta: Qual a derivada de x?
+a: 3
+b: 1
+c: 4
+d: 44
+e: 131
+Tipo: matematica
+resposta: b---pergunta: Leandro tem 40 balas, chupou 12 e deu 10 para sua irma. Com quantas balas ele ficou?
+a: 18
+b: 15
+c: 14
+d: 16
+e: 13
+Tipo: matematica
+resposta: a---pergunta: Em um cubo, a quantidade de conjuntos distintos formados por duas arestas paralelas eh igual a: 
+a: 8
+b: 6
+c: 14
+d: 16
+e: 18
+Tipo: matematica
+resposta: e
