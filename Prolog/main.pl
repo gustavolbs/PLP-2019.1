@@ -4,11 +4,12 @@
 Menu Inicial
 Instrucoes
 Cria Partida
+Leitura de arquivo
 
 --- Em Andamento ---
 SinglePlayer
 MultiPlayer
-Ler Perguntas
+Montar perguntas
 
 
 --- A Fazer ---
@@ -93,17 +94,12 @@ multi_player:-
 
 /*#################################*/
 /* LEITURA DE ARQUIVOS -- LEITURA DE ARQUIVOS*/
-/* Em fase de testes */
 
 ler_txt(Filename, Saida):-
     open(Filename, read, OS),
-    get_char(OS, C),
-    txt_to_list(C, L, OS),
-    close(OS),
-    print(L),
-    Saida is L.
+    read_string(OS, "\r", "\r", End, String),
+    split_string(String, "-", "-", Saida),
+    close(OS).
 
-txt_to_list(_, [], OS):- at_end_of_stream(OS).
-txt_to_list(' ', L, OS):- get_char(OS, Q), txt_to_list(Q, L, OS).
-txt_to_list('\n', L, OS):- get_char(OS, Q), txt_to_list(Q, L, OS).
-txt_to_list(C, [C|L], OS):- get_char(OS, Q), txt_to_list(Q, L, OS).
+/*#################################*/
+/* MONTAGEM DE PERGUNTA -- MONTAGEM DE PERGUNTA */
