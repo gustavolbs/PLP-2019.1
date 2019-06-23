@@ -1,8 +1,0 @@
-pergunta: Quem eh o autor de "O Principe"?
-a: Maquiavel
-b: Antoine de SaintExupery
-c: Montesquieu
-d: Thomas Hobbes
-e: Rousseau
-Tipo: humanas
-resposta: a***
