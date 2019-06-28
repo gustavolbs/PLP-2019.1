@@ -7,15 +7,11 @@ Cria Partida
 Leitura de arquivo
 Montar pergunta
 Avaliaçao da resposta do usuário
-
---- Em Andamento ---
+Contagem de pontos
+Dicas
 SinglePlayer
 MultiPlayer
 Inserção no ranking
-Contagem de pontos
-Dicas
-
---- A Fazer ---
 Inserir o tempo no cálculo de pontuação
 
 */
@@ -30,7 +26,7 @@ main:-
 
 /* Predicados auxiliares */
 menu:-
-    writeln("===== PerguntUP ====="),
+    writeln("\n===== PerguntUP ====="),
     writeln("by GERIGE"),
     writeln("(1) Ver as instrucoes"),
     writeln("(2) Seguir para o jogo"),
@@ -51,7 +47,7 @@ verifica_escolha(Escolha):-
     Escolha == "1" -> (instrucoes) ;
     Escolha == "2" -> (inicializa_partida_menu) ;
     Escolha == "3" -> (ranking) ;
-    Escolha == "4" -> (writeln("Obrigado por jogar! :)"), limpa_arquivo('perguntasUsadas.txt')) ;
+    Escolha == "4" -> (writeln("Obrigado por jogar! :)\n")) ;
     main.
 
 
@@ -68,9 +64,7 @@ instrucoes:-
     writeln("- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa"),
     writeln("- Pular pergunta: pula para a proxima pergunta"),
     writeln("A cada inicio de partida, voce tera 1 dica de cada"),
-    writeln("Para obter mais dicas, voce devera responder a pergunta em menos de 5 segundos"),
-	writeln("Se ja tiver sido usado alguma dica, ela sera reposta. Caso contrario, a dica recebida sera aleatoria"),
-    writeln("Alem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele e exibido no inicio e no final de cada partida\n"),
+    writeln("Alem disso, o sistema conta com um ranking com as 10 melhores pontuacoes. Ele eh exibido no inicio e no final de cada partida\n"),
     main.
 
 /* Inicializa partida */
@@ -88,7 +82,9 @@ play_again:-
 /* Em Andamento */
 ranking:-
     ler_ranking('ranking.txt', Resultado),
-    print_lista(Resultado, 1).
+    writeln("\n====== RANKING ======"),
+    print_lista(Resultado, 1),
+    main.
 
 /*#################################*/
 /* PARTIDA -- PARTIDA -- PARTIDA -- PARTIDA */
@@ -97,25 +93,32 @@ ranking:-
 modo_de_jogo:-
     writeln("\nQual a forma de jogar?\n(1) SinglePlayer\n(2) MultiPlayer\nEscolha:"),
     read(E), atom_string(E, Escolha),
-    (Escolha == "1" -> (single_player) ;
-    Escolha == "2" -> (multi_player) ;
+    (Escolha == "1" -> (single_player(Nome, Pontuacao), ranking) ;
+    Escolha == "2" -> (multi_player, ranking) ;
     (writeln("Opcao Invalida"), modo_de_jogo)).
 
-single_player:-
+single_player(Nome, Pontuacao):-
     writeln("Nome do Jogador:"),
-    read(Nome), 
+    read(Nome), atom_string(Nome, NomeStr),
     ler_txt('perguntas.txt', Perguntas),
-    monta_pergunta(Nome, Perguntas, 0, 0, 12).
+    monta_pergunta(Perguntas, 0, 0, 12, Pontuacao, 0),
+    add_ranking(Pontuacao, NomeStr),
+    limpa_arquivo('perguntasUsadas.txt'),
+    limpa_arquivo('dicas.txt').
 
 multi_player:-
-    writeln("===== Jogador 1 ====="),
-    single_player,
-    writeln("===== Jogador 1 ====="),
-    single_player.
+    writeln("\n===== Jogador 1 ====="),
+    single_player(Nome1, Pontuacao1),
+    writeln("\n===== Jogador 2 ====="),
+    single_player(Nome2, Pontuacao2),
+    
+    writeln("\n#### Resultado ####\n"),
+    ((Pontuacao1 > Pontuacao2) -> write(Nome1), writeln(" (Jogador 1) venceu!\n") ;
+    (Pontuacao2 > Pontuacao1) -> write(Nome2), writeln(" (Jogador 2) venceu!\n") ;
+    writeln("\nEmpate!\n")).
 
 /*#################################*/
 /* LEITURA E ESCRITA DE ARQUIVOS -- LEITURA E ESCRITA DE ARQUIVOS*/
-
 /* Leitura de Perguntas */
 ler_txt(Filename, Pergunta):-
     open(Filename, read, OS),
@@ -132,12 +135,18 @@ insere_pergunta(Filename, Entrada):-
 
 /* Escrita de Ranking */
 escrever_ranking('ranking.txt', []).
-escrever_ranking(Filename, [X|Y]):-
+escrever_ranking(Filename, Lista):-
     open(Filename, write, OS),
-    write(OS, X),
-    nl(OS),
-    escrever_ranking(Filename, Y),
+    escreve_lista_ranking(OS, Lista, 1),
     close(OS).
+
+escreve_lista_ranking(OS, [], _).
+escreve_lista_ranking(OS, [X|Y], Index):-
+    Index =< 10 ->
+    (write(OS, X),
+    nl(OS),
+    IndexProx is Index + 1,
+    escreve_lista_ranking(OS, Y, IndexProx)).
 
 /* Leitura de Ranking */
 ler_ranking(Filename, Pergunta):-
@@ -150,14 +159,13 @@ ler_ranking(Filename, Pergunta):-
 ler_dicas_usadas(Filename, DicasUsadas):-
     open(Filename, read, OS),
     read_string(OS, "\r", "\r", End, String),
-    split_string(String, ",", "", Pergunta),
+    split_string(String, "-", "-", DicasUsadas),
     close(OS).
 
 /* Escrita de Dicas usadas */
 marca_dica_usada(Filename, Dica):-
     open(Filename, append, OS),
-    write(OS, X),
-    write(OS, ","),
+    write(OS, Dica),
     close(OS).
 
 /* Apaga qualquer informacao no arquivo */
@@ -166,25 +174,39 @@ limpa_arquivo(Filename):-
     write(OS, ""),
     close(OS).
 
+recupera_dica(Filename):-
+    ler_dicas_usadas(Filename, DicasUsadas),
+    remover_ultimo_elem(DicasUsadas, Dicas),
+    atualiza_dicas('dicas.txt', Dicas).
+
+atualiza_dicas(Filename, Dicas):-
+    open(Filename, write, OS),
+    escreve_tudo(Dicas, OS),
+    close(OS).
+
+escreve_tudo([],_).
+escreve_tudo([X|Y], OS):-
+    write(OS, X),
+    write(OS, "---"),
+    escreve_tudo(Y, OS).
+
 /*#################################*/
 /* MONTAGEM DE PERGUNTA -- MONTAGEM DE PERGUNTA */
 
-monta_pergunta(Nome, Perguntas, Acertos, Erros, TotalPerguntas):-
+monta_pergunta(Perguntas, Acertos, Erros, TotalPerguntas, Pontuacao, Tempo):-
     TotalPerguntas == 0 -> (writeln("\nSua Pontuacao final foi:"),
-    calculaPontuacao(Acertos, 0, Pontuacao),
-    writeln(Pontuacao),
-    add_ranking(Nome, Pontuacao)).
+    calculaPontuacao(Acertos, Tempo, Pontuacao), writeln(Pontuacao)) ;
 
-monta_pergunta(Nome, Perguntas, Acertos, Erros, TotalPerguntas):-
-    pega_pergunta(Perguntas, Escolhida),
+    (pega_pergunta(Perguntas, Escolhida),
     split_string(Escolhida, "\n", "", Saida),
     printa_pergunta(Saida, Resposta),
-    avaliando_resposta(Saida, Resposta, Acertos, Erros, false),
+    avaliando_resposta(Saida, Resposta, Acertos, Erros, AcertosFinal, ErrosFinal, TempoGasto, IsPulo), TempoTotal is TempoGasto + Tempo,
     writeln("\n==== Placar Parcial ===="),
-    write("Acertos: "), writeln(Acertos),
-    write("Erros: "), writeln(Erros),
-    PerguntasFaltantes is TotalPerguntas - 1,
-    monta_pergunta(Nome, Perguntas, Acertos, Erros, PerguntasFaltantes).
+    write("Acertos: "), writeln(AcertosFinal),
+    write("Erros: "), writeln(ErrosFinal),
+    (IsPulo == 1 -> PerguntasFaltantes is TotalPerguntas ;
+    PerguntasFaltantes is TotalPerguntas - 1),
+    monta_pergunta(Perguntas, AcertosFinal, ErrosFinal, PerguntasFaltantes, Pontuacao, TempoTotal)).
 
 pega_pergunta(ListaPerguntas, Pergunta):-
     random(0, 100, R),
@@ -195,27 +217,21 @@ pega_pergunta(ListaPerguntas, Pergunta):-
     (pertence(Usadas, PerguntaEscolhida) -> pega_pergunta(ListaPerguntas, Pergunta) ;
     (Pergunta = PerguntaEscolhida, insere_pergunta('perguntasUsadas.txt', PerguntaEscolhida))).
 
-/* Problema na contagem de acertos */
-avaliando_resposta(Saida, Resposta, Acertos, Erros, true).
-avaliando_resposta(Saida, Resposta, Acertos, Erros, Flag):-
+/* Problema na contagem de acertos e erros */
+avaliando_resposta(Pergunta, Resposta, Acertos, Erros, AcertosFinal, ErrosFinal, TempoGasto, IsPulo):-
     get_time(Inicio),
-    read(RespUsuario), get_time(Fim), atom_string(RespUsuario, RespostaUs),
-    split_string(Resposta, ":", " ", Resp), get_elemento(Resp, 0, 1, RespostaCorreta),
-    (pertence(["a", "b", "c", "d", "e", "p"], RespostaCorreta) -> 
-    (RespostaUs == "p" -> dicas ;
-    RespostaUs == RespostaCorreta -> 
-    (writeln("Resposta certa!"), writeln("\n=== Marcando pergunta como respondida..."),
-    AcertosAtual is Acertos + 1, ErrosAtual is Erros) ;
-    writeln("Resposta errada!"), writeln("\n=== Marcando pergunta como respondida..."),
-    ErrosAtual is Erros + 1, AcertosAtual is Acertos)),
-    avaliando_resposta(Saida, Resposta, AcertosAtual, ErrosAtual, true).
-
-
-avaliando_resposta(Saida, Resposta, Acertos, Erros, false):-
-    writeln("Resposta invalida!"), 
-    printa_pergunta(Saida, Resp),
-    avaliando_resposta(Saida, Resp, Acertos, Erros, false).
-
+    read(RespUs), get_time(Fim),
+    atom_string(RespUs, RString),
+    Tempo is Fim - Inicio,
+    split_string(Resposta, ":", " ", R), get_elemento(R, 0, 1, RespostaCorreta),
+    (pertence(["a", "b", "c", "d", "e", "p"], RString) -> (
+        RString == "p" -> dicas(RespostaCorreta, Pergunta, IsPulo), (IsPulo == 1 -> (write(""), AcertosFinal is Acertos, ErrosFinal is Erros, TempoGasto is Tempo) ; avaliando_resposta(Pergunta, Resposta, Acertos, Erros, AcertosFinal, ErrosFinal, TempoGasto, IsPulo)) ;
+        (RString == RespostaCorreta -> (
+            writeln("Resposta certa!"), writeln("\n=== Marcando pergunta como respondida..."), AcertosFinal is (Acertos + 1), ErrosFinal is Erros, TempoGasto is Tempo) ;
+            (writeln("Resposta errada!"), writeln("\n=== Marcando pergunta como respondida..."), ErrosFinal is (Erros + 1), AcertosFinal is Acertos, TempoGasto is Tempo))) ;
+    (writeln("Resposta invalida!"), 
+    printa_pergunta(Pergunta, Resp),
+    avaliando_resposta(Pergunta, Resp, Acertos, Erros, AcertosFinal, ErrosFinal, TempoGasto, IsPulo))).
 
 /*#################################*/
 /* EXIBIÇÃO E ARMAZENAMENTO DE RANKING -- EXIBIÇÃO E ARMAZENAMENTO DE RANKING */
@@ -223,14 +239,47 @@ avaliando_resposta(Saida, Resposta, Acertos, Erros, false):-
 /* Em andamento */
 add_ranking(Nome, Pontuacao):-
     ler_ranking('ranking.txt', Top10),
-    Pessoa is Nome + ":" + Pontuacao,
-    insere_lista(Top10, Pessoa, Top10Atual),
-    sort(0, @<, Top10Atual, Result),
-    escrever_ranking('ranking.txt', Result).
-
+    string_concat(Nome, " - ", X),
+    string_concat(X, Pontuacao, Pessoa),
+    inserir_final(Top10, Pessoa, Top10Atual),
+    sort_compound(Top10Atual, L),
+    inverter(L, Lista),
+    escrever_ranking('ranking.txt', Lista).
 
 /*#################################*/
+
+/*#####################################*/
+/* Ordena Raking */
+
+sort_compound(L1,LL) :-
+    split_compound(L1,L2),
+    sort(L2,L3),
+    recombine(L3,LL).
+
+split_compound([H|T], [[N,L2]|T2]) :-
+    split_string(H,"-"," ",[H1,L2]),
+    number_string(N,H1),
+    split_compound(T,T2).
+
+split_compound([],[]).
+
+recombine([[A,B]|T], [C|T2]) :-
+    atomics_to_string([A,' - ',B],C),
+    recombine(T,T2).
+    
+recombine([],[]).
+
+
 /* PREDICADOS PARA LISTAS -- PREDICADOS PARA LISTAS */
+
+inverter([],[]).
+inverter([X|Y],Z):-
+	inverter(Y,Y1),
+	conc(Y1,[X],Z).
+
+conc([],L,L).
+conc([X|L1],L2,[X|L3]):-
+	conc(L1,L2,L3).
 
 pertence([Elemento|Y], Elemento).
 pertence([X|Y], Elemento):-
@@ -262,25 +311,185 @@ printa_pergunta(Pergunta, Resposta):-
     writeln("p: Pedir Ajuda").
 
 print_lista([],_).
+print_lista([""],1):-
+    writeln("\n====== RANKING VAZIO ======").
+print_lista([""],_).
 print_lista([X|Y], Posicao):-
-    write(Posicao), write("."), writeln(X),
+    write(Posicao), write(". "), writeln(X),
     ProximaPosicao is Posicao + 1, print_lista(Y, ProximaPosicao).
+
+somar_lista([], 0).
+somar_lista([X|Y], Soma):-
+    somar_lista(Y, K),
+    Soma is X + K.
+
+gera_lista_aleatoria(Lista, TamanhoAtual, TamanhoMax, ListaComElementos):-
+    TamanhoAtual =\= TamanhoMax ->
+    somar_lista(Lista, Soma),
+    Max is 101 - Soma,
+    random(0, Max, R),
+    TamanhoA is TamanhoAtual + 1,
+    inserir_final(Lista, R, ListaA),
+    gera_lista_aleatoria(ListaA, TamanhoA, TamanhoMax, ListaComElementos) ;
+    ListaComElementos = Lista.
+
+inserir_final([""], Y, [Y]).
+inserir_final([], Y, [Y]).
+inserir_final([I|R], Y, [I|R1]):-
+    inserir_final(R, Y, R1).
+
+remover(X,[X|C],C).	
+remover(X,[Y|C],[Y|D]):-
+	remover(X,C,D).
+
+intersec([X|Y],L,[X|Z]):-
+	pertence(L, X),
+	intersec(Y,L,Z).
+intersec([_|X],L,Y):-
+	intersec(X,L,Y).
+intersec(_,_,[]).
+
+max([X],X).
+max([X|Y],M):-
+	max(Y,N), 
+    (X>N -> M=X ; M=N).
+
+print_elementos_lista([]).
+print_elementos_lista([X|Y]):-
+    writeln(X), print_elementos_lista(Y).
+
+remover_ultimo_elem([X|Y], Lista, ListaN):-
+    length(Y, Tamanho),
+    Tamanho =\= 0 -> remover_ultimo_elem(Y, [Lista| X]) ;
+    ListaN = Lista.
 
 
 /*#################################*/
 /* DICAS -- DICAS -- DICAS -- DICAS -- DICAS -- DICAS */
 
-dicas:-
+dicas(RespostaCorreta, Pergunta, IsPulo):-
     ler_dicas_usadas('dicas.txt', DicasUsadas),
-    length(DicasUsadas, Tamanho),
-    Tamanho =\= 3 ->
-    writeln("\n(1) Eliminar alternativas\n(2) Opiniao dos internautas\n(3) Pular pergunta\n"),
-    read(X), atom_string(X, EscolhaUsuario),
-    (EscolhaUsuario == "1" -> exibe_dica(1), writeln("\n=== Marcando ajuda 1 como usada..."), marca_dica_usada('dicas.txt', "1") ;
-    EscolhaUsuario == "2" -> exibe_dica(2), writeln("\n=== Marcando ajuda 2 como usada..."), marca_dica_usada('dicas.txt', "2") ;
-    EscolhaUsuario == "3" -> exibe_dica(3), writeln("\n=== Marcando ajuda 3 como usada..."), marca_dica_usada('dicas.txt', "3") ;
-    writeln("Opcao Invalida"), dicas).
+    Indices = ["1","2","3"],
+    Lista = ["\n(1) Eliminar alternativas", "(2) Opiniao dos internautas", "(3) Pular pergunta\n"],
+    intersec(Indices, DicasUsadas, ListaIndices),
+    length(ListaIndices, Tamanho),
+    (Tamanho == 0 ->
+    (print_elementos_lista(Lista), le_opcao(RespostaCorreta, Pergunta, IsPulo)) ;
+    (Tamanho == 1 -> 
+    (get_elemento(ListaIndices, 1, 1, Elemento), number_string(Indice, Elemento),
+        get_elemento(Lista, 1, Indice, Dica1), remover(Dica1, Lista, Dicas), print_elementos_lista(Dicas),
+        le_opcao(RespostaCorreta, Pergunta, IsPulo))) ;
+    (Tamanho == 2 ->
+    (get_elemento(ListaIndices, 1, 1, Elemento1), get_elemento(ListaIndices, 1, 2, Elemento2),
+        number_string(Indice1, Elemento1), number_string(Indice2, Elemento2),
+        get_elemento(Lista, 1, Indice1, Dica1), get_elemento(Lista, 1, Indice2, Dica2),
+        remover(Dica1, Lista, D), remover(Dica2, D, Dicas), print_elementos_lista(Dicas),
+        le_opcao(RespostaCorreta, Pergunta, IsPulo))) ;
+    writeln("\n#### Voce nao tem mais dicas ####\n")).
 
+le_opcao(RespostaCorreta, Pergunta, IsPulo):-
+    read(X), atom_string(X, EscolhaUsuario),
+    (EscolhaUsuario == "1" -> writeln("\n=== Marcando ajuda 1 como usada..."), marca_dica_usada('dicas.txt', "1---"), exibe_dica1(RespostaCorreta, Pergunta), IsPulo is 0 ;
+    EscolhaUsuario == "2" -> writeln("\n=== Marcando ajuda 2 como usada..."), marca_dica_usada('dicas.txt', "2---"), exibe_dica2(RespostaCorreta, Pergunta), IsPulo is 0  ;
+    EscolhaUsuario == "3" -> writeln("\n=== Marcando ajuda 3 como usada..."), marca_dica_usada('dicas.txt', "3---"), exibe_dica3(IsPulo) ;
+    (writeln("Opcao Invalida"), dicas(RespostaCorreta, Pergunta, IsPulo))).
+
+/* DICA 1 */
+exibe_dica1(RespostaCorreta, Pergunta):-
+    random(0, 5, R1),
+    Max1 is 5 - R1,
+    random(0, Max1, R2),
+    remover(RespostaCorreta, ["a", "b", "c", "d", "e"], Lista),
+    get_elemento(Lista, 0, R1, Elemento1),
+    get_elemento(Lista, 0, R2, Elemento2),
+    Eliminadas = [Elemento1, Elemento2],
+    printa_pergunta(Pergunta, Eliminadas, 1).
+
+printa_pergunta(Pergunta, Eliminadas, 1):-
+    write("\n"),
+    get_elemento(Pergunta, 0, 6, Tipo),
+    writeln(Tipo),
+    get_elemento(Pergunta, 0, 0, Enunciado),
+    writeln(Enunciado),
+    get_elemento(Pergunta, 0, 1, AlternativaA),
+    (pertence(Eliminadas, "a") -> write("") ;
+    writeln(AlternativaA)),
+    get_elemento(Pergunta, 0, 2, AlternativaB),
+    (pertence(Eliminadas, "b") -> write("") ;
+    writeln(AlternativaB)),
+    get_elemento(Pergunta, 0, 3, AlternativaC),
+    (pertence(Eliminadas, "c") -> write("") ;
+    writeln(AlternativaC)),
+    get_elemento(Pergunta, 0, 4, AlternativaD),
+    (pertence(Eliminadas, "d") -> write("") ;
+    writeln(AlternativaD)),
+    get_elemento(Pergunta, 0, 5, AlternativaE),
+    (pertence(Eliminadas, "e") -> write("") ;
+    writeln(AlternativaE)),
+    get_elemento(Pergunta, 0, 7, Resposta).
+    
+/* DICA 2  */
+exibe_dica2(RespostaCorreta, Pergunta):-
+    gera_lista_aleatoria([], 0, 5, Lista),
+    printa_pergunta(Pergunta, Lista, RespostaCorreta, 2).
+
+printa_pergunta(Pergunta, Porcentagens, RespostaCorreta, 2):-
+    write("\n"),
+    max(Porcentagens, Certa), remover(Certa, Porcentagens, P),
+    get_elemento(Pergunta, 0, 6, Tipo),
+    writeln(Tipo),
+    get_elemento(Pergunta, 0, 0, Enunciado),
+    writeln(Enunciado),
+
+    get_elemento(Pergunta, 0, 1, AlternativaA),
+    get_elemento(Pergunta, 0, 2, AlternativaB),
+    get_elemento(Pergunta, 0, 3, AlternativaC),
+    get_elemento(Pergunta, 0, 4, AlternativaD),
+    get_elemento(Pergunta, 0, 5, AlternativaE),
+
+    string_concat(Certa, " % --> ", PorcentagemCerta),
+    get_elemento(P, 0, 0, P1), string_concat(P1, " % --> ", Porcentagem1),
+    get_elemento(P, 0, 1, P2), string_concat(P2, " % --> ", Porcentagem2),
+    get_elemento(P, 0, 2, P3), string_concat(P3, " % --> ", Porcentagem3),
+    get_elemento(P, 0, 3, P4), string_concat(P4, " % --> ", Porcentagem4),
+
+    (RespostaCorreta == "a" -> (
+        string_concat(PorcentagemCerta, AlternativaA, LetraA),
+        string_concat(Porcentagem1, AlternativaB, LetraB),
+        string_concat(Porcentagem2, AlternativaC, LetraC),
+        string_concat(Porcentagem3, AlternativaD, LetraD),
+        string_concat(Porcentagem4, AlternativaE, LetraE)) ;
+    RespostaCorreta == "b" -> (
+        string_concat(PorcentagemCerta, AlternativaB, LetraB),
+        string_concat(Porcentagem1, AlternativaA, LetraA),
+        string_concat(Porcentagem2, AlternativaC, LetraC),
+        string_concat(Porcentagem3, AlternativaD, LetraD),
+        string_concat(Porcentagem4, AlternativaE, LetraE)) ;
+    RespostaCorreta == "c" -> (
+        string_concat(PorcentagemCerta, AlternativaC, LetraC),
+        string_concat(Porcentagem1, AlternativaA, LetraA),
+        string_concat(Porcentagem2, AlternativaB, LetraB),
+        string_concat(Porcentagem3, AlternativaD, LetraD),
+        string_concat(Porcentagem4, AlternativaE, LetraE)) ;
+    RespostaCorreta == "d" -> (
+        string_concat(PorcentagemCerta, AlternativaD, LetraD),
+        string_concat(Porcentagem1, AlternativaA, LetraA),
+        string_concat(Porcentagem2, AlternativaB, LetraB),
+        string_concat(Porcentagem3, AlternativaC, LetraC),
+        string_concat(Porcentagem4, AlternativaE, LetraE)) ;
+    (
+        string_concat(PorcentagemCerta, AlternativaE, LetraE),
+        string_concat(Porcentagem1, AlternativaA, LetraA),
+        string_concat(Porcentagem2, AlternativaB, LetraB),
+        string_concat(Porcentagem3, AlternativaC, LetraC),
+        string_concat(Porcentagem4, AlternativaD, LetraD))),
+    
+    Lista = [LetraA, LetraB, LetraC, LetraD, LetraE],
+    print_elementos_lista(Lista).
+
+exibe_dica3(IsPulo):-
+    writeln("////// Pergunta Pulada\n"),
+    IsPulo = 1.
 
 /*#################################*/
 /* CALCULOS -- CALCULOS -- CALCULOS */
