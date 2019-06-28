@@ -79,7 +79,6 @@ play_again:-
     writeln("\nObrigado por jogar!"), inicializa_partida_menu.
 
 /* Constroi Ranking */
-/* Em Andamento */
 ranking:-
     ler_ranking('ranking.txt', Resultado),
     writeln("\n====== RANKING ======"),
@@ -88,7 +87,6 @@ ranking:-
 
 /*#################################*/
 /* PARTIDA -- PARTIDA -- PARTIDA -- PARTIDA */
-/* Inacabadoo */
 
 modo_de_jogo:-
     writeln("\nQual a forma de jogar?\n(1) SinglePlayer\n(2) MultiPlayer\nEscolha:"),
@@ -217,7 +215,6 @@ pega_pergunta(ListaPerguntas, Pergunta):-
     (pertence(Usadas, PerguntaEscolhida) -> pega_pergunta(ListaPerguntas, Pergunta) ;
     (Pergunta = PerguntaEscolhida, insere_pergunta('perguntasUsadas.txt', PerguntaEscolhida))).
 
-/* Problema na contagem de acertos e erros */
 avaliando_resposta(Pergunta, Resposta, Acertos, Erros, AcertosFinal, ErrosFinal, TempoGasto, IsPulo):-
     get_time(Inicio),
     read(RespUs), get_time(Fim),
@@ -236,7 +233,6 @@ avaliando_resposta(Pergunta, Resposta, Acertos, Erros, AcertosFinal, ErrosFinal,
 /*#################################*/
 /* EXIBIÇÃO E ARMAZENAMENTO DE RANKING -- EXIBIÇÃO E ARMAZENAMENTO DE RANKING */
 
-/* Em andamento */
 add_ranking(Nome, Pontuacao):-
     ler_ranking('ranking.txt', Top10),
     string_concat(Nome, " - ", X),
@@ -494,6 +490,5 @@ exibe_dica3(IsPulo):-
 /*#################################*/
 /* CALCULOS -- CALCULOS -- CALCULOS */
 
-/* Em andamento */
 calculaPontuacao(Acertos, TempoGasto, Pontuacao):-
     Pontuacao is (((Acertos * 50) // 12) + (50 - ((TempoGasto - 60) * (50 // 120)))).
