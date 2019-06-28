@@ -59,7 +59,7 @@ instrucoes:-
     writeln("Cada partida possui 12 perguntas, divididas em 4 areas de conhecimento:"),
     writeln("- Ciencias da Natureza\n- Linguagens\n- Ciencias Exatas\n- Ciencias Humanas"),
     writeln("Voce tera 15 segundos para responder cada pergunta (caso ultrapasse esse tempo, a pontuacao final sera penalizada)"),
-    writeln("Alehm disso, haverao dicas limitadas disponiveis:"),
+    writeln("Alem disso, voce tera dicas limitadas disponiveis:"),
     writeln("- Eliminar alternativas: elimina duas alternativas"),
     writeln("- Opiniao dos internautas: mostra a porcentagem de concordancia com cada alternativa"),
     writeln("- Pular pergunta: pula para a proxima pergunta"),
