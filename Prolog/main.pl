@@ -1,4 +1,3 @@
-
 :- initialization main.
 
 /* Main */
