@@ -1,20 +1,3 @@
-/* FUNCIONALIDADES
-
---- Feito ---
-Menu Inicial
-Instrucoes
-Cria Partida
-Leitura de arquivo
-Montar pergunta
-Avaliaçao da resposta do usuário
-Contagem de pontos
-Dicas
-SinglePlayer
-MultiPlayer
-Inserção no ranking
-Inserir o tempo no cálculo de pontuação
-
-*/
 
 :- initialization main.
 
